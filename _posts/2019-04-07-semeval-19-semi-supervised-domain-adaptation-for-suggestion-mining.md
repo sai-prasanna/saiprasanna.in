@@ -1,7 +1,6 @@
 ---
 title: SemEval 2019 - Semi-Supervised Domain Adaptation for Suggestion mining
-categories: publications
-tags: [NLP, Semi-Supervised Learning, Research Paper Summary]
+categories: [NLP, Semi-Supervised Learning, Research Paper Summary]
 toc: true
 layout: post
 ---

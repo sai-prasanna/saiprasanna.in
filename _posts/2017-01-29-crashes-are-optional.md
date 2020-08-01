@@ -1,7 +1,7 @@
 ---
 title:  Crashes are Optional! && Write Less, Do More
 layout: post
-tags: [iOS, swift]
+categories: [iOS, swift]
 ---
 It was a boring tuesday/wednesday afternoon, co-worker [Giridhar](https://twitter.com/giridharvc7) pinged me. He was the
 organizer for [Swift India](https://swiftindia.github.io/swiftindia/) meetups. He invited me to give a talk.

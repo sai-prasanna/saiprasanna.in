@@ -1,7 +1,7 @@
 ---
 title: ACL 2019 Conference Summary
 layout: post
-tags: [Computer Science, Machine Learning, Conference, ACL]
+categories: [Computer Science, Machine Learning, Conference, ACL]
 toc: true
 ---
 

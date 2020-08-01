@@ -1,7 +1,7 @@
 ---
 title: God's own Programming Language
 layout: post
-tags: [LISP, Programming Languages]
+categories: [LISP, Programming Languages]
 toc: true
 toc_label: Contents
 toc_icon: "yin-yang"

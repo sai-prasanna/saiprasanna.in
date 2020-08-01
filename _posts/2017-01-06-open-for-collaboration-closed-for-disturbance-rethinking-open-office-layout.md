@@ -1,7 +1,7 @@
 ---
 title:  Open for Collaboration, Closed for Disturbance
 layout: post
-tags: [work place,design]
+categories: [work place,design]
 ---
 I have been working at open office environment for past 1 and a half years. The first office was a semi open one where workspaces had some degree of separation, not exactly a cubicle, 
 honey comb like structure where there is circle of 4 people at center, and 6 or so people around. The one thing I liked about our office is that there are no corner offices for managers. Even CEO had to sit with others. Though this is my first job, I can appreciate the egalitarian and practical aspects of this. There was some degree of isolation to do deep work (though I seriously crave for more), while preserving the collaborative aspect of open office.

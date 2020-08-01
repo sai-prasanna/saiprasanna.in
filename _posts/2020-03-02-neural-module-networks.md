@@ -1,7 +1,7 @@
 ---
 title: Neural Module Networks
 layout: post
-tags: [Semantic Parsing, Visual Q/A, Symbolic AI, CV, NLP, Research Paper Summary]
+categories: [Semantic Parsing, Visual Q/A, Symbolic AI, CV, NLP, Research Paper Summary]
 ---
 
 Research Paper -  [https://arxiv.org/abs/1511.02799](https://arxiv.org/abs/1511.02799)

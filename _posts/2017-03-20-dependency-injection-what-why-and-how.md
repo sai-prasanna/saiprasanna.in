@@ -3,7 +3,7 @@
 title:  Dependency Injection - What, Why and How?
 date:   2017-03-20
 layout: post
-tags: [iOS, Swift]
+categories: [iOS, Swift]
 
 ---
 

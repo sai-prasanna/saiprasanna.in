@@ -1,7 +1,7 @@
 ---
 title:  Creation and Consumption
 layout: post
-tags: [Note to self]
+categories: [Note to self]
 ---
 
 The amount of content available for consumption in our digital age is staggering.

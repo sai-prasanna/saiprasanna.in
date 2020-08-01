@@ -1,7 +1,7 @@
 ---
 title:  MIT OCW 6.006 Algorithms Course
 date:   2016-04-02
-tags: [Algorithms, Computer Science, MOOC]
+categories: [Algorithms, Computer Science, MOOC]
 layout: post
 ---
 

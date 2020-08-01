@@ -1,7 +1,7 @@
 ---
 title:  Function Currying, Composition in Redux Middleware
 layout: post
-tags: [Javascript, Redux, Functional Programming]
+categories: [Javascript, Redux, Functional Programming]
 ---
 I am new to functional programming paradigm, though I do understand something about closures ,pure functions and have used some programming structures related to functional concepts like map, reduce, blocks in my iOS applications at work, I don’t have much experience with functional paradigm.
 

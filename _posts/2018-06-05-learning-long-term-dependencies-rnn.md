@@ -2,7 +2,7 @@
 title:  Learning Longer-term Dependencies in RNNs with Auxiliary Losses (ACL 2018)
 date:   2018-06-05 08:00:00
 layout: post
-tags: [Research Paper Summary, Deep learning, RNN]
+categories: [Research Paper Summary, Deep learning, RNN]
 ---
 
 [Paper](https://arxiv.org/pdf/1803.00144.pdf) by Trieu H. Trinh, Andrew M. Dai,  Minh-Thang Luong,  Quoc V. Le

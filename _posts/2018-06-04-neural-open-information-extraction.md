@@ -2,7 +2,7 @@
 title:   Neural Open Information Extraction (ACL 2018)
 date:   2018-06-04 08:00:00
 layout: post
-tags: [Research Paper Summary, Deep learning, NLP]
+categories: [Research Paper Summary, Deep learning, NLP]
 ---
 
 [Paper](https://arxiv.org/abs/1805.04270) by Lei Cui, Furu Wei, Ming Zhou

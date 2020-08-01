@@ -1,7 +1,7 @@
 ---
 title:  Manjaro Linux - My current daily driver arch based distro
 layout: post
-tags: [KDE, Manjaro, Arch Linux]
+categories: [KDE, Manjaro, Arch Linux]
 ---
 
 The partition having arch in my secondary hard disk had died. The invisible grime which settles 
