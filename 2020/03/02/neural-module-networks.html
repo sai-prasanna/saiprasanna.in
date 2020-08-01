@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Neural Module Networks | λf.(λg.f (g g)) (λg.f (g g)) Sai</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Neural Module Networks" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Research Paper - https://arxiv.org/abs/1511.02799" />
+<meta property="og:description" content="Research Paper - https://arxiv.org/abs/1511.02799" />
+<link rel="canonical" href="https://sai-prasanna.github.io/saiprasanna.in/2020/03/02/neural-module-networks.html" />
+<meta property="og:url" content="https://sai-prasanna.github.io/saiprasanna.in/2020/03/02/neural-module-networks.html" />
+<meta property="og:site_name" content="λf.(λg.f (g g)) (λg.f (g g)) Sai" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-02T00:00:00-06:00" />
+<script type="application/ld+json">
+{"description":"Research Paper - https://arxiv.org/abs/1511.02799","@type":"BlogPosting","headline":"Neural Module Networks","url":"https://sai-prasanna.github.io/saiprasanna.in/2020/03/02/neural-module-networks.html","datePublished":"2020-03-02T00:00:00-06:00","dateModified":"2020-03-02T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://sai-prasanna.github.io/saiprasanna.in/2020/03/02/neural-module-networks.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/saiprasanna.in/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://sai-prasanna.github.io/saiprasanna.in/feed.xml" title="λf.(λg.f (g g)) (λg.f (g g)) Sai" /><link rel="shortcut icon" type="image/x-icon" href="/saiprasanna.in/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Neural Module Networks | λf.(λg.f (g g)) (λg.f (g g)) Sai</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Neural Module Networks" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Research Paper - https://arxiv.org/abs/1511.02799" />
+<meta property="og:description" content="Research Paper - https://arxiv.org/abs/1511.02799" />
+<link rel="canonical" href="https://sai-prasanna.github.io/saiprasanna.in/2020/03/02/neural-module-networks.html" />
+<meta property="og:url" content="https://sai-prasanna.github.io/saiprasanna.in/2020/03/02/neural-module-networks.html" />
+<meta property="og:site_name" content="λf.(λg.f (g g)) (λg.f (g g)) Sai" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-02T00:00:00-06:00" />
+<script type="application/ld+json">
+{"description":"Research Paper - https://arxiv.org/abs/1511.02799","@type":"BlogPosting","headline":"Neural Module Networks","url":"https://sai-prasanna.github.io/saiprasanna.in/2020/03/02/neural-module-networks.html","datePublished":"2020-03-02T00:00:00-06:00","dateModified":"2020-03-02T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://sai-prasanna.github.io/saiprasanna.in/2020/03/02/neural-module-networks.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://sai-prasanna.github.io/saiprasanna.in/feed.xml" title="λf.(λg.f (g g)) (λg.f (g g)) Sai" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/saiprasanna.in/">λf.(λg.f (g g)) (λg.f (g g)) Sai</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/saiprasanna.in/about/">About Me</a><a class="page-link" href="/saiprasanna.in/search/">Search</a><a class="page-link" href="/saiprasanna.in/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Neural Module Networks</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-02T00:00:00-06:00" itemprop="datePublished">
+        Mar 2, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      2 min read
+    
+</span></p>
+
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Research Paper -  <a href="https://arxiv.org/abs/1511.02799">https://arxiv.org/abs/1511.02799</a></p>
+
+<p>Authors - Jacob Andreas, Marcus Rohrbach, Trevor Darrell, Dan Klein</p>
+
+<h2 id="key-idea">Key Idea</h2>
+
+<p>Parse questions of visual QA into a description of compositions of functions. These functions are neural networks called Neural Modules. Execute the neural networks and reweigh the resulting label using question representation.</p>
+
+<p><img src="/assets/images/neural-module-networks/1.png" alt="Architecture diagram" /></p>
+<h2 id="task---visual-question-answering">Task - Visual Question Answering</h2>
+<p>Given a question like “What color is the coffee mug?” and an image we want to predict the answer.</p>
+
+<p><img src="https://visualqa.org/static/img/vqa_examples.jpg" alt="4  visual qa examples. One example: Two images having a man and women. One with man wearing glasses and another image with woman wearing glasses.Question, &quot;Who is wearing glasses?&quot; and respective answer below the image" /></p>
+
+<h2 id="prior-approaches">Prior approaches</h2>
+<ul>
+  <li>End to End neural networks
+    <ul>
+      <li>Use a CNN to vectorize the image and RNN to vectorize the question and use a feed forward network to classify the answer.</li>
+      <li>This is a black box trying to answer in one shot.</li>
+    </ul>
+  </li>
+  <li>Semantic Parsing approach
+    <ul>
+      <li>Parse the question into logical expressions, image into logical representation of the world and use logic based reasoning to solve the problem.</li>
+      <li>This is more compositional.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="motivation">Motivation</h2>
+<ul>
+  <li>Combine the representational capacity of neural nets and compositionality of symbolic approach.</li>
+  <li>So, “Rather than thinking of question answering as a problem of learning a single function to map from questions and contexts to answers, it’s perhaps useful
+to think of it as a highly-multitask learning setting, where
+each problem instance is associated with a novel task, and
+the  identity  of  that  task  is  expressed  only  noisily  in  language.”</li>
+  <li>Simple example - “Is this a truck?” - Needs single task to be performed, namely truck or not classification.</li>
+  <li>Compositional example - “What is the object to the left of the tea pot?” - Needs one to find the teapot, detect object to its left, then classify the object.</li>
+</ul>
+
+<h2 id="architecture">Architecture</h2>
+
+<h3 id="neural-modules">Neural Modules</h3>
+<ul>
+  <li>Identify set of modules that can be composed to solve all/most tasks.</li>
+  <li>Modules can be thought of as a function parametrized by a neural network, with a type signature.</li>
+  <li>Data Types - Image, Unnormalized attention map, labels
+    <ul>
+      <li><img src="/assets/images/neural-module-networks/2.png" alt="Attention Module" /></li>
+      <li><img src="/assets/images/neural-module-networks/3.png" alt="Classification Module" /></li>
+      <li><img src="/assets/images/neural-module-networks/4.png" alt="Reattention module" /></li>
+      <li><img src="/assets/images/neural-module-networks/5.png" alt="Combination module" /></li>
+      <li><img src="/assets/images/neural-module-networks/6.png" alt="Measurement Module" /></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="strings---modules">Strings -&gt; Modules</h3>
+<ul>
+  <li><strong>Parsing</strong>
+    <ul>
+      <li>Use few rules on dependency parse of the question to convert it into a structured query.</li>
+      <li>e.g. “Is there a circle next to a square?” -&gt;  is(circle, next-to(square))</li>
+    </ul>
+  </li>
+  <li><strong>Layout</strong>
+    <ul>
+      <li>“All leaves become attend modules, all internal nodes become
+re-attend or combine modules dependent on their arity, and root nodes become measure modules for yes/no questions and classify modules for all other question types.”
+        <ul>
+          <li>The queries could come from anywhere not just natural language question. As long as they can be converted to a layout in the end.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="answering">Answering</h3>
+<ul>
+  <li>An RNN is used to process the question and predict a label directly without looking into the image.</li>
+  <li>This is combined with the final label from the root node of the Neural Modules using geometric mean to get the final result.</li>
+  <li>This is done for 2 reasons
+    <ul>
+      <li>Syntactic Regularity/Prior
+        <ul>
+          <li>When converting to structured query, certain syntactic elements are lost.</li>
+          <li>For e.g. What is in the sky? and What are in the sky?  both result in what(fly).</li>
+          <li>But answer varies from kite to kites.</li>
+        </ul>
+      </li>
+      <li>Semantic Regularity/Prior
+        <ul>
+          <li>Some answers are unreasonable just by inspecting the question.
+            <ul>
+              <li>For example, What colour is the bear? eliminates all non-colour answers.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="benchmarks">Benchmarks</h2>
+<ul>
+  <li>They try this in vqa dataset - https://visualqa.org/ a huge dataset with natural images and questions with answers.
+    <ul>
+      <li><img src="https://d3i71xaburhd42.cloudfront.net/21c99706bb26e9012bfb4d8d48009a3d45af59b2/7-Table3-1.png" alt="Benchmarks table for VQA" /></li>
+    </ul>
+  </li>
+  <li>Since VQA doesn’t have many deep compositional questions, they use shapes a synthetically generated dataset.
+    <ul>
+      <li><img src="https://d3i71xaburhd42.cloudfront.net/21c99706bb26e9012bfb4d8d48009a3d45af59b2/7-Table2-1.png" alt="Synthetic Shapes dataset" /></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+<ul>
+  <li>What colour is his tie? <img src="https://d3i71xaburhd42.cloudfront.net/21c99706bb26e9012bfb4d8d48009a3d45af59b2/5-Figure2-1.png" alt="Statue of a man with yellow tie, question parsed to modules 1. find tie  2. describe colour " /></li>
+  <li><img src="/assets/images/neural-module-networks/7.png" alt="Correct and incorrect predictions" /></li>
+</ul>
+
+  </div><a class="u-url" href="/saiprasanna.in/2020/03/02/neural-module-networks.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/saiprasanna.in/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/saiprasanna.in/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/saiprasanna.in/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Blog on machine learning, NLP, Computer Science, philosophy, economics, animal rights, music, programming languages and endless other things that pique my curiosity.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/sai-prasanna" title="sai-prasanna"><svg class="svg-icon grey"><use xlink:href="/saiprasanna.in/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/sai_prasanna" title="sai_prasanna"><svg class="svg-icon grey"><use xlink:href="/saiprasanna.in/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
