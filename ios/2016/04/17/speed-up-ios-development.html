@@ -1,0 +1,33 @@
+<p><a href="http://injectionforxcode.com/">Injection for XCode</a>.</p>
+
+<p><img src="https://camo.githubusercontent.com/95389a5ccf548360add8cf7270c84030cc874971/687474703a2f2f672e7265636f726469742e636f2f69366b5166544d4570672e676966" width="640" /></p>
+
+<p>One of the most boring/unproductive part of any development cycle is waiting for your project to compile. And if you have done iOS development, you know how much time is wasted for XCode to recompile the project. And even if compile time is less, you have to follow a bunch of taps, long presses etc to get to the desired app state before even testing your changes. This plugin will reduces reduce these steps considerably.
+As you change your code , you can inject the new class definition using this XCode plugin. It recompiles just changed file, and injects it into the live running app.
+The great thing is it works for real device as well.</p>
+
+<h3 id="set-up">Set up</h3>
+
+<ol>
+  <li>Install <a href="http://alcatraz.io/">Alcatraz</a> package manager for XCode . Alcatraz allows you to install and remove XCode plugins hazzle free</li>
+  <li>Open using Alcatraz with  package manager option in projects menu.</li>
+  <li>Search for injection plugin, and install it. Restart XCode after installations</li>
+  <li>To make it work in real device you need to click on <em>Product -&gt; Injection Plugin -&gt; Patch Project</em> for Injection. It will add couple of lines to 
+your main.m of your project. If it is a swift project just create a empty main.m and do the above.</li>
+</ol>
+
+<h3 id="inject-code">Inject Code</h3>
+
+<ol>
+  <li>Run your project, make some changes to the code in a file, press ^ + = .</li>
+  <li>Your changed code in that file will get compiled and injected into the app live.</li>
+  <li>Now you can simply have to somehow make your program create new object of the changed class to see the changes. For example, tap back button and then again go the view.</li>
+  <li>There are few limitations on what can be injected, refer the Injection for XCode’s <a href="https://github.com/johnno1962/injectionforxcode">github project</a>. And a small limitation currently is it wont work if you have more than 128 source files in your project due to a XCode limitation. Follow this and other issues in github issue tracker.</li>
+  <li>You can also set it up to automatically inject changes by enabling File Watcher in <em>Product-&gt; Injection Plugin -&gt; Tunable App Parameters</em></li>
+  <li>If you want it to make changes visible as you inject the changes in you have to modify your normal code. You have to  listen for callbacks after injection , and reload the view or do something else.Read the <a href="https://github.com/johnno1962/injectionforxcode#callbacks-in-your-code">instructions</a>.</li>
+</ol>
+
+<p>This plugin will add a new folder to your project which you can add to .gitignore to avoid source control.</p>
+
+<p>It is great that the developer has open sourced it. To know how it does its magic see <a href="https://github.com/johnno1962/injectionforxcode#how-it-works">here</a>
+The author has released it under “nagware” license, where he requests you to pay after using it for two weeks.</p>

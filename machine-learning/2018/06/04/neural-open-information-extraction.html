@@ -1,0 +1,33 @@
+<p><a href="https://arxiv.org/abs/1805.04270">Paper</a> by Lei Cui, Furu Wei, Ming Zhou</p>
+
+<p><strong>TLDR;</strong> Models Open information extraction as  Sequence to Sequence problem using neural nets.</p>
+
+<h3 id="what-is-open-information-extraction">What is Open information extraction?</h3>
+
+<p>Open Information Extraction aims to extract one or more (Entity 1, Relationship, Entity 2) tuples from sentences.</p>
+
+<p><strong>Example</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Deep learning is a subfield of machine learning." 
+                   |
+                   v
+(Deep learning, is a subfield of , machine learning) 
+</code></pre></div></div>
+
+<p>Existing methods use handcrafted rules written on <strong>syntatic parsers</strong> which have poor perfomance and suffer from <strong>cascading of errors</strong>.<br />
+This paper applies neural networks to get better accuracy and alleviate errors.</p>
+
+<h3 id="how-is-the-problem-modeled">How is the problem modeled?</h3>
+
+<p>Sequence 2 Sequence task, where you take a source sentence as input and output the information tuple as sequence separated by special tokens (open arg1, arg2, arg3 and close arg1, arg2 arg3).  Currently the model is trained for single tuple extraction.</p>
+
+<p>“Deep learning is a subfield of machine learning.” -&gt; “<arg1> Deep learning </arg1>  <arg2> is a subfield of </arg2> <arg3> machine learning </arg3>”</p>
+
+<p>The paper uses a LSTM based <strong>Sequence to Sequence</strong> model with <strong>attention</strong>. 
+The source and target vocabulary is same. If unknown word target is found, the model forms the target probability vector by placing attention on of source sequence as probability of the corresponding source words occurring.</p>
+
+<h3 id="what-are-the-benchmarks">What are the benchmarks?</h3>
+
+<p>Evaluating on a large benchmark dataset, this model gets <strong>0.473 AUC</strong> (Area under curve) for Precision-Recall on <strong>top 5 predictions</strong> of this model (I think generated from beam search) has better performance , significantly higher than existing systems.  Among existing systems <strong>OpenIE</strong> has the best score of  <strong>0.373 AUC</strong> .</p>
+
+<p>One observation of authors is only 11 % of the predictions of Neural model matches with Open IE (rule based) model, but the performance is higher. This could be due to neural model generalizing on some of the patterns hard to capture by rules.</p>
