@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Speed up iOS dev using XCode Injection Plugin | λf.(λg.f (g g)) (λg.f (g g)) Sai</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Speed up iOS dev using XCode Injection Plugin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Injection for XCode." />
+<meta property="og:description" content="Injection for XCode." />
+<link rel="canonical" href="https://sai-prasanna.github.io/saiprasanna.in/posts/speed-up-ios-development/" />
+<meta property="og:url" content="https://sai-prasanna.github.io/saiprasanna.in/posts/speed-up-ios-development/" />
+<meta property="og:site_name" content="λf.(λg.f (g g)) (λg.f (g g)) Sai" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-04-17T18:55:00-05:00" />
+<script type="application/ld+json">
+{"description":"Injection for XCode.","@type":"BlogPosting","headline":"Speed up iOS dev using XCode Injection Plugin","url":"https://sai-prasanna.github.io/saiprasanna.in/posts/speed-up-ios-development/","datePublished":"2016-04-17T18:55:00-05:00","dateModified":"2016-04-17T18:55:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://sai-prasanna.github.io/saiprasanna.in/posts/speed-up-ios-development/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/saiprasanna.in/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://sai-prasanna.github.io/saiprasanna.in/feed.xml" title="λf.(λg.f (g g)) (λg.f (g g)) Sai" /><link rel="shortcut icon" type="image/x-icon" href="/saiprasanna.in/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Speed up iOS dev using XCode Injection Plugin | λf.(λg.f (g g)) (λg.f (g g)) Sai</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Speed up iOS dev using XCode Injection Plugin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Injection for XCode." />
+<meta property="og:description" content="Injection for XCode." />
+<link rel="canonical" href="https://sai-prasanna.github.io/saiprasanna.in/posts/speed-up-ios-development/" />
+<meta property="og:url" content="https://sai-prasanna.github.io/saiprasanna.in/posts/speed-up-ios-development/" />
+<meta property="og:site_name" content="λf.(λg.f (g g)) (λg.f (g g)) Sai" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-04-17T18:55:00-05:00" />
+<script type="application/ld+json">
+{"description":"Injection for XCode.","@type":"BlogPosting","headline":"Speed up iOS dev using XCode Injection Plugin","url":"https://sai-prasanna.github.io/saiprasanna.in/posts/speed-up-ios-development/","datePublished":"2016-04-17T18:55:00-05:00","dateModified":"2016-04-17T18:55:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://sai-prasanna.github.io/saiprasanna.in/posts/speed-up-ios-development/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://sai-prasanna.github.io/saiprasanna.in/feed.xml" title="λf.(λg.f (g g)) (λg.f (g g)) Sai" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/saiprasanna.in/">λf.(λg.f (g g)) (λg.f (g g)) Sai</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/saiprasanna.in/about/">About Me</a><a class="page-link" href="/saiprasanna.in/search/">Search</a><a class="page-link" href="/saiprasanna.in/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Speed up iOS dev using XCode Injection Plugin</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2016-04-17T18:55:00-05:00" itemprop="datePublished">
+        Apr 17, 2016
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      2 min read
+    
+</span></p>
+
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><a href="http://injectionforxcode.com/">Injection for XCode</a>.</p>
+
+<p><img src="https://camo.githubusercontent.com/95389a5ccf548360add8cf7270c84030cc874971/687474703a2f2f672e7265636f726469742e636f2f69366b5166544d4570672e676966" width="640" /></p>
+
+<p>One of the most boring/unproductive part of any development cycle is waiting for your project to compile. And if you have done iOS development, you know how much time is wasted for XCode to recompile the project. And even if compile time is less, you have to follow a bunch of taps, long presses etc to get to the desired app state before even testing your changes. This plugin will reduces reduce these steps considerably.
+As you change your code , you can inject the new class definition using this XCode plugin. It recompiles just changed file, and injects it into the live running app.
+The great thing is it works for real device as well.</p>
+
+<h3 id="set-up">Set up</h3>
+
+<ol>
+  <li>Install <a href="http://alcatraz.io/">Alcatraz</a> package manager for XCode . Alcatraz allows you to install and remove XCode plugins hazzle free</li>
+  <li>Open using Alcatraz with  package manager option in projects menu.</li>
+  <li>Search for injection plugin, and install it. Restart XCode after installations</li>
+  <li>To make it work in real device you need to click on <em>Product -&gt; Injection Plugin -&gt; Patch Project</em> for Injection. It will add couple of lines to 
+your main.m of your project. If it is a swift project just create a empty main.m and do the above.</li>
+</ol>
+
+<h3 id="inject-code">Inject Code</h3>
+
+<ol>
+  <li>Run your project, make some changes to the code in a file, press ^ + = .</li>
+  <li>Your changed code in that file will get compiled and injected into the app live.</li>
+  <li>Now you can simply have to somehow make your program create new object of the changed class to see the changes. For example, tap back button and then again go the view.</li>
+  <li>There are few limitations on what can be injected, refer the Injection for XCode’s <a href="https://github.com/johnno1962/injectionforxcode">github project</a>. And a small limitation currently is it wont work if you have more than 128 source files in your project due to a XCode limitation. Follow this and other issues in github issue tracker.</li>
+  <li>You can also set it up to automatically inject changes by enabling File Watcher in <em>Product-&gt; Injection Plugin -&gt; Tunable App Parameters</em></li>
+  <li>If you want it to make changes visible as you inject the changes in you have to modify your normal code. You have to  listen for callbacks after injection , and reload the view or do something else.Read the <a href="https://github.com/johnno1962/injectionforxcode#callbacks-in-your-code">instructions</a>.</li>
+</ol>
+
+<p>This plugin will add a new folder to your project which you can add to .gitignore to avoid source control.</p>
+
+<p>It is great that the developer has open sourced it. To know how it does its magic see <a href="https://github.com/johnno1962/injectionforxcode#how-it-works">here</a>
+The author has released it under “nagware” license, where he requests you to pay after using it for two weeks.</p>
+
+  </div><a class="u-url" href="/saiprasanna.in/posts/speed-up-ios-development/" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/saiprasanna.in/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/saiprasanna.in/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/saiprasanna.in/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Blog on machine learning, NLP, Computer Science, philosophy, economics, animal rights, music, programming languages and endless other things that pique my curiosity.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/sai-prasanna" title="sai-prasanna"><svg class="svg-icon grey"><use xlink:href="/saiprasanna.in/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/sai_prasanna" title="sai_prasanna"><svg class="svg-icon grey"><use xlink:href="/saiprasanna.in/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
