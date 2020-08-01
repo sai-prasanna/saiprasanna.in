@@ -2,6 +2,7 @@
 title: Roam Research - Software for building a Second Brain
 layout: post
 categories: [Productivity, Note Taking]
+toc: true
 ---
 
 # Introduction
@@ -20,14 +21,14 @@ categories: [Productivity, Note Taking]
 ## Failure of Files inside Folders way of organization.
 - Most note-taking software or even physical note-taking follow a file-folder system or a single hierarchy of bullets inside bullets (Outlining tools) for organizing notes. I will refer to this as "files inside folder" model going forward now.
 - This system creates nested hierarchy of categories, sub-categories and so on. Inside which your notes are put.
-- ### **Why this approach fails?**
-        - You might have started taking notes/journaling etc for a few days and abandon it after some time. The following are the main reasons I think this happens.
-        - **Friction caused by a static hierarchy of the folder system**
-        - Every time you want to write a note you have to decide where to put it in the hierarchy. You have to ask yourselves which notebook/folder/file should I write this, for it to be useful?
-        - **Poor Return in investment for good note-taking**
-        - You painstakingly take notes or journal your exercise regime or note down something. But it never surfaces automatically when you write something related.
-        - Most notes are passive and useless unless you look for them.
-        - Most notes are hidden uselessly in the hierarchy where you put it in.
+### **Why this approach fails?**
+- You might have started taking notes/journaling etc for a few days and abandon it after some time. The following are the main reasons I think this happens.
+- **Friction caused by a static hierarchy of the folder system**
+- Every time you want to write a note you have to decide where to put it in the hierarchy. You have to ask yourselves which notebook/folder/file should I write this, for it to be useful?
+- **Poor Return in investment for good note-taking**
+- You painstakingly take notes or journal your exercise regime or note down something. But it never surfaces automatically when you write something related.
+- Most notes are passive and useless unless you look for them.
+- Most notes are hidden uselessly in the hierarchy where you put it in.
 ### Practical Scenario where folder model fails
 - Say you had a discussion with your friend about note-taking while sipping a coffee in a cafe.
 - You talk about some personal stuff which say you want to put in your journal.
@@ -35,7 +36,7 @@ categories: [Productivity, Note Taking]
 - Also, you really like the coffee in the cafe and want to note it down in your list of the favourite coffee shops.
 - **Now how do you take notes in this case?**
 - In a rigid hierarchy, for this note to be useful you have to file it under multiple places
-        -  "To read books", "Daily Journal", "Meets", "Friend's name"
+    -  "To read books", "Daily Journal", "Meets", "Friend's name"
 - But that is highly impractical because of the effort/redundancy involved. You would have to copy paste same information in multiple places or  manually create links in multiple pages. And if those pages don't exist you would have to create them.
 ## Simple Tags don't solve this problem
 - Most note-taking software provide tagging to solve this problem.
