@@ -1,1 +1,1 @@
-Sitemap: https://sai-prasanna.github.io/saiprasanna.in/sitemap.xml
+Sitemap: https://saiprasanna.in/blog/sitemap.xml
