@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>SemEval 2019 - Semi-Supervised Domain Adaptation for Suggestion mining | λf.(λg.f (g g)) (λg.f (g g)) Sai</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="SemEval 2019 - Semi-Supervised Domain Adaptation for Suggestion mining" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="SemEval Workshop regularly has been conducting tasks in NLP to evaluate the progress in the field." />
+<meta property="og:description" content="SemEval Workshop regularly has been conducting tasks in NLP to evaluate the progress in the field." />
+<link rel="canonical" href="https://sai-prasanna.github.io/saiprasanna.in/semeval-19-semi-supervised-domain-adaptation-for-suggestion-mining/" />
+<meta property="og:url" content="https://sai-prasanna.github.io/saiprasanna.in/semeval-19-semi-supervised-domain-adaptation-for-suggestion-mining/" />
+<meta property="og:site_name" content="λf.(λg.f (g g)) (λg.f (g g)) Sai" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-04-07T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"SemEval Workshop regularly has been conducting tasks in NLP to evaluate the progress in the field.","@type":"BlogPosting","headline":"SemEval 2019 - Semi-Supervised Domain Adaptation for Suggestion mining","url":"https://sai-prasanna.github.io/saiprasanna.in/semeval-19-semi-supervised-domain-adaptation-for-suggestion-mining/","datePublished":"2019-04-07T00:00:00-05:00","dateModified":"2019-04-07T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://sai-prasanna.github.io/saiprasanna.in/semeval-19-semi-supervised-domain-adaptation-for-suggestion-mining/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/saiprasanna.in/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://sai-prasanna.github.io/saiprasanna.in/feed.xml" title="λf.(λg.f (g g)) (λg.f (g g)) Sai" /><link rel="shortcut icon" type="image/x-icon" href="/saiprasanna.in/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>SemEval 2019 - Semi-Supervised Domain Adaptation for Suggestion mining | λf.(λg.f (g g)) (λg.f (g g)) Sai</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="SemEval 2019 - Semi-Supervised Domain Adaptation for Suggestion mining" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="SemEval Workshop regularly has been conducting tasks in NLP to evaluate the progress in the field." />
+<meta property="og:description" content="SemEval Workshop regularly has been conducting tasks in NLP to evaluate the progress in the field." />
+<link rel="canonical" href="https://sai-prasanna.github.io/saiprasanna.in/semeval-19-semi-supervised-domain-adaptation-for-suggestion-mining/" />
+<meta property="og:url" content="https://sai-prasanna.github.io/saiprasanna.in/semeval-19-semi-supervised-domain-adaptation-for-suggestion-mining/" />
+<meta property="og:site_name" content="λf.(λg.f (g g)) (λg.f (g g)) Sai" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-04-07T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"SemEval Workshop regularly has been conducting tasks in NLP to evaluate the progress in the field.","@type":"BlogPosting","headline":"SemEval 2019 - Semi-Supervised Domain Adaptation for Suggestion mining","url":"https://sai-prasanna.github.io/saiprasanna.in/semeval-19-semi-supervised-domain-adaptation-for-suggestion-mining/","datePublished":"2019-04-07T00:00:00-05:00","dateModified":"2019-04-07T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://sai-prasanna.github.io/saiprasanna.in/semeval-19-semi-supervised-domain-adaptation-for-suggestion-mining/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://sai-prasanna.github.io/saiprasanna.in/feed.xml" title="λf.(λg.f (g g)) (λg.f (g g)) Sai" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/saiprasanna.in/">λf.(λg.f (g g)) (λg.f (g g)) Sai</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/saiprasanna.in/about/">About Me</a><a class="page-link" href="/saiprasanna.in/search/">Search</a><a class="page-link" href="/saiprasanna.in/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">SemEval 2019 - Semi-Supervised Domain Adaptation for Suggestion mining</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2019-04-07T00:00:00-05:00" itemprop="datePublished">
+        Apr 7, 2019
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      2 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/saiprasanna.in/categories/#publications">publications</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#suggestion-mining-task">Suggestion Mining Task</a></li>
+<li class="toc-entry toc-h2"><a href="#key-techniques">Key Techniques</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#transfer-learning">Transfer Learning</a></li>
+<li class="toc-entry toc-h3"><a href="#semi-supervised-learning">Semi-Supervised Learning</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#statistical-significance">Statistical Significance</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#metrics">Metrics</a></li>
+<li class="toc-entry toc-h3"><a href="#mcnemars-test">McNemar’s Test</a></li>
+</ul>
+</li>
+</ul><p>SemEval Workshop regularly has been conducting tasks in NLP to evaluate the progress in the field.</p>
+
+<p>I and my colleague Ananda Seelan participated in this year SemEval’s Suggestion mining task (Task 9).
+Here is our <a href="https://arxiv.org/abs/1902.10623">submission</a> to be published in NAACL 2019 proceedings, and the code is on <a href="https://github.com/sai-prasanna/suggestion-mining-semeval19">github</a>.</p>
+
+<p>This blog is a summary of the key techniques and ideas which influenced this work.</p>
+
+<h2 id="suggestion-mining-task">
+<a class="anchor" href="#suggestion-mining-task" aria-hidden="true"><span class="octicon octicon-link"></span></a>Suggestion Mining Task</h2>
+
+<p>The suggestion mining task in brief is a text classification task to find whether a sentence contains a suggestion.</p>
+
+<p>Example,</p>
+
+<ul>
+  <li>
+<strong>Suggestion</strong>     - It would be nice if they had vegan options.</li>
+  <li>
+<strong>Non Suggestion</strong> - This restaurant has good vegan options.</li>
+</ul>
+
+<p>About 8k sentences scrapped from technical forumns were provided as training data. 
+The task was divided into two subtasks.</p>
+
+<ul>
+  <li>Subtask A - Evaluation on same domain   - technical forums posts.</li>
+  <li>Subtask B - Evaluation on out of domain - hotel reviews.</li>
+</ul>
+
+<p>The catch for subtask B is human labelled data in hotel reviews domain is not allowed for training.
+Our model was placed third place in the leaderboard for Subtask B.</p>
+
+<h2 id="key-techniques">
+<a class="anchor" href="#key-techniques" aria-hidden="true"><span class="octicon octicon-link"></span></a>Key Techniques</h2>
+
+<p>We used simple convolutional neural networks for text classification. And we applied transfer learning and semi-supervised learning for the tasks.</p>
+
+<h3 id="transfer-learning">
+<a class="anchor" href="#transfer-learning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Transfer Learning</h3>
+
+<p>The current trend in machine learning for NLP is to using pre-trained language models. We used google’s recently published BERT model as our representation layer.
+Take a look at <a href="http://jalammar.github.io/illustrated-bert/">http://jalammar.github.io/illustrated-bert/</a> for a good description of how pre-trained models work for NLP.</p>
+
+<h3 id="semi-supervised-learning">
+<a class="anchor" href="#semi-supervised-learning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Semi-Supervised Learning</h3>
+<p>In ACL 2018 conference Melbourne, I attended two talks which impacted the work in this paper. One was Sebastien Ruder’s talk on Strong baselines for semi-supervised
+learning in NLP. The conclusion of <a href="https://aclweb.org/anthology/P18-1096">Sebastian Ruder, Barbara Plank (2018)</a> was that classic machine learning techniques for semi-supervised learning such as Tri-Training prove as strong baseline in NLP with neural nets.
+Sebastien has a very accessible and thorough <a href="http://ruder.io/semi-supervised/">blog post</a> explaining the techniques. They have also made their code available on <a href="https://github.com/bplank/semi-supervised-baselines">github</a>.</p>
+
+<iframe src="https://player.vimeo.com/video/285802189" width="640" height="360" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+
+<p>We applied a variant of tri-training. We use three models of the same architecture trained initially on data <a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)">bootstrap sampled</a> from the tech reviews data. The three models
+are used to iteratively label unlabelled data from hotel reviews domain. Agreement of labels between two models is used as way to select sentences to be added to next iteration
+of training. Pseudo-code and detailed explanations can be found in the paper. Or you might as well look to the code, as its way simpler than a dry description of it might suggest.</p>
+
+<h2 id="statistical-significance">
+<a class="anchor" href="#statistical-significance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Statistical Significance</h2>
+
+<p>The other work <a href="https://aclweb.org/anthology/P18-1128">published</a> and presented in ACL 2018 that influenced this paper is Rotem Dror’s “The Hitchhiker’s Guide to Statistical Significance in NLP”.</p>
+
+<iframe src="https://player.vimeo.com/video/285803636" width="640" height="360" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+
+<p>We report confidence intervals for five random seeds for all our experiments. And we also do pair-wise significance testing via McNemar’s test to evaluate 
+whether pair-wise model performance on the test set vary significantly.</p>
+
+<h3 id="metrics">
+<a class="anchor" href="#metrics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Metrics</h3>
+
+<p><img src="https://ai2-s2-public.s3.amazonaws.com/figures/2017-08-08/bf7927798419277eea7063f40d4329f8b8fa31ad/3-Table1-1.png" alt="img"></p>
+
+<h3 id="mcnemars-test">
+<a class="anchor" href="#mcnemars-test" aria-hidden="true"><span class="octicon octicon-link"></span></a>McNemar’s Test</h3>
+
+<p><img src="https://ai2-s2-public.s3.amazonaws.com/figures/2017-08-08/bf7927798419277eea7063f40d4329f8b8fa31ad/5-Table3-1.png" alt="img"></p>
+
+
+  </div><a class="u-url" href="/saiprasanna.in/semeval-19-semi-supervised-domain-adaptation-for-suggestion-mining/" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/saiprasanna.in/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/saiprasanna.in/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/saiprasanna.in/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Blog on machine learning, NLP, Computer Science, philosophy, economics, animal rights, music, programming languages and endless other things that pique my curiosity.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/sai-prasanna" title="sai-prasanna"><svg class="svg-icon grey"><use xlink:href="/saiprasanna.in/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/sai_prasanna" title="sai_prasanna"><svg class="svg-icon grey"><use xlink:href="/saiprasanna.in/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
