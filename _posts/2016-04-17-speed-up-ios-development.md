@@ -1,7 +1,7 @@
 ---
 title:  Speed up iOS dev using XCode Injection Plugin
 date:   2016-04-17 23:55:00
-categories: iOS
+layout: post
 tags: [iOS]
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Roam Research - Software for building a Second Brain
+layout: post
 tags: [Productivity, Note Taking]
 permalink: /roam-research-software-for-building-a-second-brain
 ---

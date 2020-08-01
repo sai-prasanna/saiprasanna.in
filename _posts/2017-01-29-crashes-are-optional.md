@@ -1,6 +1,6 @@
 ---
 title:  Crashes are Optional! && Write Less, Do More
-categories: talks
+layout: post
 tags: [iOS, swift]
 ---
 It was a boring tuesday/wednesday afternoon, co-worker [Giridhar](https://twitter.com/giridharvc7) pinged me. He was the

@@ -1,6 +1,6 @@
 ---
 title: ACL 2019 Conference Summary
-categories: semantic-legion
+layout: post
 tags: [Computer Science, Machine Learning, Conference, ACL]
 toc: true
 ---

@@ -1,8 +1,8 @@
 ---
-title:  PaperWatch 001 - Neural Open Information Extraction (ACL 2018)
+title:   Neural Open Information Extraction (ACL 2018)
 date:   2018-06-04 08:00:00
-categories: machine-learning
-tags: [PaperWatch, Deep learning, NLP]
+layout: post
+tags: [Research Paper Summary, Deep learning, NLP]
 ---
 
 [Paper](https://arxiv.org/abs/1805.04270) by Lei Cui, Furu Wei, Ming Zhou

@@ -1,6 +1,6 @@
 ---
 title:  Open for Collaboration, Closed for Disturbance
-categories: developer life
+layout: post
 tags: [work place,design]
 ---
 I have been working at open office environment for past 1 and a half years. The first office was a semi open one where workspaces had some degree of separation, not exactly a cubicle, 

@@ -1,6 +1,6 @@
 ---
 title:  Creation and Consumption
-categories: notetoself
+layout: post
 tags: [Note to self]
 ---
 

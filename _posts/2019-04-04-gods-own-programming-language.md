@@ -1,6 +1,6 @@
 ---
 title: God's own Programming Language
-categories: programming
+layout: post
 tags: [LISP, Programming Languages]
 toc: true
 toc_label: Contents

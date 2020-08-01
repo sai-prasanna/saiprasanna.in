@@ -1,10 +1,9 @@
 ---
 title: SemEval 2019 - Semi-Supervised Domain Adaptation for Suggestion mining
 categories: publications
-tags: [NLP, Semi-Supervised Learning]
+tags: [NLP, Semi-Supervised Learning, Research Paper Summary]
 toc: true
-toc_label: Contents
-toc_icon: "yin-yang"
+layout: post
 ---
 
 SemEval Workshop regularly has been conducting tasks in NLP to evaluate the progress in the field.
