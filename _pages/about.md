@@ -4,10 +4,10 @@ title: About Me
 permalink: /about/
 ---
 
-{::nomarkdown}<img src="assets/images/bio-photo.jpg", style="display: block;margin-left: auto; margin-right: auto; width: 50%;border-radius:50%" width="320" height="320"/>{:/}
+{::nomarkdown}<img src="/assets/images/bio-photo.jpg", style="display: block;margin-left: auto; margin-right: auto; border-radius:50%" width="200" height="200"/>{:/}
 
 I'm Sai Prasanna. I work as a machine learning engineer focusing currently on NLP applications.
-I also do research in machine learning. 
+I also do academic research in machine learning.
 
 ## Research Interests
 * Natural Language Processing
