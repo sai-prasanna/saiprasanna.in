@@ -14,7 +14,7 @@ github_repo: "saiprasanna.in"
 
 # OPTIONAL: override baseurl and url if using a custom domain
 # Note: leave out the trailing / from this value. 
-url: "https://saiprasanna.in" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://sai-prasanna.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 ###########################################################
 #########  Special Instructions for baseurl ###############
@@ -34,7 +34,7 @@ url: "https://saiprasanna.in" # the base hostname & protocol for your site, e.g.
 #
 # 3. You must replace the parameter `baseurl` in _action_files/settings.ini with the same value as you set here but WITHOUT QUOTES.
 #
-baseurl: "/blog" # the subpath of your site, e.g. "/blog".
+baseurl: "/saiprasanna.in" # the subpath of your site, e.g. "/blog".
 
 # Github and twitter are optional:
 minima:
@@ -113,4 +113,4 @@ kramdown:
   hard_wrap: false
   syntax_highlighter: rouge
 
-permalink: /:title/
+permalink: /posts/:title/
