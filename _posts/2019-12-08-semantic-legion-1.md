@@ -1,5 +1,5 @@
 ---
-title: Semantic Legion \#001
+title: Semantic Legion #001
 layout: post
 tags: [Computer Science, Machine Learning, Philosophy, Semantic Legion]
 ---
