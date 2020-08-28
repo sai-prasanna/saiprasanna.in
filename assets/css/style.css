@@ -482,13 +482,19 @@ table th { text-align: center !important; }
 
 .highlight .gd { color: #ff5555; }
 
-.post-content p, .post-content li { font-size: 16px; }
+.post-content p, .post-content li { font-size: 16px; color: #000; }
 
 .post-header h1 { font-size: 2rem; }
 
 @media screen and (min-width: 1200px) { .post-header h1 { font-size: 2.25rem; } }
 
-.post-header p { font-style: italic; }
+.post-meta post-meta-title { display: inline-block; }
+
+.category-tags { display: inline-block; }
+
+.category-tags-link { border-radius: 5px; border: 1px solid #828282; color: #828282; padding: 1px 5px; text-decoration: none; }
+
+.category-tags-link:hover { border: 1px solid #e0491f; text-decoration: none; color: #ffffff; background: #e0491f; }
 
 .post-content h1 { font-size: 1.75rem; }
 
