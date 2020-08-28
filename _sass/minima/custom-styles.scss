@@ -14,6 +14,7 @@
 // make body text (paragraphy) smaller (was 20px)
 .post-content p, .post-content li {
    font-size: 16px;
+   color: #000;
 }  
 
 // MORGAN: Change Post-Title (post-header) size
@@ -26,8 +27,28 @@
   }
 }
 
-.post-header p {
-  font-style: italic
+// Tags like https://lilianweng.github.io
+
+.post-meta post-meta-title {
+   display: inline-block;
+}
+.category-tags {
+   display: inline-block;
+}
+
+.category-tags-link {
+   border-radius: 5px;
+   border: 1px solid #828282;
+   color: #828282;
+   padding: 1px 5px;
+   text-decoration: none;
+}
+
+.category-tags-link:hover {
+    border:1px solid #e0491f;
+    text-decoration:none;
+    color:#ffffff;
+    background:#e0491f
 }
 
 // MORGAN: Make heading sizes smaller in body
