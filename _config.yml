@@ -114,3 +114,4 @@ kramdown:
   syntax_highlighter: rouge
 
 permalink: /posts/:title/
+comments: true
