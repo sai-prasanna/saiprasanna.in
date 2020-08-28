@@ -29,7 +29,7 @@
 
 // Tags like https://lilianweng.github.io
 
-.post-meta post-meta-title {
+.post-meta .post-meta-title {
    display: inline-block;
 }
 .category-tags {
@@ -47,7 +47,7 @@
 .category-tags-link:hover {
     border:1px solid #e0491f;
     text-decoration:none;
-    color:#ffffff;
+    color:#ffffff !iimportant;
     background:#e0491f
 }
 
