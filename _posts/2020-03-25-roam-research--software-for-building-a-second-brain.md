@@ -3,6 +3,7 @@ title: Roam Research - Software for building a Second Brain
 layout: post
 categories: [Productivity, Note Taking]
 toc: true
+comments: true
 ---
 # Introduction
 
@@ -29,9 +30,13 @@ This system creates nested hierarchy of categories, sub-categories and so on. In
 ### **Why this approach fails?**
 
 You might have started taking notes/journaling etc for a few days and abandon it after some time. The following are the main reasons I think this happens.
+
 **Friction caused by a static hierarchy of the folder system**
+
 Every time you want to write a note you have to decide where to put it in the hierarchy. You have to ask yourselves which notebook/folder/file should I write this, for it to be useful?
+
 **Poor Return in investment for good note-taking**
+
 You painstakingly take notes or journal your exercise regime or note down something. But it never surfaces automatically when you write something related.
 Most notes are passive and useless unless you look for them.
 Most notes are hidden uselessly in the hierarchy where you put it in.
@@ -76,12 +81,13 @@ Roam's home page is the Daily notes page where you can see pages titled by dates
 One Important thing here is if the note page doesn't exist a new page gets create. This would seem weird when coming from other applications. But it serves a big purpose you will see next. 
 
 ## Bi-directional Linking
- <iframe width="854" height="480" src="https://www.youtube.com/embed/v9s3pusI1JQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> This is the key feature of Roam. When a page is linked to, when you visit the page you can see all the places where it has been referred.
-Examples:
+ <iframe width="854" height="480" src="https://www.youtube.com/embed/v9s3pusI1JQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+This is the key feature of Roam. When a page is linked to, when you visit the page you can see all the places where it has been referred.
+
 Say you write "I was reading this cool article on [[Deep Learning]]",
 The Deep Learning page will have a back link to all the places it has been mentioned.
 So every page becomes akin to a tag, but associations between them form a dynamic/organic hierarchy. 
-"^^Every page is a tag, and every tag is a page"^^ - [Nat Elison's blog on Roam]](https://www.nateliason.com/blog/roam)
+> "Every page is a tag, and every tag is a page" - [Nat Elison's blog on Roam](https://www.nateliason.com/blog/roam)
 
 ## Un-linked References
  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/nROryUttSr0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> If you have already mentioned a topic in lots of notes, but didn't create a page for it and link them. Roam has got your back with its super cool un-linked references. When you create a new page, you can easily bulk link every other page that has mentions of the current page.
