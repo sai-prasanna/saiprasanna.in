@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://saiprasanna.in/feed.xml" rel="self" type="application/atom+xml" /><link href="https://saiprasanna.in/" rel="alternate" type="text/html" /><updated>2020-08-28T03:02:49-05:00</updated><id>https://saiprasanna.in/feed.xml</id><title type="html">λf.(λg.f (g g)) (λg.f (g g)) Sai</title><subtitle>Blog on machine learning, NLP, Computer Science, philosophy, economics, animal rights, music, programming languages and endless other things that pique my curiosity.</subtitle><entry><title type="html">Roam Research - Software for building a Second Brain</title><link href="https://saiprasanna.in/posts/roam-research-software-for-building-a-second-brain/" rel="alternate" type="text/html" title="Roam Research - Software for building a Second Brain" /><published>2020-03-25T00:00:00-05:00</published><updated>2020-03-25T00:00:00-05:00</updated><id>https://saiprasanna.in/posts/roam-research--software-for-building-a-second-brain</id><content type="html" xml:base="https://saiprasanna.in/posts/roam-research-software-for-building-a-second-brain/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://saiprasanna.in/feed.xml" rel="self" type="application/atom+xml" /><link href="https://saiprasanna.in/" rel="alternate" type="text/html" /><updated>2020-08-28T03:19:43-05:00</updated><id>https://saiprasanna.in/feed.xml</id><title type="html">λf.(λg.f (g g)) (λg.f (g g)) Sai</title><subtitle>Blog on machine learning, NLP, Computer Science, philosophy, economics, animal rights, music, programming languages and endless other things that pique my curiosity.</subtitle><entry><title type="html">Roam Research - Software for building a Second Brain</title><link href="https://saiprasanna.in/posts/roam-research-software-for-building-a-second-brain/" rel="alternate" type="text/html" title="Roam Research - Software for building a Second Brain" /><published>2020-03-25T00:00:00-05:00</published><updated>2020-03-25T00:00:00-05:00</updated><id>https://saiprasanna.in/posts/roam-research--software-for-building-a-second-brain</id><content type="html" xml:base="https://saiprasanna.in/posts/roam-research-software-for-building-a-second-brain/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://roamresearch.com/assets/images/Roam-Group-min.png&quot; alt=&quot;&quot; /&gt;
 &lt;a href=&quot;roamresearch.com&quot;&gt;Roam Research&lt;/a&gt; is a revolutionary note-taking/knowledge management software. It is designed with the idea that data structure for a second brain should be associative (graph) rather than a rigid hierarchy.
@@ -22,11 +22,15 @@ This system creates nested hierarchy of categories, sub-categories and so on. In
 
 &lt;h3 id=&quot;why-this-approach-fails&quot;&gt;&lt;strong&gt;Why this approach fails?&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;p&gt;You might have started taking notes/journaling etc for a few days and abandon it after some time. The following are the main reasons I think this happens.
-&lt;strong&gt;Friction caused by a static hierarchy of the folder system&lt;/strong&gt;
-Every time you want to write a note you have to decide where to put it in the hierarchy. You have to ask yourselves which notebook/folder/file should I write this, for it to be useful?
-&lt;strong&gt;Poor Return in investment for good note-taking&lt;/strong&gt;
-You painstakingly take notes or journal your exercise regime or note down something. But it never surfaces automatically when you write something related.
+&lt;p&gt;You might have started taking notes/journaling etc for a few days and abandon it after some time. The following are the main reasons I think this happens.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Friction caused by a static hierarchy of the folder system&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Every time you want to write a note you have to decide where to put it in the hierarchy. You have to ask yourselves which notebook/folder/file should I write this, for it to be useful?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Poor Return in investment for good note-taking&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You painstakingly take notes or journal your exercise regime or note down something. But it never surfaces automatically when you write something related.
 Most notes are passive and useless unless you look for them.
 Most notes are hidden uselessly in the hierarchy where you put it in.&lt;/p&gt;
 
@@ -72,12 +76,14 @@ One Important thing here is if the note page doesn’t exist a new page gets cre
 
 &lt;h2 id=&quot;bi-directional-linking&quot;&gt;Bi-directional Linking&lt;/h2&gt;
 &lt;iframe width=&quot;854&quot; height=&quot;480&quot; src=&quot;https://www.youtube.com/embed/v9s3pusI1JQ&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;This is the key feature of Roam. When a page is linked to, when you visit the page you can see all the places where it has been referred.
-Examples:
-Say you write “I was reading this cool article on [[Deep Learning]]”,
+&lt;p&gt;This is the key feature of Roam. When a page is linked to, when you visit the page you can see all the places where it has been referred.&lt;/p&gt;
+
+&lt;p&gt;Say you write “I was reading this cool article on [[Deep Learning]]”,
 The Deep Learning page will have a back link to all the places it has been mentioned.
-So every page becomes akin to a tag, but associations between them form a dynamic/organic hierarchy. 
-“^^Every page is a tag, and every tag is a page”^^ - [Nat Elison’s blog on Roam]](https://www.nateliason.com/blog/roam)&lt;/p&gt;
+So every page becomes akin to a tag, but associations between them form a dynamic/organic hierarchy.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“Every page is a tag, and every tag is a page” - &lt;a href=&quot;https://www.nateliason.com/blog/roam&quot;&gt;Nat Elison’s blog on Roam&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h2 id=&quot;un-linked-references&quot;&gt;Un-linked References&lt;/h2&gt;
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube-nocookie.com/embed/nROryUttSr0&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
