@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      31 min read
+      30 min read
     
 </span></p>
 
@@ -142,15 +142,18 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h3"><a href="#General-approach-to-dynamic-batching-and-it's-challenges.">General approach to dynamic batching and it&#39;s challenges. </a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#Checkpointing-Data-Iteration">Checkpointing Data Iteration </a></li>
+<li class="toc-entry toc-h2"><a href="#3.-Checkpointing">3. Checkpointing </a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#Infinibatch-to-the-rescue">Infinibatch to the rescue </a>
 <ul>
-<li class="toc-entry toc-h2"><a href="#Sharding-Dataset-and-shuffling-iterator">Sharding Dataset and shuffling iterator </a></li>
-<li class="toc-entry toc-h2"><a href="#Tensorize-our-dataset-with-a-map-iterator">Tensorize our dataset with a map iterator </a></li>
-<li class="toc-entry toc-h2"><a href="#Dynamic-Batching">Dynamic Batching </a></li>
-<li class="toc-entry toc-h2"><a href="#Checkpointing">Checkpointing </a></li>
+<li class="toc-entry toc-h2"><a href="#1.-Loading-and-shuffling-large-datasets">1. Loading and shuffling large datasets </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Tensorize-our-dataset-with-a-map-iterator">Tensorize our dataset with a map iterator </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#2.-Dynamic-Batching">2. Dynamic Batching </a></li>
+<li class="toc-entry toc-h2"><a href="#3.-Checkpointing">3. Checkpointing </a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#Making-Infinibatch-work-with-Pytorch-Dataloaders">Making Infinibatch work with Pytorch Dataloaders </a></li>
@@ -204,35 +207,6 @@ window.onload = wrap_img;
 </div>
 
     </details>
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>--2020-09-13 16:56:29--  https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-103-raw-v1.zip
-Resolving s3.amazonaws.com (s3.amazonaws.com)... 52.217.43.102
-Connecting to s3.amazonaws.com (s3.amazonaws.com)|52.217.43.102|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 191984949 (183M) [application/zip]
-Saving to: ‘wikitext-103-raw-v1.zip’
-
-wikitext-103-raw-v1 100%[===================&gt;] 183.09M  16.5MB/s    in 12s     
-
-2020-09-13 16:56:43 (14.9 MB/s) - ‘wikitext-103-raw-v1.zip’ saved [191984949/191984949]
-
-Archive:  wikitext-103-raw-v1.zip
-   creating: wikitext-103-raw/
-  inflating: wikitext-103-raw/wiki.test.raw  
-  inflating: wikitext-103-raw/wiki.valid.raw  
-  inflating: wikitext-103-raw/wiki.train.raw  
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     
 
@@ -252,10 +226,10 @@ Archive:  wikitext-103-raw-v1.zip
 <a class="anchor" href="#1.-Loading-and-shuffling-large-datasets" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Loading and shuffling large datasets<a class="anchor-link" href="#1.-Loading-and-shuffling-large-datasets"> </a>
 </h2>
 <p>For large datasets, loading the entire data into memory might not be possible. If we are to sample fully random batches, we would need to do random access on huge dataset. Depending on the disk latency this might be unfeasible.</p>
-<p>To solve this, we need to</p>
+<p>To solve this,</p>
 <ol>
 <li>Shard the data into chunks larger than single instances so that it reduces the disk access.</li>
-<li>We can then shuffle the chunks and load few of them and shuffle the data loaded from the chunks.</li>
+<li>Shuffle the chunks and load few of them and shuffle the data loaded from the chunks.</li>
 </ol>
 <p>If we shard the pieces into too big chunks we might end up loosing statistical power in our training updates as we are essentially reducing the randomness of our samples used for training. But we can't shard them too small either as that wouldn't solve our disk access problem.</p>
 <p>So a flexible approach would make it easy to control how much data is to be loaded into memory for shuffling. To address this challenge in isolation, you can refer dataset sharding logic in NVIDIA's <a href="https://github.com/NVIDIA/Megatron-LM/blob/main/megatron/data/indexed_dataset.py">MEGATRON language model training code</a> as an example.</p>
@@ -647,8 +621,8 @@ Padding Tokens % : 67.09493267712108
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Checkpointing-Data-Iteration">
-<a class="anchor" href="#Checkpointing-Data-Iteration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checkpointing Data Iteration<a class="anchor-link" href="#Checkpointing-Data-Iteration"> </a>
+<h2 id="3.-Checkpointing">
+<a class="anchor" href="#3.-Checkpointing" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Checkpointing<a class="anchor-link" href="#3.-Checkpointing"> </a>
 </h2>
 <p>In large datasets, it's typical not to wait for an entire epoch to checkpoint your model to recover from failures. So to be able to recover and continue training in a deterministic manner, such that it converges to same state if the failure hadn't occured, we have to checkpoint the random state that controls the order in which our samples are generated.</p>
 
@@ -664,21 +638,7 @@ Padding Tokens % : 67.09493267712108
 <blockquote>
 <p>Infinibatch is a library of checkpointable iterators for randomized data loading of massive data sets in deep neural network training.</p>
 </blockquote>
-<p>It has the following features that makes processing large datasets practical.</p>
-
-<pre><code>support for corpora much larger than fit into RAM
-hierarchical block+sentence-level randomization over the whole corpus, different randomization in each epoch
-only load the data that is needed
-very fast start-up time (does not need to read full corpus)
-only requires the most basic of data preparation (e.g. no indexing)
-for multi-GPU, only load what the respective GPU needs
-100% accurate check-pointing, restore from checkpoint should not read all data up to the checkpoint
-support automatic bucketed batching with dynamic batch sizes
-pre-fetching thread
-composable, as to support for complex batching, e.g. negative samples from multiple documents
-
-</code></pre>
-<p>It's basically a collection of pure python classes that implement <code>__iter__</code> interface. They can be composed inside one another easily and the final composed iterator can be checkpointed as a single entity.</p>
+<p>It is aimed at simplify the processing of large datasets.It's a collection of pure python classes that implement <code>__iter__</code> interface. They can be composed inside one another easily and the final composed iterator can be checkpointed as a single entity.</p>
 <p>You can checkout it's basic tutorial <a href="https://github.com/microsoft/infinibatch">here</a>. We will use it to address the listed challenges piece by piece and then finally make it work inside <code>IterableDataset</code> and <code>DataLoader</code> abstractions also handling tricky bits with distributed data parallel training.</p>
 
 </div>
@@ -687,8 +647,8 @@ composable, as to support for complex batching, e.g. negative samples from multi
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Sharding-Dataset-and-shuffling-iterator">
-<a class="anchor" href="#Sharding-Dataset-and-shuffling-iterator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sharding Dataset and shuffling iterator<a class="anchor-link" href="#Sharding-Dataset-and-shuffling-iterator"> </a>
+<h2 id="1.-Loading-and-shuffling-large-datasets">
+<a class="anchor" href="#1.-Loading-and-shuffling-large-datasets" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Loading and shuffling large datasets<a class="anchor-link" href="#1.-Loading-and-shuffling-large-datasets"> </a>
 </h2>
 <p>Following the infinibatch tutorial, let's first divide our dataset into multiple gzip chunks of 10000 sentences each.</p>
 
@@ -716,8 +676,7 @@ composable, as to support for complex batching, e.g. negative samples from multi
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now we can create an iterator using infinibatch with a function that can deserialize a shard. Infinibatch takes care of loading multiple in a shuffled order. We can control the amount of deserialized examples (not shards!!) to be buffered using <code>buffer_size</code> parameter.</p>
-<p>The library returns a python iterator on which we can call <code>next</code> or iterate with <code>for</code> to get next example.</p>
+<p>Now we can create an iterator using infinibatch with a function that can deserialize a shard. Infinibatch takes care of loading multiple in a shuffled order. We can control the amount of deserialized examples (not shards!!) to be buffered using <code>buffer_size</code> parameter. The library returns a python iterator on which we can call <code>next</code> or iterate with <code>for</code> to get next example.</p>
 <p>Note: Passing <code>train=True</code> creates an infinite iterator that cycles after a full run on the dataset. The <code>chunked_dataset_iterator</code> method returns a composition of iterators, you can refer the source code <a href="https://github.com/microsoft/infinibatch/blob/master/infinibatch/iterators.py">here</a></p>
 
 </div>
@@ -773,9 +732,9 @@ composable, as to support for complex batching, e.g. negative samples from multi
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Tensorize-our-dataset-with-a-map-iterator">
+<h3 id="Tensorize-our-dataset-with-a-map-iterator">
 <a class="anchor" href="#Tensorize-our-dataset-with-a-map-iterator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tensorize our dataset with a map iterator<a class="anchor-link" href="#Tensorize-our-dataset-with-a-map-iterator"> </a>
-</h2>
+</h3>
 <p>Let's compose our tokenizer upon our sentence iterator. Infinibatch has two ways of doing this,</p>
 <ol>
 <li>
@@ -833,8 +792,8 @@ composable, as to support for complex batching, e.g. negative samples from multi
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Dynamic-Batching">
-<a class="anchor" href="#Dynamic-Batching" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dynamic Batching<a class="anchor-link" href="#Dynamic-Batching"> </a>
+<h2 id="2.-Dynamic-Batching">
+<a class="anchor" href="#2.-Dynamic-Batching" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Dynamic Batching<a class="anchor-link" href="#2.-Dynamic-Batching"> </a>
 </h2>
 <p>Now comes the magic of dynamic batching with <code>BucketedReadaheadBatchIterator</code>. Let's fix the maximum tokens per batch to  <code>32 * 512 = 16384</code>. This iterator allows you to compute dynamic batch size with a callback over the current longest example it read in a sorting <code>read_ahead</code> window fetched from the iterator composed within it.</p>
 
@@ -1025,7 +984,7 @@ Padding Tokens % : 3.1094080491725653
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>LOOK AT THAT! We have reduced the percentage of padding tokens per epoch from 67% to just around 3%.The total batches needed to process it in the same max tokens per batch limitation hence got reduced nearly five times from 36390 to 7642.</p>
+<p>LOOK AT THAT! We have <strong>reduced</strong> the % of <strong>padding tokens</strong> per epoch from <strong>67% to just around 3%</strong>.The total batches needed to process it in the same max tokens per batch limitation hence got reduced nearly five times from 36390 to 7642.</p>
 <p>The processing time is just one minute added. I guess that's due to IO, but you could try benchmarking that with more rigour.</p>
 <p>Now, plotting the length distribution for dynamic batches.</p>
 
@@ -1086,8 +1045,8 @@ Padding Tokens % : 3.1094080491725653
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Checkpointing">
-<a class="anchor" href="#Checkpointing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checkpointing<a class="anchor-link" href="#Checkpointing"> </a>
+<h2 id="3.-Checkpointing">
+<a class="anchor" href="#3.-Checkpointing" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Checkpointing<a class="anchor-link" href="#3.-Checkpointing"> </a>
 </h2>
 <p>One cool feature of <code>infinibatch</code> is that you can checkpoint a particular state in which the composed iterators is at and restore it back to that state. This is very cool considering it works recursively on the composed iterators and even on infinite iterator. Let's recreate our iterators and check this out.</p>
 
