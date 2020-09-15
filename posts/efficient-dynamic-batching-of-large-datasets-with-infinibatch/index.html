@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      31 min read
+      32 min read
     
 </span></p>
 
@@ -1235,7 +1235,7 @@ All items drawn after resetting are equal: True
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">IterableDataset</span>
-
+<span class="kn">import</span> <span class="nn">torch.distributed</span> <span class="k">as</span> <span class="nn">dist</span>
 
 <span class="k">class</span> <span class="nc">IterableCheckpointedDataset</span><span class="p">(</span><span class="n">IterableDataset</span><span class="p">):</span>
     <span class="sd">"""</span>
@@ -1274,12 +1274,29 @@ All items drawn after resetting are equal: True
                            <span class="n">num_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
                            <span class="n">buffer_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">,</span> 
                            <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1337</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataLoader</span><span class="p">:</span>
+
+    <span class="n">num_instances</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">instance_rank</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">dist</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="ow">and</span> <span class="n">is_train</span><span class="p">:</span>
+        <span class="c1"># Only in training mode we want the data to be split.</span>
+        <span class="c1"># This is a hack to make dynamic batched iterators work while using ddp.</span>
+        <span class="c1"># If we were to split the data and number of batches turned out uneven, then</span>
+        <span class="c1"># Iterator might exhaust early in one GPU leaving it stuck there forever.</span>
+        <span class="c1"># So we rather choose to do the same validation in all the GPUs.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">num_instances</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_world_size</span><span class="p">()</span>
+            <span class="n">instance_rank</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">get_rank</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
     <span class="n">sentence_it</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">chunked_dataset_iterator</span><span class="p">(</span>
         <span class="n">chunk_refs</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">chunks_glob</span><span class="p">),</span>
         <span class="n">read_chunk_fn</span> <span class="o">=</span> <span class="n">read_chunk</span><span class="p">,</span>
         <span class="n">buffer_size</span> <span class="o">=</span> <span class="n">buffer_size</span><span class="p">,</span> 
-        <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">,</span> 
-        <span class="n">train</span><span class="o">=</span><span class="n">is_train</span><span class="p">,</span> 
+        <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">,</span>
+        <span class="n">num_instances</span><span class="o">=</span><span class="n">num_instances</span><span class="p">,</span>
+        <span class="n">instance_rank</span><span class="o">=</span><span class="n">instance_rank</span><span class="p">,</span>
+        <span class="n">train</span><span class="o">=</span><span class="n">is_train</span><span class="p">,</span>
         <span class="n">shuffle</span><span class="o">=</span><span class="n">is_train</span> <span class="c1"># Shuffle Only on Train</span>
     <span class="p">)</span>
     <span class="n">tokenize_fn</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="n">max_seq_len</span><span class="p">,</span> <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
