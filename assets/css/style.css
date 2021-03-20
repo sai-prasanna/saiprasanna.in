@@ -480,7 +480,9 @@ pre code { font-size: 15px !important; }
 
 p code { font-size: 19px; }
 
-.post-content p, .post-content li { font-size: 16px; color: #000; }
+.page-content { font-family: "Segoe UI", SegoeUI, "Segoe WP", "Helvetica Neue", "Helvetica", "Tahoma", "Arial", sans-serif !important; }
+
+.page-content p, .page-content li { font-size: 16px; color: #000; }
 
 .post-header h1 { font-size: 2rem; }
 
