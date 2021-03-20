@@ -10,12 +10,15 @@
 // If you want to turn off dark background for syntax highlighting, comment or delete the below line.
 @import "minima/fastpages-dracula-highlight"; 
 
-// Copied from - https://github.com/morganmcg1/ntentional/blob/master/_sass/minima/custom-styles.scss
-// make body text (paragraphy) smaller (was 20px)
-.post-content p, .post-content li {
-   font-size: 16px;
-   color: #000;
-}  
+.page-content {
+   font-family: "Segoe UI", SegoeUI, "Segoe WP", "Helvetica Neue", "Helvetica", "Tahoma", "Arial", sans-serif !important;
+   // Copied from - https://github.com/morganmcg1/ntentional/blob/master/_sass/minima/custom-styles.scss
+   // make body text (paragraphy) smaller (was 20px)
+   p, li {
+      font-size: 16px;
+      color: #000;
+   }
+}
 
 // MORGAN: Change Post-Title (post-header) size
 // Defaults from minima/_sass/minima/_layout.scss were relative-font-size(2.625) and relative-font-size(2.625)
