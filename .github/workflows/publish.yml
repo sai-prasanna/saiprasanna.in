@@ -1,8 +1,7 @@
 on:
+  push:
+    branches: master
   workflow_dispatch:
-    push:
-      branches: main
-
 name: Quarto Publish
 
 jobs:
