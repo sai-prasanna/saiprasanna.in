@@ -10,23 +10,7 @@
 <atom:link href="saiprasanna.in/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.1.251</generator>
-<lastBuildDate>Sat, 24 Sep 2022 23:55:00 GMT</lastBuildDate>
-<item>
-  <title>TeST</title>
-  <link>saiprasanna.in/posts/test.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-
- ]]></description>
-  <category>test</category>
-  <guid>saiprasanna.in/posts/test.html</guid>
-  <pubDate>Sat, 24 Sep 2022 23:55:00 GMT</pubDate>
-</item>
+<lastBuildDate>Sun, 13 Sep 2020 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Efficient Dynamic Batching of Large Datasets with Infinibatch</title>
   <link>saiprasanna.in/posts/efficient-dynamic-batching-of-large-datasets-with-infinibatch/index.html</link>
