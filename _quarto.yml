@@ -18,8 +18,5 @@ format:
       light: flatly
       dark: darkly
     css: styles.css
-comments:
-  utterances:
-    repo: sai-prasanna/saiprasanna.in
 execute:
   freeze: auto
