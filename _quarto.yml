@@ -1,0 +1,25 @@
+project:
+  type: website
+
+website:
+  title: "λf.(λg.f (g g)) (λg.f (g g)) Sai"
+  favicon: favicon.ico
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/sai-prasanna
+      - icon: twitter
+        href: https://twitter.com/sai_prasanna
+  site-url: saiprasanna.in
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: styles.css
+comments:
+  utterances:
+    repo: sai-prasanna/saiprasanna.in
+execute:
+  freeze: auto

@@ -1,0 +1,19 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/sai_prasanna
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/sai-prasanna-r-422aaba4
+    - icon: github
+      text: Github
+      href: https://github.com/sai-prasanna
+
+---
+
+About this blog
