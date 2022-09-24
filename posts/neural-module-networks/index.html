@@ -1,211 +1,380 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Neural Module Networks | λf.(λg.f (g g)) (λg.f (g g)) Sai</title>
-<meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Neural Module Networks" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Research Paper - https://arxiv.org/abs/1511.02799" />
-<meta property="og:description" content="Research Paper - https://arxiv.org/abs/1511.02799" />
-<link rel="canonical" href="https://saiprasanna.in/posts/neural-module-networks/" />
-<meta property="og:url" content="https://saiprasanna.in/posts/neural-module-networks/" />
-<meta property="og:site_name" content="λf.(λg.f (g g)) (λg.f (g g)) Sai" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-03-02T00:00:00-06:00" />
-<script type="application/ld+json">
-{"url":"https://saiprasanna.in/posts/neural-module-networks/","@type":"BlogPosting","headline":"Neural Module Networks","dateModified":"2020-03-02T00:00:00-06:00","datePublished":"2020-03-02T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://saiprasanna.in/posts/neural-module-networks/"},"description":"Research Paper - https://arxiv.org/abs/1511.02799","@context":"https://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://saiprasanna.in/feed.xml" title="λf.(λg.f (g g)) (λg.f (g g)) Sai" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<script>
-function wrap_img(fn) {
-    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-        var elements = document.querySelectorAll(".post img");
-        Array.prototype.forEach.call(elements, function(el, i) {
-            if (el.getAttribute("title") && (el.className != "emoji")) {
-                const caption = document.createElement('figcaption');
-                var node = document.createTextNode(el.getAttribute("title"));
-                caption.appendChild(node);
-                const wrapper = document.createElement('figure');
-                wrapper.className = 'image';
-                el.parentNode.insertBefore(wrapper, el);
-                el.parentNode.removeChild(el);
-                wrapper.appendChild(el);
-                wrapper.appendChild(caption);
-            }
-        });
-    } else { document.addEventListener('DOMContentLoaded', fn); }
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-03-02">
+
+<title>λf.(λg.f (g g)) (λg.f (g g)) Sai - Neural Module Networks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
 }
-window.onload = wrap_img;
-</script>
+</style>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function(){
-    // add link icon to anchor tags
-    var elem = document.querySelectorAll(".anchor-link")
-    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
-    });
-</script>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
 </head>
-<body><header class="site-header">
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/">λf.(λg.f (g g)) (λg.f (g g)) Sai</a><nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
+<body class="nav-fixed fullcontent">
 
-        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
-      </nav></div>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">λf.(λg.f (g g)) (λg.f (g g)) Sai</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/sai-prasanna"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/sai_prasanna"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
 </header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Neural Module Networks</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-02T00:00:00-06:00" itemprop="datePublished">
-        Mar 2, 2020
-      </time>
-       • <span class="read-time" title="Estimated read time">
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Neural Module Networks</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Semantic Parsing</div>
+                <div class="quarto-category">Visual Q/A</div>
+                <div class="quarto-category">Symbolic AI</div>
+                <div class="quarto-category">CV</div>
+                <div class="quarto-category">NLP</div>
+                <div class="quarto-category">Research Paper Summary</div>
+              </div>
+                  </div>
+  </div>
     
-    
-      2 min read
-    
-</span></p>
+  
+  <div class="quarto-title-meta">
 
-    
-      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
       
-        <a class="category-tags-link" href="/categories/#Semantic Parsing">Semantic Parsing</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/categories/#Visual Q/A">Visual Q/A</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/categories/#Symbolic AI">Symbolic AI</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/categories/#CV">CV</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/categories/#NLP">NLP</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/categories/#Research Paper Summary">Research Paper Summary</a>
-        
-      
-      </p>
-    
-
-    </header>
-
-  <div class="post-content e-content" itemprop="articleBody">
-    <p>Research Paper -  <a href="https://arxiv.org/abs/1511.02799">https://arxiv.org/abs/1511.02799</a></p>
-
-<p>Authors - Jacob Andreas, Marcus Rohrbach, Trevor Darrell, Dan Klein</p>
-<h2 id="key-idea">Key Idea</h2>
-<p>Parse questions of visual QA into a description of compositions of functions. These functions are neural networks called Neural Modules. Execute the neural networks and reweigh the resulting label using question representation.
-<img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FImqekKqTqJ?alt=media&amp;token=f46ba375-0d38-4c81-b40f-f691c4099a74" alt="Architecture diagram" /></p>
-<h2 id="task---visual-question-answering">Task - Visual Question Answering</h2>
-<p>Given a question like “What color is the coffee mug?” and an image we want to predict the answer.
-<img src="https://visualqa.org/static/img/vqa_examples.jpg" alt="4  visual qa examples. One example: Two images having a man and women. One with man wearing glasses and another image with woman wearing glasses.Question, &quot;Who is wearing glasses?&quot; and respective answer below the image" /></p>
-<h2 id="prior-approaches">Prior approaches</h2>
-
-<p><strong>End to End neural networks</strong></p>
-
-<p>Use a CNN to vectorize the image and RNN to vectorize the question and use a feed forward network to classify the answer.
-This is a black box trying to answer in one shot.</p>
-
-<p><strong>Semantic Parsing approach</strong></p>
-
-<p>Parse the question into logical expressions, image into logical representation of the world and use logic based reasoning to solve the problem.
-This is more compositional.</p>
-<h2 id="motivation">Motivation</h2>
-<p>Combine the representational capacity of neural nets and compositionality of symbolic approach.</p>
-
-<blockquote>
-  <p>“Rather than thinking of question answering as a problem of learning a single function to map from questions and contexts to answers, it’s perhaps useful
-to think of it as a highly-multitask learning setting, where each problem instance is associated with a novel task, and the  identity  of  that  task  is  expressed  only  noisily  in  language.”</p>
-</blockquote>
-
-<p>Simple example - “Is this a truck?” - Needs single task to be performed, namely truck or not classification.</p>
-
-<p>Compositional example - “What is the object to the left of the tea pot?” - Needs one to find the teapot, detect object to its left, then classify the object.</p>
-<h2 id="architecture">Architecture</h2>
-<h3 id="neural-modules">Neural Modules</h3>
-<p>Identify set of modules that can be composed to solve all/most tasks.
-Modules can be thought of as a function parametrized by a neural network, with a type signature.
-Data Types - Image, Unnormalized attention map, labels
-<img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FCukmmNqjRE?alt=media&amp;token=f63a5c71-e85f-4936-a3db-d6c2e210da46" alt="Attention Module" />
-<img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2Fn0rzgVl42h?alt=media&amp;token=74d06d94-d7a2-4911-9f10-dac8a01a7970" alt="Classification Module" />
-<img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FnOFbj1IDtR?alt=media&amp;token=044075ba-b992-4618-905e-e4a5e69fe4a4" alt="Reattention module" />
-<img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FGhc8_NHxUn?alt=media&amp;token=b06a6670-84f7-4c65-89da-9475008fe5c3" alt="Combination module" />
-<img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FQt95yqX3Cf?alt=media&amp;token=b2628c2d-ca01-48fd-b596-c4e01e491823" alt="Measurement Module" /></p>
-<h3 id="strings---modules">Strings -&gt; Modules</h3>
-<p><strong>Parsing</strong>
-Use few rules on dependency parse of the question to convert it into a structured query.
-e.g. “Is there a circle next to a square?” -&gt;  is(circle, next-to(square))
-<strong>Layout</strong>
-“All leaves become attend modules, all internal nodes become
-re-attend or combine modules dependent on their arity, and root nodes become measure modules for yes/no questions and classify modules for all other question types.”
-The queries could come from anywhere not just natural language question. As long as they can be converted to a layout in the end.</p>
-<h3 id="answering">Answering</h3>
-<p>An RNN is used to process the question and predict a label directly without looking into the image.
-This is combined with the final label from the root node of the Neural Modules using geometric mean to get the final result.
-This is done for 2 reasons
-<strong>Syntactic Regularity/Prior</strong>
-When converting to structured query, certain syntactic elements are lost.
-For e.g. What is in the sky? and What are in the sky?  both result in what(fly).
-But answer varies from kite to kites.
-<strong>Semantic Regularity/Prior</strong>
-Some answers are unreasonable just by inspecting the question.
-For example, What colour is the bear? eliminates all non-colour answers.</p>
-<h2 id="benchmarks">Benchmarks</h2>
-<p>They try this in vqa dataset - https://visualqa.org/ a huge dataset with natural images and questions with answers.
-<img src="https://d3i71xaburhd42.cloudfront.net/21c99706bb26e9012bfb4d8d48009a3d45af59b2/7-Table3-1.png" alt="Benchmarks table for VQA" />
-Since VQA doesn’t have many deep compositional questions, they use shapes a synthetically generated dataset.
-<img src="https://d3i71xaburhd42.cloudfront.net/21c99706bb26e9012bfb4d8d48009a3d45af59b2/7-Table2-1.png" alt="Synthetic Shapes dataset" /></p>
-<h2 id="examples">Examples</h2>
-<p>What colour is his tie? <img src="https://d3i71xaburhd42.cloudfront.net/21c99706bb26e9012bfb4d8d48009a3d45af59b2/5-Figure2-1.png" alt="Statue of a man with yellow tie, question parsed to modules 1. find tie  2. describe colour " />
-<img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FacB53oMkSP?alt=media&amp;token=a75a6545-1c5f-44f6-9ed5-3f17d26061b0" alt="Correct and incorrect predictions" /></p>
-
-  </div><a class="u-url" href="/posts/neural-module-networks/" hidden></a>
-</article>
-      </div>
-    </main><footer class="site-footer h-card">
-  <data class="u-url" href="/"></data>
-
-  <div class="wrapper">
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col">
-        <p class="feed-subscribe">
-          <a href="/feed.xml">
-            <svg class="svg-icon orange">
-              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
-            </svg><span>Subscribe</span>
-          </a>
-        </p>
-      </div>
-      <div class="footer-col">
-        <p>Blog on machine learning, NLP, Computer Science, philosophy, economics, animal rights, music, programming languages and endless other things that pique my curiosity.</p>
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 2, 2020</p>
       </div>
     </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
-    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/sai-prasanna" title="sai-prasanna"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/sai_prasanna" title="sai_prasanna"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
-</div>
 
-  </div>
 
-</footer>
-</body>
 
-</html>
+<p>Research Paper - <a href="https://arxiv.org/abs/1511.02799">https://arxiv.org/abs/1511.02799</a></p>
+<p>Authors - Jacob Andreas, Marcus Rohrbach, Trevor Darrell, Dan Klein ## Key Idea Parse questions of visual QA into a description of compositions of functions. These functions are neural networks called Neural Modules. Execute the neural networks and reweigh the resulting label using question representation. <img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FImqekKqTqJ?alt=media&amp;token=f46ba375-0d38-4c81-b40f-f691c4099a74.png" class="img-fluid" alt="Architecture diagram"> ## Task - Visual Question Answering Given a question like “What color is the coffee mug?” and an image we want to predict the answer. <img src="https://visualqa.org/static/img/vqa_examples.jpg" class="img-fluid" alt="4 visual qa examples. One example: Two images having a man and women. One with man wearing glasses and another image with woman wearing glasses.Question, “Who is wearing glasses?” and respective answer below the image"> ## Prior approaches</p>
+<p><strong>End to End neural networks</strong></p>
+<p>Use a CNN to vectorize the image and RNN to vectorize the question and use a feed forward network to classify the answer. This is a black box trying to answer in one shot.</p>
+<p><strong>Semantic Parsing approach</strong></p>
+<p>Parse the question into logical expressions, image into logical representation of the world and use logic based reasoning to solve the problem. This is more compositional. ## Motivation Combine the representational capacity of neural nets and compositionality of symbolic approach.</p>
+<blockquote class="blockquote">
+<p>“Rather than thinking of question answering as a problem of learning a single function to map from questions and contexts to answers, it’s perhaps useful to think of it as a highly-multitask learning setting, where each problem instance is associated with a novel task, and the identity of that task is expressed only noisily in language.”</p>
+</blockquote>
+<p>Simple example - “Is this a truck?” - Needs single task to be performed, namely truck or not classification.</p>
+<p>Compositional example - “What is the object to the left of the tea pot?” - Needs one to find the teapot, detect object to its left, then classify the object. ## Architecture ### Neural Modules Identify set of modules that can be composed to solve all/most tasks. Modules can be thought of as a function parametrized by a neural network, with a type signature. Data Types - Image, Unnormalized attention map, labels <img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FCukmmNqjRE?alt=media&amp;token=f63a5c71-e85f-4936-a3db-d6c2e210da46.png" class="img-fluid" alt="Attention Module"> <img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2Fn0rzgVl42h?alt=media&amp;token=74d06d94-d7a2-4911-9f10-dac8a01a7970.png" class="img-fluid" alt="Classification Module"> <img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FnOFbj1IDtR?alt=media&amp;token=044075ba-b992-4618-905e-e4a5e69fe4a4.png" class="img-fluid" alt="Reattention module"> <img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FGhc8_NHxUn?alt=media&amp;token=b06a6670-84f7-4c65-89da-9475008fe5c3.png" class="img-fluid" alt="Combination module"> <img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FQt95yqX3Cf?alt=media&amp;token=b2628c2d-ca01-48fd-b596-c4e01e491823.png" class="img-fluid" alt="Measurement Module"> ### Strings -&gt; Modules <strong>Parsing</strong> Use few rules on dependency parse of the question to convert it into a structured query. e.g.&nbsp;“Is there a circle next to a square?” -&gt; is(circle, next-to(square)) <strong>Layout</strong> “All leaves become attend modules, all internal nodes become re-attend or combine modules dependent on their arity, and root nodes become measure modules for yes/no questions and classify modules for all other question types.” The queries could come from anywhere not just natural language question. As long as they can be converted to a layout in the end. ### Answering An RNN is used to process the question and predict a label directly without looking into the image. This is combined with the final label from the root node of the Neural Modules using geometric mean to get the final result. This is done for 2 reasons <strong>Syntactic Regularity/Prior</strong> When converting to structured query, certain syntactic elements are lost. For e.g.&nbsp;What is in the sky? and What are in the sky? both result in what(fly). But answer varies from kite to kites. <strong>Semantic Regularity/Prior</strong> Some answers are unreasonable just by inspecting the question. For example, What colour is the bear? eliminates all non-colour answers. ## Benchmarks They try this in vqa dataset - https://visualqa.org/ a huge dataset with natural images and questions with answers. <img src="https://d3i71xaburhd42.cloudfront.net/21c99706bb26e9012bfb4d8d48009a3d45af59b2/7-Table3-1.png" class="img-fluid" alt="Benchmarks table for VQA"> Since VQA doesn’t have many deep compositional questions, they use shapes a synthetically generated dataset. <img src="https://d3i71xaburhd42.cloudfront.net/21c99706bb26e9012bfb4d8d48009a3d45af59b2/7-Table2-1.png" class="img-fluid" alt="Synthetic Shapes dataset"> ## Examples What colour is his tie? <img src="https://d3i71xaburhd42.cloudfront.net/21c99706bb26e9012bfb4d8d48009a3d45af59b2/5-Figure2-1.png" class="img-fluid" alt="Statue of a man with yellow tie, question parsed to modules 1. find tie 2. describe colour"> <img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FacB53oMkSP?alt=media&amp;token=a75a6545-1c5f-44f6-9ed5-3f17d26061b0.png" class="img-fluid" alt="Correct and incorrect predictions"></p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="sai-prasanna/saiprasanna.in" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

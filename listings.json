@@ -1,0 +1,27 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/post-with-code/index.html",
+      "/posts/welcome/index.html",
+      "/posts/efficient-dynamic-batching-of-large-datasets-with-infinibatch/index.html",
+      "/posts/roam-research-software-for-building-a-second-brain/index.html",
+      "/posts/neural-module-networks/index.html",
+      "/posts/ACL-2019-Conference-Summary/index.html",
+      "/posts/semantic-legion-1/index.html",
+      "/posts/semeval-19-semi-supervised-domain-adaptation-for-suggestion-mining/index.html",
+      "/posts/gods-own-programming-language/index.html",
+      "/posts/learning-long-term-dependencies-rnn/index.html",
+      "/posts/neural-open-information-extraction/index.html",
+      "/posts/dependency-injection-what-why-and-how/index.html",
+      "/posts/Manjaro-Linux/index.html",
+      "/posts/crashes-are-optional/index.html",
+      "/posts/open-for-collaboration-closed-for-disturbance-rethinking-open-office-layout/index.html",
+      "/posts/function-currying-and-composition/index.html",
+      "/posts/creation-and-consumption/index.html",
+      "/posts/speed-up-ios-development/index.html",
+      "/posts/MIT-OCW-Algorithms/index.html",
+      "/posts/new-blog/index.html"
+    ]
+  }
+]

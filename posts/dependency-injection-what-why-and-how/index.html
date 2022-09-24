@@ -1,667 +1,891 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Dependency Injection - What, Why and How? | λf.(λg.f (g g)) (λg.f (g g)) Sai</title>
-<meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Dependency Injection - What, Why and How?" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="We are going to explore dependency injection with emphasis on swift iOS development. But the concept applies to most object oriented languages. We will also see some practical considerations on applying DI in iOS environment. This article is result of my deep dive into implementing DI, and learning about various practical, theoretical aspects of it." />
-<meta property="og:description" content="We are going to explore dependency injection with emphasis on swift iOS development. But the concept applies to most object oriented languages. We will also see some practical considerations on applying DI in iOS environment. This article is result of my deep dive into implementing DI, and learning about various practical, theoretical aspects of it." />
-<link rel="canonical" href="https://saiprasanna.in/posts/dependency-injection-what-why-and-how/" />
-<meta property="og:url" content="https://saiprasanna.in/posts/dependency-injection-what-why-and-how/" />
-<meta property="og:site_name" content="λf.(λg.f (g g)) (λg.f (g g)) Sai" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2017-03-20T00:00:00-05:00" />
-<script type="application/ld+json">
-{"url":"https://saiprasanna.in/posts/dependency-injection-what-why-and-how/","@type":"BlogPosting","headline":"Dependency Injection - What, Why and How?","dateModified":"2017-03-20T00:00:00-05:00","datePublished":"2017-03-20T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://saiprasanna.in/posts/dependency-injection-what-why-and-how/"},"description":"We are going to explore dependency injection with emphasis on swift iOS development. But the concept applies to most object oriented languages. We will also see some practical considerations on applying DI in iOS environment. This article is result of my deep dive into implementing DI, and learning about various practical, theoretical aspects of it.","@context":"https://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://saiprasanna.in/feed.xml" title="λf.(λg.f (g g)) (λg.f (g g)) Sai" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<script>
-function wrap_img(fn) {
-    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-        var elements = document.querySelectorAll(".post img");
-        Array.prototype.forEach.call(elements, function(el, i) {
-            if (el.getAttribute("title") && (el.className != "emoji")) {
-                const caption = document.createElement('figcaption');
-                var node = document.createTextNode(el.getAttribute("title"));
-                caption.appendChild(node);
-                const wrapper = document.createElement('figure');
-                wrapper.className = 'image';
-                el.parentNode.insertBefore(wrapper, el);
-                el.parentNode.removeChild(el);
-                wrapper.appendChild(el);
-                wrapper.appendChild(caption);
-            }
-        });
-    } else { document.addEventListener('DOMContentLoaded', fn); }
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2017-03-20">
+
+<title>λf.(λg.f (g g)) (λg.f (g g)) Sai - Dependency Injection - What, Why and How?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
 }
-window.onload = wrap_img;
-</script>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function(){
-    // add link icon to anchor tags
-    var elem = document.querySelectorAll(".anchor-link")
-    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
-    });
-</script>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
 </head>
-<body><header class="site-header">
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/">λf.(λg.f (g g)) (λg.f (g g)) Sai</a><nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
-
-        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
-      </nav></div>
-</header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Dependency Injection - What, Why and How?</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2017-03-20T00:00:00-05:00" itemprop="datePublished">
-        Mar 20, 2017
-      </time>
-       • <span class="read-time" title="Estimated read time">
-    
-    
-      15 min read
-    
-</span></p>
-
-    
-      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
-      
-        <a class="category-tags-link" href="/categories/#iOS">iOS</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/categories/#Swift">Swift</a>
-        
-      
-      </p>
-    
-
-    </header>
-
-  <div class="post-content e-content" itemprop="articleBody">
-    <p>We are going to explore dependency injection with emphasis on swift iOS development. But the concept
-applies to most object oriented languages. We will also see some practical considerations on 
-applying DI in iOS environment. This article is result of my deep dive into implementing DI, and learning about 
-various practical, theoretical aspects of it.</p>
-
-<h1 id="what-is-dependency-injection">What is Dependency Injection?</h1>
-
-<blockquote>
-  <p>“Dependency Injection” is a 25-dollar term for a 5-cent concept”.</p>
-</blockquote>
-
-<p>is a often repeated maxim regarding DI.</p>
-
-<p>In its essence DI means wherever possible, <strong>replace object creation inside a piece of code 
-by providing it from outside that piece of code</strong>. Hence the term.</p>
-
-<p>Constructor, Property, Method are where we usually do object creation, and that can be replaced from outside. So we end up with 3 types of injection.</p>
-
-<ol>
-  <li>Constructor Injection</li>
-  <li>Property Injection</li>
-  <li>Method Injection</li>
-</ol>
-
-<p>We will explore they 3 types in “How ..?” section.</p>
-
-<h1 id="why-dependency-injection">Why Dependency Injection?</h1>
-
-<p>Let’s dwelve into this with help of a scenario.</p>
-
-<h2 id="scenario---koala-koder">Scenario - Koala Koder!</h2>
-
-<p>Say you have an app with a user login. A user model struct/class  encapsulates the logged in user data.</p>
-
-<p>Suppose you are a Koala Koder( a programmer who is as lazy as a koala bear). You perhaps made a solution which is quick and dirty. Store the user model inside NSUserDefaults, and fetch it via properties. And as we all know how apple loves its singleton classes, we follow them making UserModel a singleton.</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">UserModel</span> <span class="p">{</span>
-
-    <span class="kd">static</span> <span class="k">let</span> <span class="nv">sharedInstance</span> <span class="o">=</span> <span class="kt">UserModel</span><span class="p">()</span>
-
-    <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
-        <span class="k">get</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kt">NSUserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"userName"</span><span class="p">)</span>  <span class="p">??</span> <span class="s">""</span>
-        <span class="p">}</span>
-        <span class="k">set</span> <span class="p">{</span>
-            <span class="kt">NSUserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="n">newValue</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span><span class="s">"userName"</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">greet</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="s">"</span><span class="se">\(</span><span class="n">name</span><span class="se">)</span><span class="s">, Vannakam :)"</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></div></div>
-
-<p>We write our app with this usermodel in mind, and <code class="language-plaintext highlighter-rouge">UserModel.sharedInstance</code> is everywhere in our app.</p>
-
-<p><img src="https://ih0.redbubble.net/image.5150955.4141/flat,1000x1000,075,f.jpg" alt="Koala lazing off" /></p>
-
-<h2 id="problems-problems-everywhere">Problems, problems everywhere…</h2>
-
-<h3 id="1-unit-tester-vader-strikes">1. Unit Tester Vader strikes!</h3>
-
-<p>A senior developer suddenly turns to the dark side, and starts ranting about <em>unit testing</em>.
-He/She will not let apps which are not unit tested pass the code review.</p>
-
-<p><img src="http://s2.quickmeme.com/img/03/0347c3efdc17cc1959d089f60b8b2fc267d9093caa8e8cb483bf476b58e63e45.jpg" alt="Meme: Darth Vader says &quot;I find your lack of unit testing disturbing&quot;" /></p>
-
-<h3 id="2-a-wild-new-use-case-appears">2. A wild New Use case appears!</h3>
-
-<p>And if that isn’t enough a <em>new use case</em>  should be supported. Our app should now support <em>multiple users</em>.</p>
-
-<p><img src="https://cdn.meme.am/instances/500x/64312241.jpg" alt="Meme: Back to future - Dr Brown says &quot;New Usecase in no time? I've an extra flux capacitor&quot;" /></p>
-
-<h3 id="3-lets-move-to-insert-any-serialization-library-here">3. “Lets move to &lt;insert any serialization library here&gt;”</h3>
-
-<p>Now we also reached a point where userdefaults didn’t scale and  wish to migrate to new data serialization method. Now even our getters and setters inside the UserProfile is not safe.</p>
-
-<h2 id="why-are-there-problems">Why are there problems?</h2>
-
-<p>So we find ourselves in deep trouble. Lets analyze why so.</p>
-
-<h3 id="1-singletons-are-hard-to-test">1. Singletons are hard to test</h3>
-
-<p>Now if you want to unit test a viewcontroller that uses this singleton.</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">class</span> <span class="kt">UserProfile</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
-
-    <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">greetingLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="kt">UserModel</span><span class="o">.</span><span class="n">sharedInstance</span><span class="o">.</span><span class="nf">greet</span><span class="p">()</span>
-        <span class="c1">//...</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></div></div>
-
-<p>In unit testing you create a UserProfile object, call viewDidLoad or other methods manually. Now you have to verify 
-whether <code class="language-plaintext highlighter-rouge">UserModel.sharedInstance.greet()</code> was called.</p>
-
-<p>Since UserModel.sharedInstance is immutable, either we can’t replace it with our mock class extending UserModel, which overrides greetUser, and sets a flag which can be checked. So our testing coverage comes down.</p>
-
-<h3 id="2-instantiation-inside-our-code-constraints-creates-strong-coupling-creating-harmful-constraints">2. Instantiation inside our code constraints creates strong coupling, creating harmful constraints</h3>
-
-<p>In our scenario, by using a singleton, we tied our codebase to a single UserModel but now our app needs multiple user models. So in general, using singletons will make it hard to adapt to new use cases. <em>What you thought as a singleton suddenly is not so single anymore</em>.</p>
-
-<p>But consider that we didn’t use singleton, but instantiated UserModel, by calling <code class="language-plaintext highlighter-rouge">UserModel()</code> wherever we needed it.</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">class</span> <span class="kt">UserProfile</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
-
-    <span class="k">let</span> <span class="nv">userModel</span> <span class="o">=</span> <span class="kt">UserModel</span><span class="p">()</span>
-
-    <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">userNameLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">userModel</span>
-        <span class="c1">//...</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></div></div>
-
-<p>We can’t support our new usecase of multiple users, without userprofile class knowing about multi-usermodel, or some other global allowing UserModel() to return the correct usermodel, these solutions are ugly hacks, which add complexity by either giving too much knowledge to classes or using globals and forgoing object oriented encapsulation.</p>
-
-<h3 id="3-concrete-type-usage-creates-strong-coupling">3. Concrete Type usage creates strong coupling</h3>
-
-<p>Consider the UserProfile, it  uses NSUserDefaults, now suppose we move to coredata to save our data, we are again in trouble because of using singleton inside. <strong>Our UserProfile rather needed only just a way to serialize some data, it didn’t need to know about WHAT we use for serialization</strong>. This is the key insight to keep in mind  when thinking about dependency injection.</p>
-
-<h2 id="di-to-the-rescue">DI to the rescue</h2>
-
-<p>DI helps to solve the variety of issues that we face above, with regard to  Unit Testablity, Singletons and strong coupling we face above.</p>
-
-<h1 id="how-to-do-dependency-injection">How to do Dependency Injection?</h1>
-
-<h2 id="constructor-injection">Constructor Injection</h2>
-
-<p>So we will be injecting a serializer into UserModel via constructor.</p>
-
-<p><strong>Move dependency to constructor, and if possible make it a interface/protocol type instead of concrete class/struct</strong></p>
-
-<p>So we remove singleton access to userdefaults. And rather pass a serializer protocol which has methods we require for serialization to constructor.</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">protocol</span> <span class="kt">Serializing</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">string</span><span class="p">(</span><span class="n">forKey</span> <span class="n">defaultName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span>
-    <span class="kd">func</span> <span class="nf">set</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?,</span> <span class="n">forKey</span> <span class="n">defaultName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="kd">class</span> <span class="kt">UserModel</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="k">let</span> <span class="nv">serializer</span><span class="p">:</span> <span class="kt">Serializing</span>
-
-    <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">serializer</span><span class="p">:</span> <span class="kt">Serializing</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">self</span><span class="o">.</span><span class="n">serializer</span> <span class="o">=</span> <span class="n">serializer</span>
-    <span class="p">}</span>
-
-    <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
-        <span class="k">get</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">serializer</span><span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"userName"</span><span class="p">)</span>  <span class="p">??</span> <span class="s">""</span>
-         <span class="p">}</span>
-        <span class="k">set</span> <span class="p">{</span>
-            <span class="n">serializer</span><span class="o">.</span><span class="nf">setObject</span><span class="p">(</span><span class="n">newValue</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span><span class="s">"userName"</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-<span class="p">}</span>
-
-</code></pre></div></div>
-
-<p>Since we are Koala Koder, we just make the Serializing protocol methods to same ones in NSUserdefaults, so we can make NSUserDefaults conform easily by</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">NSUserDefaults</span><span class="p">:</span> <span class="kt">Serializing</span> <span class="p">{}</span>
-</code></pre></div></div>
-<p>.</p>
-
-<p>Now to use user defaults as our serializer, we do the following.</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">UserModel</span><span class="p">(</span><span class="nv">serializer</span><span class="p">:</span> <span class="kt">NSUserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>For our fancy multiple user use case we can also do this. (Note: did this in a hurry, it may have edge cases, just providing it as a illustration)</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">struct</span> <span class="kt">MultiUserSerializer</span><span class="p">:</span> <span class="kt">Serializing</span> <span class="p">{</span>
-
-    <span class="k">let</span> <span class="nv">serializer</span><span class="p">:</span> <span class="kt">Serializing</span>
-    <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">serializer</span><span class="p">:</span> <span class="kt">Serializing</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">self</span><span class="o">.</span><span class="n">serializer</span> <span class="o">=</span> <span class="n">serializer</span>
-    <span class="p">}</span>
-
-    <span class="c1">// So we fetch the current currentUserId and use that to prefix stored data</span>
-    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">fetchCurrentUserId</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">serializer</span><span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"CURRENT_USER_ID"</span><span class="p">)</span> <span class="p">??</span> <span class="s">"0"</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">string</span><span class="p">(</span><span class="n">forKey</span> <span class="n">defaultName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">serializer</span><span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="nf">fetchCurrentUserId</span><span class="p">()</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="n">defaultName</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">set</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?,</span> <span class="n">forKey</span> <span class="n">defaultName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">serializer</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">forKey</span> <span class="n">defaultName</span><span class="p">:</span> <span class="nf">fetchCurrentUserId</span><span class="p">()</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="n">defaultName</span><span class="p">)</span>
-    <span class="p">}</span>
-
-<span class="p">}</span>
-
-<span class="c1">//Instantiate using userdefaults, assume we implemented contextFetcher somewhere else</span>
-
-<span class="k">let</span> <span class="nv">multiUserSerializer</span> <span class="o">=</span> <span class="kt">MultiUserSerializer</span><span class="p">(</span><span class="nv">serializer</span><span class="p">:</span> <span class="kt">NSUserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="p">)</span>
-
-<span class="k">let</span> <span class="nv">userModel</span> <span class="o">=</span> <span class="kt">UserModel</span><span class="p">(</span><span class="nv">serializer</span><span class="p">:</span> <span class="n">multiUserSerializer</span><span class="p">)</span>
-
-</code></pre></div></div>
-
-<p>So now userModel fetches data, and sets data to the current userID without even knowing about it. We could also use something other than <code class="language-plaintext highlighter-rouge">NSUserDefaults.standard</code> to serialize the data in top level.</p>
-
-<p>The point is by removing replacing the concrete  dependency <code class="language-plaintext highlighter-rouge">NSUserDefaults.standard</code> out of <code class="language-plaintext highlighter-rouge">UserModel</code> and swapping it to <code class="language-plaintext highlighter-rouge">Serializing</code> protocol we can now satisfy the new usecase of multi user modelling easily. This is the core idea behind of <strong>loose coupling</strong>.</p>
-
-<p>Also we can now unit test User Model by just passing a Mock implementation of <code class="language-plaintext highlighter-rouge">Serializing</code></p>
-
-<h3 id="dependency-injection-works-even-with-only-concrete-types">Dependency injection works even with only concrete types.</h3>
-
-<p>Sometimes you don’t have the time, or are  sure that concrete type used will not have to be changed. You can still DI the concrete type without bothering with protocol creation, just for the sake of it.</p>
-
-<h4 id="for-example">For example:</h4>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">class</span> <span class="kt">UserProfile</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
-
-    <span class="k">let</span> <span class="nv">userModel</span><span class="p">:</span> <span class="kt">UserModel</span>
-
-    <span class="c1">// This works only if you don't use storyboards</span>
-    <span class="nf">init</span><span class="p">(</span><span class="nv">userModel</span><span class="p">:</span> <span class="kt">UserModel</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">self</span><span class="o">.</span><span class="n">userModel</span> <span class="o">=</span> <span class="n">userModel</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">userNameLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">userModel</span><span class="o">.</span><span class="n">name</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></div></div>
-
-<p>We  move UserModel creation out of the controller, without creating any protocol for UserModel properties.</p>
-
-<p>We still gain advantages of unit testability using ordinary mock objects, and also we are free to use our multi user serialized UserModel , hence making UserProfile support multi user model without changing any logic in user profile.</p>
-
-<p>(But if you have to do something to notify changes in data, that is seperate topic)</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">multiUserSerializer</span> <span class="o">=</span> <span class="kt">MultiUserSerializer</span><span class="p">(</span><span class="nv">serializer</span><span class="p">:</span> <span class="kt">NSUserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">multiUserModel</span> <span class="o">=</span> <span class="kt">UserModel</span><span class="p">(</span><span class="nv">serializer</span><span class="p">:</span> <span class="n">multiUserSerializer</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">userProfile</span> <span class="o">=</span> <span class="kt">UserProfile</span><span class="p">(</span><span class="nv">userModel</span><span class="p">:</span> <span class="n">multiUserModel</span><span class="p">)</span>
-</code></pre></div></div>
-
-<h3 id="my-constructor-is-a-monster-now">My constructor is a monster now :(</h3>
-
-<p>A common problem which you will come across is, your UIViewController (if you don’t use storyboards) or any class where you do DI becomes a to big.</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">UserProfile</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
-
-<span class="nf">init</span><span class="p">(</span><span class="nv">userModel</span><span class="p">:</span> <span class="kt">UserModel</span><span class="p">,</span> <span class="nv">apiService</span><span class="p">:</span> <span class="kt">APIService</span><span class="p">,</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">XService</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span><span class="kt">YService</span><span class="p">,</span> <span class="nv">z</span><span class="p">:</span> <span class="kt">ZService</span><span class="p">,</span> <span class="o">....</span><span class="p">)</span> 
-</code></pre></div></div>
-
-<p>This is a good thing, it points out clearly that your class is violating <strong>Single Responsibility rule</strong> . Single responsibility rule states that a  class should have singe responsibility.</p>
-
-<p>We can solve this by moving some of the current dependencies to a new class, and pass the new class as dependency to UserProfile.</p>
-
-<p>Guess what if we do this we properly we would be re-inventing design patterns l
-MVVM(Nodel View ViewModel) or MVP. Whew! DI just solved Huge ViewController problem!!.</p>
-
-<blockquote>
-  <p>DI can easily help refactoring code to better design, in a gradual manner.</p>
-</blockquote>
-
-<h2 id="property-injection">Property Injection</h2>
-
-<p>We seemed to have solved all our above problems, why bother with more types of injections?</p>
-
-<blockquote>
-  <p>If you don’t control the creation of a object, your best bet is property injection. But prefer constructor injection if that’s not the case.</p>
-</blockquote>
-
-<p>Sometimes you don’t create objects of classes, some messy framework does it. For example, if you use Storyboards, you can’t do stuff like <code class="language-plaintext highlighter-rouge">let userProfileViewController = UserProfile(multiUserModel)</code>. You would have to refactor to something like</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">class</span> <span class="kt">UserProfile</span><span class="p">:</span> <span class="kt">UIViewController</span> <span class="p">{</span>
-
-    <span class="k">var</span> <span class="nv">userModel</span><span class="p">:</span> <span class="kt">UserModel</span><span class="o">!</span>
-
-    <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">userNameLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">userModel</span><span class="o">.</span><span class="n">name</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">let</span> <span class="nv">multiUserSerializer</span> <span class="o">=</span> <span class="kt">MultiUserSerializer</span><span class="p">(</span><span class="nv">serializer</span><span class="p">:</span> <span class="kt">NSUserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">multiUserModel</span> <span class="o">=</span> <span class="kt">UserModel</span><span class="p">(</span><span class="nv">serializer</span><span class="p">:</span> <span class="n">multiUserSerializer</span><span class="p">)</span>
-
-<span class="k">let</span> <span class="nv">storyboard</span> <span class="o">=</span> <span class="kt">UIStoryboard</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"main"</span><span class="p">,</span> <span class="nv">bundle</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">userProfile</span> <span class="o">=</span> <span class="n">storyboard</span><span class="o">.</span><span class="nf">instantiateViewController</span><span class="p">(</span><span class="nv">withIdentifier</span><span class="p">:</span> <span class="s">"UserProfile"</span><span class="p">)</span> <span class="k">as!</span> <span class="kt">UserProfile</span>
-<span class="n">userProfile</span><span class="o">.</span><span class="n">userModel</span> <span class="o">=</span> <span class="n">multiUserModel</span>
-
-</code></pre></div></div>
-
-<p>By using implicitly unwrapped Optional property, and setting it from outside, we achive the same effects of constructor injection. But is not perfect, as <code class="language-plaintext highlighter-rouge">userModel</code> property can be mutated from outside. Butthis is as good as it can get.</p>
-
-<h2 id="method-injection">Method Injection</h2>
-
-<p>Method injection is just replacing instantiating inside method by one of its parameters.</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Before injection</span>
-
-<span class="kd">func</span> <span class="nf">someMethod</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="kt">X</span><span class="p">()</span>
-    <span class="k">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="nf">something</span><span class="p">()</span> <span class="o">+</span> <span class="mi">10</span>
-    <span class="k">return</span> <span class="n">y</span>
-<span class="p">}</span>
-
-<span class="c1">// After injection</span>
-
-<span class="kd">func</span> <span class="nf">someMethod</span><span class="p">(</span><span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">XService</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="nf">something</span><span class="p">()</span> <span class="o">+</span> <span class="mi">10</span>
-    <span class="k">return</span> <span class="n">y</span>
-<span class="p">}</span>
-
-</code></pre></div></div>
-
-<h2 id="runtime-injection---factory-pattern">Runtime Injection - Factory pattern</h2>
-
-<p>Sometimes you want to create a object of a particular class in runtime. But you want to use only protocol type(or a super type) instead of actual implementation (or subclass). Let’s say you need a networking service, which you set based on a user action, but as you are going to need it in runtime, you may think that you can’t inject it.</p>
-
-<p>But what you can do is inject a factory Networking object or closure, that constructs it in runtime. This factory can fill the dependency of the concrete Networking class, so your class can be unaware of this.</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">protocol</span> <span class="kt">Networking</span> <span class="p">{</span>
- <span class="c1">// Some methods ..</span>
-<span class="p">}</span>
-
-<span class="kd">class</span> <span class="kt">ProxyNetworking</span><span class="p">:</span> <span class="kt">Networking</span>  <span class="p">{</span>
-    <span class="nf">init</span><span class="p">(</span><span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">class</span> <span class="kt">NormalNetworking</span><span class="p">:</span> <span class="kt">Networking</span> <span class="p">{</span>
-    <span class="nf">init</span><span class="p">(</span><span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="p">}</span>
-<span class="p">}</span>
-
-
-<span class="c1">// Injection Via Factory Class</span>
-
-<span class="kd">class</span> <span class="kt">NetworkingFactory</span> <span class="p">{</span>
-
-    <span class="k">let</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span>
-    <span class="nf">init</span><span class="p">(</span><span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="kt">A</span>
-    <span class="p">}</span>
-
-    <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="n">_</span> <span class="nv">withProxy</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Networking</span> <span class="p">{</span>
-         <span class="k">if</span> <span class="p">(</span><span class="n">withProxy</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kt">ProxyNetworking</span><span class="p">(</span><span class="nv">a</span><span class="p">:</span> <span class="n">a</span><span class="p">)</span>
-         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kt">NormalNetworking</span><span class="p">(</span><span class="nv">a</span><span class="p">:</span> <span class="n">a</span><span class="p">)</span>
-         <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-
-<span class="kd">class</span> <span class="kt">Some</span> <span class="p">:</span><span class="kt">UIViewController</span> <span class="p">{</span>
-
-  <span class="c1">// This has to be injected via property injection</span>
-    <span class="k">var</span> <span class="nv">networkingFactory</span><span class="p">:</span> <span class="kt">NetworkingFactory</span><span class="o">!</span> 
-
-    <span class="k">var</span> <span class="nv">networking</span><span class="p">:</span> <span class="kt">Networking</span><span class="p">?</span>
-
-    <span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">proxySwitch</span><span class="p">:</span> <span class="kt">UISwitch</span><span class="o">!</span>
-
-    <span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">userTappedSubmit</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">networking</span> <span class="o">=</span> <span class="n">networkingFactory</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">withProxy</span><span class="p">:</span> <span class="n">proxySwitch</span><span class="o">.</span><span class="n">isOn</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-
-<span class="c1">// Injection using closure</span>
-
-<span class="kd">class</span> <span class="kt">Some</span> <span class="p">:</span><span class="kt">UIViewController</span> <span class="p">{</span>
-
-    <span class="c1">// This has to be injected via property injection</span>
-    <span class="k">var</span> <span class="nv">networkingFactory</span><span class="p">:</span> <span class="p">((</span><span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Networking</span><span class="p">)</span><span class="o">!</span>
-
-    <span class="k">var</span> <span class="nv">networking</span><span class="p">:</span> <span class="kt">Networking</span><span class="p">?</span>
-
-    <span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">proxySwitch</span><span class="p">:</span> <span class="kt">UISwitch</span><span class="o">!</span>
-
-    <span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">userTappedSubmit</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">networking</span> <span class="o">=</span> <span class="nf">networkingFactory</span><span class="p">(</span><span class="n">proxySwitch</span><span class="o">.</span><span class="n">isOn</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-
-</code></pre></div></div>
-
-<h1 id="dependency-injection---containers--frameworks">Dependency injection - Containers &amp; Frameworks</h1>
-
-<p>There are Dependency Injection frameworks that make the job of dependency injection easier. You may say, “whoa Sai! wait,Do we really need a dependency injection framework as a dependency? Can’t it be done “.</p>
-
-<p>When we examine what we are doing with DI, we are building a graph with our concrete types as nodes, and their dependencies linking them. If we do this completely, all dependencies will originate from a root object.</p>
-
-<p>Without a framework, we will be doing a lot of copy paste coding. If our app uses networking protocol type in multiple areas, we have to type out the same concrete implementation everywhere, and fill out every dependency of networking class everywhere.</p>
-
-<p>For example:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="kt">A</span> <span class="p">{</span> 
-    <span class="k">var</span> <span class="nv">propertyInjectionVar</span> <span class="p">:</span><span class="kt">V</span><span class="o">!</span>
-
-    <span class="nf">init</span><span class="p">(</span><span class="nv">networking</span><span class="p">:</span> <span class="kt">Networking</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> 
-  <span class="p">}</span>
-
- <span class="c1">// To create A we have to create networking and also fill out any property injection vars it needs</span>
-
- <span class="kd">class</span> <span class="kt">NetworkService</span><span class="p">:</span> <span class="kt">Networking</span> <span class="p">{</span> <span class="nf">init</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="kt">X</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">Y</span><span class="p">,</span> <span class="nv">z</span><span class="p">:</span> <span class="kt">Z</span><span class="p">)</span> <span class="p">{}</span> <span class="p">}</span>
-
- <span class="c1">// Now networking will inturn have its dependencies , which inturn have more ..</span>
- <span class="c1">// So to create A, You have to create NetworkService, X, Y, Z </span>
-
-<span class="kt">A</span><span class="p">(</span><span class="n">networking</span> <span class="kt">NetworkService</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="kt">X</span><span class="p">(),</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">Y</span><span class="p">(),</span> <span class="nv">z</span><span class="p">:</span> <span class="kt">Z</span><span class="p">()))</span>
-
-</code></pre></div></div>
-
-<p>To make this process easier we can build something to store list of dependency type, and their concrete implementation. We will have a table of mappings.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Dependency Type</th>
-      <th>Implementation type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Networking</td>
-      <td>NetworkService</td>
-    </tr>
-    <tr>
-      <td>X</td>
-      <td>XService</td>
-    </tr>
-    <tr>
-      <td>Y</td>
-      <td>YService</td>
-    </tr>
-    <tr>
-      <td>Z</td>
-      <td>ZSubClass</td>
-    </tr>
-    <tr>
-      <td>A</td>
-      <td>A</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>We can register a protocol Dependency Type to concrete implementation, like Networking, X, Y to NetworkService, XService, YService respectively. Or map concrete type to its concrete implementation which can be exactly same type, like A, or subclass like mapping Z to ZSubClass. Now what the container does is when A has to be created, it auto resolves each dependency of A from the table.</p>
-
-<p>You can either implement a container, or use a DI Framework which does that for you.</p>
-
-<p>Containers also allow you to autofill property injection, handle lifecycle of dependencies like marking them as singleton, so that your whole container has only one object of that type created and other fancy features to make your life easy.</p>
-
-<blockquote>
-  <h3 id="a-key-point-to-remember-is-that-your-classes-should-not-depend-on-di-framework-container-ie-its-not-good-idea-to-pass-the-container-to-your-class-as-a-dependency">A key point to remember is that your classes should not depend on DI framework container ie its not good idea to pass the container to your class as a dependency.</h3>
-</blockquote>
-
-<h2 id="dip-framework---swift"><a href="https://github.com/AliSoftware/Dip">Dip Framework - Swift</a></h2>
-
-<p>Among the DI frameworks exiting now for swift, I recommend Dip. Dip has some nifty features to make your DI pain free.</p>
-
-<h3 id="features-of-dip">Features of Dip</h3>
-
-<ul>
-  <li><strong>Scopes</strong>. Dip supports 5 different scopes (or life cycle strategies): <em>Unique</em>, <em>Shared</em>, <em>Singleton</em>, <em>EagerSingleton</em>, <em>WeakSingleton</em>;</li>
-  <li><strong>Auto-wiring</strong> &amp; <strong>Auto-injection</strong>. Dip can infer your components’ dependencies injected in constructor and automatically resolve them as well as dependencies injected with properties.</li>
-  <li><strong>Resolving optionals</strong>. Dip is able to resolve constructor or property dependencies defined as optionals.</li>
-  <li><strong>Type forwarding</strong>. You can register the same factory to resolve different types implemeted by a single class.</li>
-  <li><strong>Circular dependencies</strong>. Dip will be able to resolve circular dependencies if you will follow some simple rules;</li>
-  <li><strong>Storyboards integration</strong>. You can easily use Dip along with storyboards and Xibs without ever referencing container in your view controller’s code;</li>
-  <li><strong>Named definitions</strong>. You can register different factories for the same protocol or type by registering them with <a href="">tags</a>;</li>
-  <li><strong>Runtime arguments</strong>. You can register factories that accept up to 6 runtime arguments (and extend it if you need);</li>
-  <li><strong>Easy configuration</strong> &amp; <strong>Code generation</strong>. No complex containers hierarchy, no unneeded functionality. Tired of writing all registrations by hand? There is a <a href="https://github.com/ilyapuchka/dipgen">cool code generator</a> that will create them for you. The only thing you need is to annotate your code with some comments.</li>
-  <li><strong>Weakly typed components</strong>. Dip can resolve “weak” types when they are unknown at compile time.</li>
-  <li><strong>Thread safety</strong>. Registering and resolving components is thread safe;</li>
-  <li><strong>Helpful error messages and configuration validation</strong>. You can validate your container configuration. If something can not be resolved at runtime Dip throws an error that completely describes the issue;</li>
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">λf.(λg.f (g g)) (λg.f (g g)) Sai</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/sai-prasanna"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/sai_prasanna"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
 </ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Dependency Injection - What, Why and How?</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">iOS</div>
+                <div class="quarto-category">Swift</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
 
-<h3 id="annotations-in-dip">Annotations in Dip</h3>
-
-<p>Java has good frameworks like <a href="https://square.github.io/dagger/">Dagger</a>, and <a href="https://github.com/google/guice">Guice</a> that use annotations to make the job even simpler compared to swift. Dip allows you to leave annotations of dependencies in comments and also generate code for DI from it. How cool is that?</p>
-
-<h2 id="poor-mans-di-in-swift">Poor man’s DI in Swift</h2>
-
-<p>Though I recommend the framework approach, supposing you don’t want to use framework initially and still want the to do DI, Fear not. You can use Swift’s default parameters to do constructor/method injection, and just use variable properties for property injection. You can maintain a Seperate DI singleton and fill dependencies using that.</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-
-<span class="kd">class</span> <span class="kt">UserModel</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="k">let</span> <span class="nv">serializer</span><span class="p">:</span> <span class="kt">Serializing</span>
-
-    <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">serializer</span><span class="p">:</span> <span class="kt">Serializing</span> <span class="o">=</span> <span class="kt">PoormanDIContainer</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="nf">getSerializer</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// Poor man DI</span>
-        <span class="k">self</span><span class="o">.</span><span class="n">serializer</span> <span class="o">=</span> <span class="n">serializer</span>
-    <span class="p">}</span>
-
-    <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
-        <span class="k">get</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">serializer</span><span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"userName"</span><span class="p">)</span>  <span class="p">??</span> <span class="s">""</span>
-         <span class="p">}</span>
-        <span class="k">set</span> <span class="p">{</span>
-            <span class="n">serializer</span><span class="o">.</span><span class="nf">setObject</span><span class="p">(</span><span class="n">newValue</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span><span class="s">"userName"</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-
-<span class="kd">class</span> <span class="kt">PoorManDIContainer</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">instance</span> <span class="o">=</span> <span class="kt">PoorManDIContainer</span><span class="p">()</span> 
-    <span class="kd">func</span> <span class="nf">getSerializer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Serializing</span> <span class="p">{</span>
-        <span class="c1">// If Serializer has some dependencies, it will again use default constructor to obtain it from PoorManDIContainer</span>
-        <span class="k">return</span> <span class="kt">Serializer</span><span class="p">()</span> 
-    <span class="p">}</span>
-<span class="p">}</span>
-
-
-</code></pre></div></div>
-
-<p>But if you use the above method, beware of circular dependencies.</p>
-
-<h1 id="conclusion">Conclusion</h1>
-
-<p>So in conclusion DI is great. It allows you to progressively make your code better remove  singletons, make your code modular, testable and also allow you to evolve good design patterns. Try it out in your existing code base, it will be one of the easiest way to refactor legacy OOP code, without modifying internal logic initially.If you have any doubts, suggestions, constructive criticisms, comment below.</p>
-
-  </div><a class="u-url" href="/posts/dependency-injection-what-why-and-how/" hidden></a>
-</article>
-      </div>
-    </main><footer class="site-footer h-card">
-  <data class="u-url" href="/"></data>
-
-  <div class="wrapper">
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col">
-        <p class="feed-subscribe">
-          <a href="/feed.xml">
-            <svg class="svg-icon orange">
-              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
-            </svg><span>Subscribe</span>
-          </a>
-        </p>
-      </div>
-      <div class="footer-col">
-        <p>Blog on machine learning, NLP, Computer Science, philosophy, economics, animal rights, music, programming languages and endless other things that pique my curiosity.</p>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 20, 2017</p>
       </div>
     </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
-    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/sai-prasanna" title="sai-prasanna"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/sai_prasanna" title="sai_prasanna"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+
+
+
+<p>We are going to explore dependency injection with emphasis on swift iOS development. But the concept applies to most object oriented languages. We will also see some practical considerations on applying DI in iOS environment. This article is result of my deep dive into implementing DI, and learning about various practical, theoretical aspects of it.</p>
+<section id="what-is-dependency-injection" class="level1">
+<h1>What is Dependency Injection?</h1>
+<blockquote class="blockquote">
+<p>“Dependency Injection” is a 25-dollar term for a 5-cent concept”.</p>
+</blockquote>
+<p>is a often repeated maxim regarding DI.</p>
+<p>In its essence DI means wherever possible, <strong>replace object creation inside a piece of code by providing it from outside that piece of code</strong>. Hence the term.</p>
+<p>Constructor, Property, Method are where we usually do object creation, and that can be replaced from outside. So we end up with 3 types of injection.</p>
+<ol type="1">
+<li>Constructor Injection</li>
+<li>Property Injection</li>
+<li>Method Injection</li>
+</ol>
+<p>We will explore they 3 types in “How ..?” section.</p>
+</section>
+<section id="why-dependency-injection" class="level1">
+<h1>Why Dependency Injection?</h1>
+<p>Let’s dwelve into this with help of a scenario.</p>
+<section id="scenario---koala-koder" class="level2">
+<h2 class="anchored" data-anchor-id="scenario---koala-koder">Scenario - Koala Koder!</h2>
+<p>Say you have an app with a user login. A user model struct/class encapsulates the logged in user data.</p>
+<p>Suppose you are a Koala Koder( a programmer who is as lazy as a koala bear). You perhaps made a solution which is quick and dirty. Store the user model inside NSUserDefaults, and fetch it via properties. And as we all know how apple loves its singleton classes, we follow them making UserModel a singleton.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> UserModel <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">static</span> <span class="kw">let</span> <span class="va">sharedInstance</span> <span class="op">=</span> UserModel<span class="op">()</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> <span class="va">name</span><span class="op">:</span> String <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">get</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            <span class="kw">return</span> NSUserDefaults<span class="op">.</span>standard<span class="op">.</span>string<span class="op">(</span>forKey<span class="op">:</span> <span class="st">"userName"</span><span class="op">)</span>  <span class="op">??</span> <span class="st">""</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">set</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            NSUserDefaults<span class="op">.</span>standard<span class="op">.</span><span class="kw">set</span><span class="op">(</span>newValue<span class="op">,</span> forKey<span class="op">:</span><span class="st">"userName"</span><span class="op">)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">func</span> <span class="fu">greet</span><span class="op">()</span> -&gt; <span class="fu">String</span> <span class="op">{</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> <span class="st">"</span><span class="er">\(</span><span class="st">name), Vannakam :)"</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We write our app with this usermodel in mind, and <code>UserModel.sharedInstance</code> is everywhere in our app.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://ih0.redbubble.net/image.5150955.4141/flat,1000x1000,075,f.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Koala lazing off</figcaption><p></p>
+</figure>
 </div>
+</section>
+<section id="problems-problems-everywhere" class="level2">
+<h2 class="anchored" data-anchor-id="problems-problems-everywhere">Problems, problems everywhere…</h2>
+<section id="unit-tester-vader-strikes" class="level3">
+<h3 class="anchored" data-anchor-id="unit-tester-vader-strikes">1. Unit Tester Vader strikes!</h3>
+<p>A senior developer suddenly turns to the dark side, and starts ranting about <em>unit testing</em>. He/She will not let apps which are not unit tested pass the code review.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="http://s2.quickmeme.com/img/03/0347c3efdc17cc1959d089f60b8b2fc267d9093caa8e8cb483bf476b58e63e45.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Meme: Darth Vader says “I find your lack of unit testing disturbing”</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="a-wild-new-use-case-appears" class="level3">
+<h3 class="anchored" data-anchor-id="a-wild-new-use-case-appears">2. A wild New Use case appears!</h3>
+<p>And if that isn’t enough a <em>new use case</em> should be supported. Our app should now support <em>multiple users</em>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cdn.meme.am/instances/500x/64312241.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Meme: Back to future - Dr Brown says “New Usecase in no time? I’ve an extra flux capacitor”</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="lets-move-to-insert-any-serialization-library-here" class="level3">
+<h3 class="anchored" data-anchor-id="lets-move-to-insert-any-serialization-library-here">3. “Lets move to &lt;insert any serialization library here&gt;”</h3>
+<p>Now we also reached a point where userdefaults didn’t scale and wish to migrate to new data serialization method. Now even our getters and setters inside the UserProfile is not safe.</p>
+</section>
+</section>
+<section id="why-are-there-problems" class="level2">
+<h2 class="anchored" data-anchor-id="why-are-there-problems">Why are there problems?</h2>
+<p>So we find ourselves in deep trouble. Lets analyze why so.</p>
+<section id="singletons-are-hard-to-test" class="level3">
+<h3 class="anchored" data-anchor-id="singletons-are-hard-to-test">1. Singletons are hard to test</h3>
+<p>Now if you want to unit test a viewcontroller that uses this singleton.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> UserProfile<span class="op">:</span> <span class="dt">UIViewController</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">func</span> <span class="fu">viewDidLoad</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        greetingLabel<span class="op">.</span>text <span class="op">=</span> UserModel<span class="op">.</span>sharedInstance<span class="op">.</span>greet<span class="op">()</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">//...</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In unit testing you create a UserProfile object, call viewDidLoad or other methods manually. Now you have to verify whether <code>UserModel.sharedInstance.greet()</code> was called.</p>
+<p>Since UserModel.sharedInstance is immutable, either we can’t replace it with our mock class extending UserModel, which overrides greetUser, and sets a flag which can be checked. So our testing coverage comes down.</p>
+</section>
+<section id="instantiation-inside-our-code-constraints-creates-strong-coupling-creating-harmful-constraints" class="level3">
+<h3 class="anchored" data-anchor-id="instantiation-inside-our-code-constraints-creates-strong-coupling-creating-harmful-constraints">2. Instantiation inside our code constraints creates strong coupling, creating harmful constraints</h3>
+<p>In our scenario, by using a singleton, we tied our codebase to a single UserModel but now our app needs multiple user models. So in general, using singletons will make it hard to adapt to new use cases. <em>What you thought as a singleton suddenly is not so single anymore</em>.</p>
+<p>But consider that we didn’t use singleton, but instantiated UserModel, by calling <code>UserModel()</code> wherever we needed it.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> UserProfile<span class="op">:</span> <span class="dt">UIViewController</span> <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="va">userModel</span> <span class="op">=</span> UserModel<span class="op">()</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">func</span> <span class="fu">viewDidLoad</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        userNameLabel<span class="op">.</span>text <span class="op">=</span> userModel</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">//...</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can’t support our new usecase of multiple users, without userprofile class knowing about multi-usermodel, or some other global allowing UserModel() to return the correct usermodel, these solutions are ugly hacks, which add complexity by either giving too much knowledge to classes or using globals and forgoing object oriented encapsulation.</p>
+</section>
+<section id="concrete-type-usage-creates-strong-coupling" class="level3">
+<h3 class="anchored" data-anchor-id="concrete-type-usage-creates-strong-coupling">3. Concrete Type usage creates strong coupling</h3>
+<p>Consider the UserProfile, it uses NSUserDefaults, now suppose we move to coredata to save our data, we are again in trouble because of using singleton inside. <strong>Our UserProfile rather needed only just a way to serialize some data, it didn’t need to know about WHAT we use for serialization</strong>. This is the key insight to keep in mind when thinking about dependency injection.</p>
+</section>
+</section>
+<section id="di-to-the-rescue" class="level2">
+<h2 class="anchored" data-anchor-id="di-to-the-rescue">DI to the rescue</h2>
+<p>DI helps to solve the variety of issues that we face above, with regard to Unit Testablity, Singletons and strong coupling we face above.</p>
+</section>
+</section>
+<section id="how-to-do-dependency-injection" class="level1">
+<h1>How to do Dependency Injection?</h1>
+<section id="constructor-injection" class="level2">
+<h2 class="anchored" data-anchor-id="constructor-injection">Constructor Injection</h2>
+<p>So we will be injecting a serializer into UserModel via constructor.</p>
+<p><strong>Move dependency to constructor, and if possible make it a interface/protocol type instead of concrete class/struct</strong></p>
+<p>So we remove singleton access to userdefaults. And rather pass a serializer protocol which has methods we require for serialization to constructor.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">protocol</span> Serializing <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">func</span> <span class="fu">string</span><span class="op">(</span><span class="va">forKey</span> <span class="va">defaultName</span><span class="op">:</span> <span class="dt">String</span><span class="op">)</span> -&gt; <span class="fu">String</span>?</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">func</span> <span class="kw">set</span><span class="op">(</span><span class="va">_</span> <span class="va">value</span><span class="op">:</span> <span class="dt">Any</span><span class="op">?,</span> <span class="va">forKey</span> <span class="va">defaultName</span><span class="op">:</span> <span class="dt">String</span><span class="op">)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="fu">UserModel</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">static</span> <span class="kw">let</span> <span class="va">serializer</span><span class="op">:</span> Serializing</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">init</span><span class="op">(</span>_ serializer<span class="op">:</span> Serializing<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="kw">self</span><span class="op">.</span>serializer <span class="op">=</span> serializer</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> <span class="va">name</span><span class="op">:</span> String <span class="op">{</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="kw">get</span> <span class="op">{</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            <span class="kw">return</span> serializer<span class="op">.</span>string<span class="op">(</span>forKey<span class="op">:</span> <span class="st">"userName"</span><span class="op">)</span>  <span class="op">??</span> <span class="st">""</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>         <span class="op">}</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="kw">set</span> <span class="op">{</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            serializer<span class="op">.</span>setObject<span class="op">(</span>newValue<span class="op">,</span> forKey<span class="op">:</span><span class="st">"userName"</span><span class="op">)</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Since we are Koala Koder, we just make the Serializing protocol methods to same ones in NSUserdefaults, so we can make NSUserDefaults conform easily by</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">extension</span> NSUserDefaults<span class="op">:</span> <span class="dt">Serializing</span> <span class="op">{}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>.</p>
+<p>Now to use user defaults as our serializer, we do the following.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>UserModel<span class="op">(</span>serializer<span class="op">:</span> NSUserDefaults<span class="op">.</span>standard<span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For our fancy multiple user use case we can also do this. (Note: did this in a hurry, it may have edge cases, just providing it as a illustration)</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> MultiUserSerializer<span class="op">:</span> <span class="dt">Serializing</span> <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="va">serializer</span><span class="op">:</span> Serializing</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">init</span><span class="op">(</span>_ serializer<span class="op">:</span> Serializing<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">self</span><span class="op">.</span>serializer <span class="op">=</span> serializer</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// So we fetch the current currentUserId and use that to prefix stored data</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">func</span> <span class="fu">fetchCurrentUserId</span><span class="op">()</span> -&gt; <span class="fu">String</span> <span class="op">{</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> serializer<span class="op">.</span>string<span class="op">(</span>forKey<span class="op">:</span> <span class="st">"CURRENT_USER_ID"</span><span class="op">)</span> <span class="op">??</span> <span class="st">"0"</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">func</span> <span class="fu">string</span><span class="op">(</span><span class="va">forKey</span> <span class="va">defaultName</span><span class="op">:</span> <span class="dt">String</span><span class="op">)</span> -&gt; <span class="fu">String</span>? <span class="op">{</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> serializer<span class="op">.</span>string<span class="op">(</span>forKey<span class="op">:</span> fetchCurrentUserId<span class="op">()</span> <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> defaultName<span class="op">)</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">func</span> <span class="kw">set</span><span class="op">(</span><span class="va">_</span> <span class="va">value</span><span class="op">:</span> <span class="dt">Any</span><span class="op">?,</span> <span class="va">forKey</span> <span class="va">defaultName</span><span class="op">:</span> <span class="dt">String</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> serializer<span class="op">.</span><span class="kw">set</span><span class="op">(</span>value<span class="op">,</span> forKey defaultName<span class="op">:</span> fetchCurrentUserId<span class="op">()</span> <span class="op">+</span> <span class="st">":"</span> <span class="op">+</span> defaultName<span class="op">)</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">//Instantiate using userdefaults, assume we implemented contextFetcher somewhere else</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="va">multiUserSerializer</span> <span class="op">=</span> MultiUserSerializer<span class="op">(</span>serializer<span class="op">:</span> NSUserDefaults<span class="op">.</span>standard<span class="op">)</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="va">userModel</span> <span class="op">=</span> UserModel<span class="op">(</span>serializer<span class="op">:</span> multiUserSerializer<span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>So now userModel fetches data, and sets data to the current userID without even knowing about it. We could also use something other than <code>NSUserDefaults.standard</code> to serialize the data in top level.</p>
+<p>The point is by removing replacing the concrete dependency <code>NSUserDefaults.standard</code> out of <code>UserModel</code> and swapping it to <code>Serializing</code> protocol we can now satisfy the new usecase of multi user modelling easily. This is the core idea behind of <strong>loose coupling</strong>.</p>
+<p>Also we can now unit test User Model by just passing a Mock implementation of <code>Serializing</code></p>
+<section id="dependency-injection-works-even-with-only-concrete-types." class="level3">
+<h3 class="anchored" data-anchor-id="dependency-injection-works-even-with-only-concrete-types.">Dependency injection works even with only concrete types.</h3>
+<p>Sometimes you don’t have the time, or are sure that concrete type used will not have to be changed. You can still DI the concrete type without bothering with protocol creation, just for the sake of it.</p>
+<section id="for-example" class="level4">
+<h4 class="anchored" data-anchor-id="for-example">For example:</h4>
+<div class="sourceCode" id="cb8"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> UserProfile<span class="op">:</span> <span class="dt">UIViewController</span> <span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="va">userModel</span><span class="op">:</span> UserModel</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This works only if you don't use storyboards</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">init</span><span class="op">(</span>userModel<span class="op">:</span> UserModel<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">self</span><span class="op">.</span>userModel <span class="op">=</span> userModel</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">func</span> <span class="fu">viewDidLoad</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        userNameLabel<span class="op">.</span>text <span class="op">=</span> userModel<span class="op">.</span>name</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We move UserModel creation out of the controller, without creating any protocol for UserModel properties.</p>
+<p>We still gain advantages of unit testability using ordinary mock objects, and also we are free to use our multi user serialized UserModel , hence making UserProfile support multi user model without changing any logic in user profile.</p>
+<p>(But if you have to do something to notify changes in data, that is seperate topic)</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="va">multiUserSerializer</span> <span class="op">=</span> MultiUserSerializer<span class="op">(</span>serializer<span class="op">:</span> NSUserDefaults<span class="op">.</span>standard<span class="op">)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="va">multiUserModel</span> <span class="op">=</span> UserModel<span class="op">(</span>serializer<span class="op">:</span> multiUserSerializer<span class="op">)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="va">userProfile</span> <span class="op">=</span> UserProfile<span class="op">(</span>userModel<span class="op">:</span> multiUserModel<span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="my-constructor-is-a-monster-now" class="level3">
+<h3 class="anchored" data-anchor-id="my-constructor-is-a-monster-now">My constructor is a monster now&nbsp;:(</h3>
+<p>A common problem which you will come across is, your UIViewController (if you don’t use storyboards) or any class where you do DI becomes a to big.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> UserProfile<span class="op">:</span> <span class="dt">UIViewController</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">init</span><span class="op">(</span>userModel<span class="op">:</span> UserModel<span class="op">,</span> apiService<span class="op">:</span> APIService<span class="op">,</span> x<span class="op">:</span> XService<span class="op">,</span> y<span class="op">:</span>YService<span class="op">,</span> z<span class="op">:</span> ZService<span class="op">,</span> <span class="op">....)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is a good thing, it points out clearly that your class is violating <strong>Single Responsibility rule</strong> . Single responsibility rule states that a class should have singe responsibility.</p>
+<p>We can solve this by moving some of the current dependencies to a new class, and pass the new class as dependency to UserProfile.</p>
+<p>Guess what if we do this we properly we would be re-inventing design patterns l MVVM(Nodel View ViewModel) or MVP. Whew! DI just solved Huge ViewController problem!!.</p>
+<blockquote class="blockquote">
+<p>DI can easily help refactoring code to better design, in a gradual manner.</p>
+</blockquote>
+</section>
+</section>
+<section id="property-injection" class="level2">
+<h2 class="anchored" data-anchor-id="property-injection">Property Injection</h2>
+<p>We seemed to have solved all our above problems, why bother with more types of injections?</p>
+<blockquote class="blockquote">
+<p>If you don’t control the creation of a object, your best bet is property injection. But prefer constructor injection if that’s not the case.</p>
+</blockquote>
+<p>Sometimes you don’t create objects of classes, some messy framework does it. For example, if you use Storyboards, you can’t do stuff like <code>let userProfileViewController = UserProfile(multiUserModel)</code>. You would have to refactor to something like</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> UserProfile<span class="op">:</span> <span class="dt">UIViewController</span> <span class="op">{</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> <span class="va">userModel</span><span class="op">:</span> UserModel<span class="op">!</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">func</span> <span class="fu">viewDidLoad</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        userNameLabel<span class="op">.</span>text <span class="op">=</span> userModel<span class="op">.</span>name</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="va">multiUserSerializer</span> <span class="op">=</span> MultiUserSerializer<span class="op">(</span>serializer<span class="op">:</span> NSUserDefaults<span class="op">.</span>standard<span class="op">)</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="va">multiUserModel</span> <span class="op">=</span> UserModel<span class="op">(</span>serializer<span class="op">:</span> multiUserSerializer<span class="op">)</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="va">storyboard</span> <span class="op">=</span> UIStoryboard<span class="op">(</span>name<span class="op">:</span> <span class="st">"main"</span><span class="op">,</span> bundle<span class="op">:</span> <span class="kw">nil</span><span class="op">)</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="va">userProfile</span> <span class="op">=</span> storyboard<span class="op">.</span>instantiateViewController<span class="op">(</span>withIdentifier<span class="op">:</span> <span class="st">"UserProfile"</span><span class="op">)</span> <span class="kw">as</span><span class="op">!</span> UserProfile</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>userProfile<span class="op">.</span>userModel <span class="op">=</span> multiUserModel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>By using implicitly unwrapped Optional property, and setting it from outside, we achive the same effects of constructor injection. But is not perfect, as <code>userModel</code> property can be mutated from outside. Butthis is as good as it can get.</p>
+</section>
+<section id="method-injection" class="level2">
+<h2 class="anchored" data-anchor-id="method-injection">Method Injection</h2>
+<p>Method injection is just replacing instantiating inside method by one of its parameters.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Before injection</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="fu">someMethod</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="va">x</span> <span class="op">=</span> X<span class="op">()</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="va">y</span> <span class="op">=</span> x<span class="op">.</span>something<span class="op">()</span> <span class="op">+</span> <span class="dv">10</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> y</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">// After injection</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="fu">someMethod</span><span class="op">(</span><span class="va">_</span> <span class="va">x</span><span class="op">:</span> <span class="dt">XService</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="va">y</span> <span class="op">=</span> x<span class="op">.</span>something<span class="op">()</span> <span class="op">+</span> <span class="dv">10</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> y</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="runtime-injection---factory-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="runtime-injection---factory-pattern">Runtime Injection - Factory pattern</h2>
+<p>Sometimes you want to create a object of a particular class in runtime. But you want to use only protocol type(or a super type) instead of actual implementation (or subclass). Let’s say you need a networking service, which you set based on a user action, but as you are going to need it in runtime, you may think that you can’t inject it.</p>
+<p>But what you can do is inject a factory Networking object or closure, that constructs it in runtime. This factory can fill the dependency of the concrete Networking class, so your class can be unaware of this.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">protocol</span> Networking <span class="op">{</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a> <span class="co">// Some methods ..</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ProxyNetworking<span class="op">:</span> <span class="dt">Networking</span>  <span class="op">{</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">init</span><span class="op">(</span>a<span class="op">:</span> A<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NormalNetworking<span class="op">:</span> <span class="dt">Networking</span> <span class="op">{</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">init</span><span class="op">(</span>a<span class="op">:</span> A<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co">// Injection Via Factory Class</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NetworkingFactory <span class="op">{</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="va">a</span><span class="op">:</span> A</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">init</span><span class="op">(</span>a<span class="op">:</span> A<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        <span class="kw">self</span><span class="op">.</span>a <span class="op">=</span> A</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">func</span> <span class="fu">create</span><span class="op">(</span><span class="va">_</span> <span class="va">withProxy</span><span class="op">:</span> <span class="dt">Bool</span><span class="op">)</span> -&gt; <span class="fu">Networking</span> <span class="op">{</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>         <span class="cf">if</span> <span class="op">(</span>withProxy<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>            <span class="kw">return</span> ProxyNetworking<span class="op">(</span>a<span class="op">:</span> a<span class="op">)</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>         <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>            <span class="kw">return</span> NormalNetworking<span class="op">(</span>a<span class="op">:</span> a<span class="op">)</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>         <span class="op">}</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Some <span class="op">:</span><span class="dt">UIViewController</span> <span class="op">{</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">// This has to be injected via property injection</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> <span class="va">networkingFactory</span><span class="op">:</span> NetworkingFactory<span class="op">!</span> </span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> <span class="va">networking</span><span class="op">:</span> Networking<span class="op">?</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">@IBOutlet</span> <span class="kw">weak</span> <span class="kw">var</span> <span class="va">proxySwitch</span><span class="op">:</span> UISwitch<span class="op">!</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">@IBAction</span> <span class="kw">func</span> <span class="fu">userTappedSubmit</span><span class="op">(</span><span class="va">sender</span><span class="op">:</span> <span class="dt">UIButton</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>        networking <span class="op">=</span> networkingFactory<span class="op">.</span>create<span class="op">(</span>withProxy<span class="op">:</span> proxySwitch<span class="op">.</span>isOn<span class="op">)</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a><span class="co">// Injection using closure</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Some <span class="op">:</span><span class="dt">UIViewController</span> <span class="op">{</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This has to be injected via property injection</span></span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> <span class="va">networkingFactory</span><span class="op">:</span> <span class="op">((</span>Bool<span class="op">)</span> <span class="op">-&gt;</span> Networking<span class="op">)!</span></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> <span class="va">networking</span><span class="op">:</span> Networking<span class="op">?</span></span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">@IBOutlet</span> <span class="kw">weak</span> <span class="kw">var</span> <span class="va">proxySwitch</span><span class="op">:</span> UISwitch<span class="op">!</span></span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">@IBAction</span> <span class="kw">func</span> <span class="fu">userTappedSubmit</span><span class="op">(</span><span class="va">sender</span><span class="op">:</span> <span class="dt">UIButton</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>        networking <span class="op">=</span> networkingFactory<span class="op">(</span>proxySwitch<span class="op">.</span>isOn<span class="op">)</span></span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="dependency-injection---containers-frameworks" class="level1">
+<h1>Dependency injection - Containers &amp; Frameworks</h1>
+<p>There are Dependency Injection frameworks that make the job of dependency injection easier. You may say, “whoa Sai! wait,Do we really need a dependency injection framework as a dependency? Can’t it be done”.</p>
+<p>When we examine what we are doing with DI, we are building a graph with our concrete types as nodes, and their dependencies linking them. If we do this completely, all dependencies will originate from a root object.</p>
+<p>Without a framework, we will be doing a lot of copy paste coding. If our app uses networking protocol type in multiple areas, we have to type out the same concrete implementation everywhere, and fill out every dependency of networking class everywhere.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a> <span class="kw">class</span> A <span class="op">{</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> <span class="va">propertyInjectionVar</span> <span class="op">:</span>V<span class="op">!</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">init</span><span class="op">(</span>networking<span class="op">:</span> Networking<span class="op">,</span> <span class="op">...)</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a> <span class="co">// To create A we have to create networking and also fill out any property injection vars it needs</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a> <span class="kw">class</span> NetworkService<span class="op">:</span> <span class="dt">Networking</span> <span class="op">{</span> <span class="kw">init</span><span class="op">(</span>x<span class="op">:</span> X<span class="op">,</span> y<span class="op">:</span> Y<span class="op">,</span> z<span class="op">:</span> Z<span class="op">)</span> <span class="op">{}</span> <span class="op">}</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a> <span class="co">// Now networking will inturn have its dependencies , which inturn have more ..</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a> <span class="co">// So to create A, You have to create NetworkService, X, Y, Z </span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>A<span class="op">(</span>networking NetworkService<span class="op">(</span>x<span class="op">:</span> X<span class="op">(),</span> y<span class="op">:</span> Y<span class="op">(),</span> z<span class="op">:</span> Z<span class="op">()))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To make this process easier we can build something to store list of dependency type, and their concrete implementation. We will have a table of mappings.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Dependency Type</th>
+<th>Implementation type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Networking</td>
+<td>NetworkService</td>
+</tr>
+<tr class="even">
+<td>X</td>
+<td>XService</td>
+</tr>
+<tr class="odd">
+<td>Y</td>
+<td>YService</td>
+</tr>
+<tr class="even">
+<td>Z</td>
+<td>ZSubClass</td>
+</tr>
+<tr class="odd">
+<td>A</td>
+<td>A</td>
+</tr>
+</tbody>
+</table>
+<p>We can register a protocol Dependency Type to concrete implementation, like Networking, X, Y to NetworkService, XService, YService respectively. Or map concrete type to its concrete implementation which can be exactly same type, like A, or subclass like mapping Z to ZSubClass. Now what the container does is when A has to be created, it auto resolves each dependency of A from the table.</p>
+<p>You can either implement a container, or use a DI Framework which does that for you.</p>
+<p>Containers also allow you to autofill property injection, handle lifecycle of dependencies like marking them as singleton, so that your whole container has only one object of that type created and other fancy features to make your life easy.</p>
+<blockquote class="blockquote">
+<h3 id="a-key-point-to-remember-is-that-your-classes-should-not-depend-on-di-framework-container-ie-its-not-good-idea-to-pass-the-container-to-your-class-as-a-dependency." class="anchored">A key point to remember is that your classes should not depend on DI framework container ie its not good idea to pass the container to your class as a dependency.</h3>
+</blockquote>
+<section id="dip-framework---swift" class="level2">
+<h2 class="anchored" data-anchor-id="dip-framework---swift"><a href="https://github.com/AliSoftware/Dip">Dip Framework - Swift</a></h2>
+<p>Among the DI frameworks exiting now for swift, I recommend Dip. Dip has some nifty features to make your DI pain free.</p>
+<section id="features-of-dip" class="level3">
+<h3 class="anchored" data-anchor-id="features-of-dip">Features of Dip</h3>
+<ul>
+<li><strong>Scopes</strong>. Dip supports 5 different scopes (or life cycle strategies): <em>Unique</em>, <em>Shared</em>, <em>Singleton</em>, <em>EagerSingleton</em>, <em>WeakSingleton</em>;</li>
+<li><strong>Auto-wiring</strong> &amp; <strong>Auto-injection</strong>. Dip can infer your components’ dependencies injected in constructor and automatically resolve them as well as dependencies injected with properties.</li>
+<li><strong>Resolving optionals</strong>. Dip is able to resolve constructor or property dependencies defined as optionals.</li>
+<li><strong>Type forwarding</strong>. You can register the same factory to resolve different types implemeted by a single class.</li>
+<li><strong>Circular dependencies</strong>. Dip will be able to resolve circular dependencies if you will follow some simple rules;</li>
+<li><strong>Storyboards integration</strong>. You can easily use Dip along with storyboards and Xibs without ever referencing container in your view controller’s code;</li>
+<li><strong>Named definitions</strong>. You can register different factories for the same protocol or type by registering them with <a href="">tags</a>;</li>
+<li><strong>Runtime arguments</strong>. You can register factories that accept up to 6 runtime arguments (and extend it if you need);</li>
+<li><strong>Easy configuration</strong> &amp; <strong>Code generation</strong>. No complex containers hierarchy, no unneeded functionality. Tired of writing all registrations by hand? There is a <a href="https://github.com/ilyapuchka/dipgen">cool code generator</a> that will create them for you. The only thing you need is to annotate your code with some comments.</li>
+<li><strong>Weakly typed components</strong>. Dip can resolve “weak” types when they are unknown at compile time.</li>
+<li><strong>Thread safety</strong>. Registering and resolving components is thread safe;</li>
+<li><strong>Helpful error messages and configuration validation</strong>. You can validate your container configuration. If something can not be resolved at runtime Dip throws an error that completely describes the issue;</li>
+</ul>
+</section>
+<section id="annotations-in-dip" class="level3">
+<h3 class="anchored" data-anchor-id="annotations-in-dip">Annotations in Dip</h3>
+<p>Java has good frameworks like <a href="https://square.github.io/dagger/">Dagger</a>, and <a href="https://github.com/google/guice">Guice</a> that use annotations to make the job even simpler compared to swift. Dip allows you to leave annotations of dependencies in comments and also generate code for DI from it. How cool is that?</p>
+</section>
+</section>
+<section id="poor-mans-di-in-swift" class="level2">
+<h2 class="anchored" data-anchor-id="poor-mans-di-in-swift">Poor man’s DI in Swift</h2>
+<p>Though I recommend the framework approach, supposing you don’t want to use framework initially and still want the to do DI, Fear not. You can use Swift’s default parameters to do constructor/method injection, and just use variable properties for property injection. You can maintain a Seperate DI singleton and fill dependencies using that.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> UserModel <span class="op">{</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">static</span> <span class="kw">let</span> <span class="va">serializer</span><span class="op">:</span> Serializing</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">init</span><span class="op">(</span>_ serializer<span class="op">:</span> Serializing <span class="op">=</span> PoormanDIContainer<span class="op">.</span>instance<span class="op">.</span>getSerializer<span class="op">())</span> <span class="op">{</span> <span class="co">// Poor man DI</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">self</span><span class="op">.</span>serializer <span class="op">=</span> serializer</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> <span class="va">name</span><span class="op">:</span> String <span class="op">{</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="kw">get</span> <span class="op">{</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>            <span class="kw">return</span> serializer<span class="op">.</span>string<span class="op">(</span>forKey<span class="op">:</span> <span class="st">"userName"</span><span class="op">)</span>  <span class="op">??</span> <span class="st">""</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>         <span class="op">}</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        <span class="kw">set</span> <span class="op">{</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>            serializer<span class="op">.</span>setObject<span class="op">(</span>newValue<span class="op">,</span> forKey<span class="op">:</span><span class="st">"userName"</span><span class="op">)</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PoorManDIContainer <span class="op">{</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="va">instance</span> <span class="op">=</span> PoorManDIContainer<span class="op">()</span> </span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">func</span> <span class="fu">getSerializer</span><span class="op">()</span> -&gt; <span class="fu">Serializing</span> <span class="op">{</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">// If Serializer has some dependencies, it will again use default constructor to obtain it from PoorManDIContainer</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> Serializer<span class="op">()</span> </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>But if you use the above method, beware of circular dependencies.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>So in conclusion DI is great. It allows you to progressively make your code better remove singletons, make your code modular, testable and also allow you to evolve good design patterns. Try it out in your existing code base, it will be one of the easiest way to refactor legacy OOP code, without modifying internal logic initially.If you have any doubts, suggestions, constructive criticisms, comment below.</p>
 
-  </div>
 
-</footer>
-</body>
+</section>
 
-</html>
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="sai-prasanna/saiprasanna.in" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
