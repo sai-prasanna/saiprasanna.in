@@ -13,7 +13,12 @@ about:
     - icon: github
       text: Github
       href: https://github.com/sai-prasanna
+    - icon: google-scholar
+      text: Google Scholar
+      href: https://scholar.google.co.in/citations?user=ZiB7SdEAAAAJ&hl=en
 
 ---
 
-About this blog
+I research reinforcement learning for robotics in the Robot learning lab at the University of Freiburg. My work focuses on generalization for reinforcement learning applied to robotics.
+
+I have previously worked on applied research in NLP to build solutions for agara.ai and Zoho. I also have research experience, publishing two papers to top NLP conferences (EMNLP) and workshops (SEMEVAL).
