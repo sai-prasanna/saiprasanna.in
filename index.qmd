@@ -1,6 +1,6 @@
 ---
 title: "Dao of Sai"
-subtitle: "Season 4: Robotics"
+subtitle: "🤖 = 42"
 listing:
   contents: posts
   sort: "date desc"
