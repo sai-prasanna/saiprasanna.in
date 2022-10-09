@@ -4,12 +4,14 @@ categories:
 date: "2022-01-08"
 layout: post
 title: "When BERT plays the lottery, All Tickets are winning!"
-toc: true
+description: My first major conference paper and change in research journey towards robotics!
 bibliography: references.bib
 ---
-![BERT plays the lottery](bert-lottery.webp){fig-alt="A cartoon of BERT sesame street along with a bandit machine."}
+
 
 In 2020, I was working in [Zoho](zoho.com) focusing on natural language processing (NLP). It was around time when there was an explosion of self-supervised models such as BERT, RoBERTA etc in NLP. I had some research questions about these pre-trained models. I approached Dr. Anna Rogers, an amazing researcher working on interpretability in twitter. I asked her about some research directions in NLP I was considering. As our interests coincided, she graciously offered to mentor me.
+
+![BERT plays the lottery](bert-lottery.webp){fig-alt="A cartoon of BERT sesame street along with a bandit machine."}
 
 :::{.callout-tip}
 Twitter is a powerful tool to reach out to top researchers in your field of interest.
@@ -17,4 +19,14 @@ Twitter is a powerful tool to reach out to top researchers in your field of inte
 
 This resulted in our work [@prasanna-etal-2020-bert]. We analyzed pruned sub-networks in the BERT model in the context of fine-tuning. We used pruning as an approach for interpretability. For a summary about our paper, checkout Anna's [article](https://thegradient.pub/when-bert-plays-the-lottery-all-tickets-are-winning/) in the gradient.pub.
 
-This work also helped me to find my long-term research interest. Surprisingly, it wasn't in NLP. When I finished submitting our paper for review, I found that in the long-term I would enjoy research in robotics. That's the way it goes I guess!
+This work also helped me to find my long-term research interest. It shifted from NLP. When I finished submitting our paper for review, I found that in the long-term I would enjoy research in robotics. In the research towards better intelligence, I found myself more fascinated by non-human intelligence in animals, birds and micro-organisms. I think building embodied agents that interact with the world is essential to make progress towards building better agents and even understanding what intelligence is. Simple multi-cellular organisms have robust agential behavior, and trying to build them without relying on human language as a prior would help us understand the fundamental mechanisms essential for intelligence that acts robustly in the real-world. 
+
+In the short-term application side, I found that solving NLP tasks have second order effects in improving productivity. But I wanted to work on robots that automate things which have first-order effects. I think this is the classic Asimovian robotics vision which partly inspired me to work on AI.
+
+It's interesting that long-term research direction in some of the top AI people is currently towards building active agents.
+
+The Turing award winner and one of the leading figures in Deep learning, Prof. Yann LeCun's [current plan](https://ai.facebook.com/blog/yann-lecun-advances-in-ai-research/) on AI is also focused on building active agents.
+
+The co-author of the LSTM paper and other seminal works in AI, Prof. Jürgen Schmidhuber thinks that the next wave of AI applications is going to be in robotics and it might have far larger impact on the world economy than current passive predictive models. 
+
+{{< video https://www.youtube.com/watch?v=3FIo6evmweo&t=3391s >}}
