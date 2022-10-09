@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2022-10-when-bert-plays-the-lottery/index.html",
       "/posts/efficient-dynamic-batching-of-large-datasets-with-infinibatch/index.html",
       "/posts/roam-research-software-for-building-a-second-brain/index.html",
       "/posts/neural-module-networks/index.html",
