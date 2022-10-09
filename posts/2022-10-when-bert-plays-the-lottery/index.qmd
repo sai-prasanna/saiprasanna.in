@@ -1,0 +1,20 @@
+---
+categories:
+- NLP
+date: "2022-01-08"
+layout: post
+title: "When BERT plays the lottery, All Tickets are winning!"
+toc: true
+bibliography: references.bib
+---
+![BERT plays the lottery](bert-lottery.webp){fig-alt="A cartoon of BERT sesame street along with a bandit machine."}
+
+In 2020, I was working in [Zoho](zoho.com) focusing on natural language processing (NLP). It was around time when there was an explosion of self-supervised models such as BERT, RoBERTA etc in NLP. I had some research questions about these pre-trained models. I approached Dr. Anna Rogers, an amazing researcher working on interpretability in twitter. I asked her about some research directions in NLP I was considering. As our interests coincided, she graciously offered to mentor me.
+
+:::{.callout-tip}
+Twitter is a powerful tool to reach out to top researchers in your field of interest.
+:::
+
+This resulted in our work [@prasanna-etal-2020-bert]. We analyzed pruned sub-networks in the BERT model in the context of fine-tuning. We used pruning as an approach for interpretability. For a summary about our paper, checkout Anna's [article](https://thegradient.pub/when-bert-plays-the-lottery-all-tickets-are-winning/) in the gradient.pub.
+
+This work also helped me to find my long-term research interest. Surprisingly, it wasn't in NLP. When I finished submitting our paper for review, I found that in the long-term I would enjoy research in robotics. That's the way it goes I guess!
