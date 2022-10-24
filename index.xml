@@ -10,7 +10,291 @@
 <atom:link href="saiprasanna.in/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.1.251</generator>
-<lastBuildDate>Sat, 08 Jan 2022 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 23 Oct 2022 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Augmented Dreams: Data Augmentation & Self-supervised learning in Model-Based Reinforcement Learning</title>
+  <dc:creator>Sai Prasanna, Karim Farid, Diego Fernandez</dc:creator>
+  <link>saiprasanna.in/posts/2022-10-augmented-dreams/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Deep Reinforcement learning agents take a lot of interactions for training directly on high-dimensional inputs such as images. This could be time-consuming and/or infeasible if we were to train directly in the real world. Training in a simulator is faster and safer than real-world training. Simulators such as NVIDIA Isaac SIM can now render realistic scenes. <sup>1</sup> It would still be ideal to have sample efficient agents that don’t require millions of environment interactions for relatively simple tasks.</p>
+<p>In this work, we experiment with further improving the sample efficiency of the MbRL approach, “Dreamer” with data augmentation and SSL. We find that data augmentation can aid sample efficiency. Our code is available <a href="github.com/sai-prasanna/dreamer_augment">here</a>.</p>
+</section>
+<section id="related-work" class="level2">
+<h2 class="anchored" data-anchor-id="related-work">Related Work</h2>
+<section id="model-based-rl-from-pixels" class="level3">
+<h3 class="anchored" data-anchor-id="model-based-rl-from-pixels">Model-Based RL from pixels</h3>
+<p>Model-based reinforcement learning (MbRL) comes with a promise of sample efficiency. In MbRL, we learn a model of the environment where given the current state and action, our model learns to predict the future, i.e.&nbsp;the next state and reward. If we learn good-enough models of the world, we can use that to directly plan actions that maximize future rewards by simulating the actions using the model and picking the action that leads to the best return (model predictive control) or even learn agents by sampling from the model instead of interacting with the actual environment. And learning models are arguably more suited to the capabilities of neural networks compared to learning the policy or value function as it is a supervised learning problem.</p>
+<p>In 2019-2021, a series of works authored by <a href="danijar.com">Danijar Hafner</a> demonstrated that MbRL can be applied directly on pixel inputs and reach good performance and sample efficiency. They evaluated their approach on environments such as Atari for discrete action spaces and dmcontrol for continuous control.</p>
+<section id="planet" class="level4">
+<h4 class="anchored" data-anchor-id="planet">PlaNET</h4>
+<p>In the first work, <strong>PlaNet</strong> <span class="citation" data-cites="hafnerLearningLatentDynamics2019">(Hafner et al. 2019)</span>, the authors came up with an effective way to learn a latent forward dynamics model for pixel observations. This “world model” allows one to directly plan in latent space. In PlaNet, they used Model Predictive Control (MPC) to obtain a policy directly from the learnt model.</p>
+<div class="quarto-figure quarto-figure-center" style="text-align: center;">
+<figure class="figure">
+<p><img src="saiprasanna.in/posts/2022-10-augmented-dreams/dreamer.png" class="img-fluid figure-img" alt="Architecture diagram of learning latent dynamics from pixels with reconstruction in dreamer world model"></p>
+<p></p><figcaption class="figure-caption">World Model training in PlaNet and Dreamer</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="dreamer" class="level4">
+<h4 class="anchored" data-anchor-id="dreamer">Dreamer</h4>
+<p>In the next work, <strong>Dreamer</strong> <span class="citation" data-cites="hafnerDreamControlLearning2020">(Hafner et al. 2020)</span>, they replaced the MPC policy with a learnt policy. They learnt an actor-critic agent directly on the rollouts sampled from the model (or the “dreams of the model”) instead of the real environment. Since the learnt model is differentiable, they could improve the policy directly without using high-variance policy gradient estimates.</p>
+<p>For a summary of these approaches, take a look at the following blog posts <a href="https://ai.googleblog.com/2019/02/introducing-PlaNet-deep-planning.html">PlaNet</a>, <a href="https://ai.googleblog.com/2020/03/introducing-dreamer-scalable.html">Dreamer v1</a>, and <a href="https://ai.googleblog.com/2021/02/mastering-atari-with-discrete-world.html">Dreamer v2</a>.</p>
+</section>
+</section>
+<section id="model-free-rl-from-pixels" class="level3">
+<h3 class="anchored" data-anchor-id="model-free-rl-from-pixels">Model-free RL from pixels</h3>
+<p>Concurrently, there was a race to bring sample efficiency to model-free approaches. Works such as <strong>CURL</strong> <span class="citation" data-cites="srinivasCURLContrastiveUnsupervised2020">(Srinivas, Laskin, and Abbeel 2020)</span>, <strong>DRQv2</strong> <span class="citation" data-cites="yaratsMasteringVisualContinuous2021">(Yarats et al. 2021)</span>, <strong>RAD</strong> <span class="citation" data-cites="laskinReinforcementLearningAugmented2020">(Laskin et al. 2020)</span> competed to achieve sample efficiency without learning a dynamics model.</p>
+<p>These approaches fall under two broad categories.</p>
+<ol type="1">
+<li>Data augmentation-only approach</li>
+<li>Data augmentation with Self-Supervised learning (SSL).</li>
+</ol>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center" style="text-align: center;">
+<figure class="figure">
+<p><img src="saiprasanna.in/posts/2022-10-augmented-dreams/drqv2.png" class="img-fluid figure-img" alt="A block diagram of DrQv2"></p>
+<p></p><figcaption class="figure-caption">DrQv2</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center" style="text-align: center;">
+<figure class="figure">
+<p><img src="saiprasanna.in/posts/2022-10-augmented-dreams/curl.png" class="img-fluid figure-img" alt="A block diagram of CURL"></p>
+<p></p><figcaption class="figure-caption">CURL</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>The <strong>first</strong> category of approaches applies data augmentation on the pixel observations leaving the optimized RL objective (or loss) unchanged.</p>
+<p>In the <strong>second</strong> category of approaches, there is a self-supervised Auxillary loss added to the RL objective. While the data-augmentation-only approach improves sample efficiency, it relies only on the reward as a signal to train.</p>
+<p>The second approach always adds the auxiliary self-supervised signal to train the pixel encoder (CNN). This could prove beneficial in the sparse reward setting where the reward is not a sufficient signal to train representation learning CNN. For a detailed comparison of these two approaches have a look at the <a href="https://bair.berkeley.edu/blog/2020/07/19/curl-rad/">BAIR blog</a>.</p>
+</section>
+</section>
+<section id="our-approach" class="level2">
+<h2 class="anchored" data-anchor-id="our-approach">Our Approach</h2>
+<p>We apply data augmentation and/or self-supervised learning (SSL) over Dreamer(v2). This could allow us to exploit the sample efficiency of both MbRL and augmentations/SSL. We also test whether data augmentation and/or self-supervised learning helps with robustness to changes in the image backgrounds.</p>
+<section id="augmentations" class="level3">
+<h3 class="anchored" data-anchor-id="augmentations">Augmentations</h3>
+<p>In Dreamer, the world model is trained with batches consisting of episode fragments. For all our experiments, we apply the same augmentation to all the input images in an episode. This consistent augmentation avoids adding unrecoverable noise to the dynamics. For the reconstruction objective, we use the unaugmented images as the ground truth. This acts as additional regularization for learning the latent representations from pixels.</p>
+<p>We have three main settings for our augmentations.</p>
+<section id="colour" class="level4">
+<h4 class="anchored" data-anchor-id="colour">1. Colour</h4>
+<p>Here we apply various augmentations such as changes to contrast, sharpness and adding Colour jitter.</p>
+<div class="quarto-figure quarto-figure-center" style="text-align: center;">
+<figure class="figure">
+<p><img src="saiprasanna.in/posts/2022-10-augmented-dreams/color_augmentation.png" class="img-fluid figure-img" alt="Few images from a sample of dmcontrol task with Colour augmentation"></p>
+<p></p><figcaption class="figure-caption">Colour Augmentation</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="randshift" class="level4">
+<h4 class="anchored" data-anchor-id="randshift">2. RandShift</h4>
+<p>Here, we pad the image with a 4-pixel border which mirrors the existing border and then crops the resulting image to the original image size at a random point. This surprisingly simple augmentation has proven effective for improving sample efficiency in model-free RL methods such as <span class="citation" data-cites="yaratsMasteringVisualContinuous2021">(Yarats et al. 2021)</span>.</p>
+<div class="quarto-figure quarto-figure-center" style="text-align: center;">
+<figure class="figure">
+<p><img src="saiprasanna.in/posts/2022-10-augmented-dreams/randshift_aug.png" class="img-fluid figure-img" alt="Few images from a sample of dmcontrol task with Randshift augmentation"></p>
+<p></p><figcaption class="figure-caption">RandShift Augmentation</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="curl" class="level4">
+<h4 class="anchored" data-anchor-id="curl">3. CURL</h4>
+<p>In this setting, we follow CURL<span class="citation" data-cites="srinivasCURLContrastiveUnsupervised2020">(Srinivas, Laskin, and Abbeel 2020)</span> in obtaining larger images (<em>84x84</em>) from the environment and cropping them to our default setting (<em>64x64</em>). We add the self-supervised learning auxiliary loss to the output vectors from the observation encoder CNN in the Dreamer 2 world model.</p>
+</section>
+</section>
+<section id="dmcontrol100k-benchmark" class="level3">
+<h3 class="anchored" data-anchor-id="dmcontrol100k-benchmark">DMControl100k Benchmark</h3>
+<p>We experiment on the Cheetah, Finger Spin, and Ball Cup Catch environments in the DMControl suite. We choose these environments as they’re widely used in model-free RL papers for establishing sample efficiency. We also fix the total number of real environment steps to 100,000 (100k).</p>
+</section>
+<section id="distracting-control-suite" class="level3">
+<h3 class="anchored" data-anchor-id="distracting-control-suite">Distracting Control Suite</h3>
+<p><span class="citation" data-cites="Stone2021TheDC">Stone et al. (2021)</span> introduces the Distracting Control benchmark. They extend DM Control by introducing visual distractions. These distractions create variations in background, colour, and camera pose. We are interested in measuring the robustness against the distractors introduced by our new training regime with augmentation. Hence, we only use distracting control environments for testing our trained agents. Due to the limited computational resources, we are able to only compare the vanilla dreamer 2 agent with the agents trained on augmented inputs. We do not test the model-free baselines on these approaches.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="saiprasanna.in/posts/2022-10-augmented-dreams/distracting_control.png" class="img-fluid figure-img" alt="An example image from distracting control suite where the default starry blue background replaced by another image"></p>
+<p></p><figcaption class="figure-caption">Distracting Control: Example</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="dmcontrol-100k" class="level3">
+<h3 class="anchored" data-anchor-id="dmcontrol-100k">DmControl 100k</h3>
+<p>We use the results reported by <strong>CURL</strong> <span class="citation" data-cites="srinivasCURLContrastiveUnsupervised2020">(Srinivas, Laskin, and Abbeel 2020)</span>, <strong>DrQv2</strong> <span class="citation" data-cites="yaratsMasteringVisualContinuous2021">(Yarats et al. 2021)</span> <sup>2</sup>, and <strong>RAD</strong> <span class="citation" data-cites="laskinReinforcementLearningAugmented2020">(Laskin et al. 2020)</span> as external baselines. We run three seeds of torch implementation of <a href="https://github.com/jsikyoon/dreamer-torch">Dreamer v2</a> as our internal baseline. We build our augmentations upon this dreamer implementation, resulting in the following three experimental settings.</p>
+<ol type="1">
+<li>Colour augmentation (Dreamer <strong>+Colour</strong>)</li>
+<li>RandShift augmentation (Dreamer <strong>+RandShift</strong>)</li>
+<li>Colour and RandShift (Dreamer2 <strong>+RandShift +Colour</strong>)</li>
+<li>CURL (Dreamer2 <strong>+CURL</strong>)</li>
+</ol>
+<table class="table">
+<caption><strong>DMControl100k</strong> Benchmark results with 100k environment steps</caption>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 20%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Environment</th>
+<th style="text-align: center;">CURL</th>
+<th style="text-align: center;">DrQv2</th>
+<th style="text-align: center;">RAD</th>
+<th style="text-align: center;">Dreamer 2</th>
+<th style="text-align: center;">Dreamer 2 +Colour</th>
+<th style="text-align: center;">Dreamer 2 +RandShift</th>
+<th>Dreamer 2 +Colour +RandShift</th>
+<th style="text-align: center;">Dreamer 2 +CURL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cheetah, Run</td>
+<td style="text-align: center;">299 ± 48</td>
+<td style="text-align: center;">272 ± 129</td>
+<td style="text-align: center;">447 ± 88</td>
+<td style="text-align: center;">377 ± 69</td>
+<td style="text-align: center;"><strong>470 ± 38</strong></td>
+<td style="text-align: center;">463 ± 3</td>
+<td>248 ± 226</td>
+<td style="text-align: center;">227 ± 153</td>
+</tr>
+<tr class="even">
+<td>Finger, Spin</td>
+<td style="text-align: center;">767 ± 56</td>
+<td style="text-align: center;">352 ± 310</td>
+<td style="text-align: center;"><strong>856 ± 73</strong></td>
+<td style="text-align: center;">668 ± 460</td>
+<td style="text-align: center;">270 ± 99</td>
+<td style="text-align: center;">376 ± 288</td>
+<td>528 ± 207</td>
+<td style="text-align: center;">679 ± 282</td>
+</tr>
+<tr class="odd">
+<td>Ball Cup, Catch</td>
+<td style="text-align: center;">769 ± 43</td>
+<td style="text-align: center;">359 ± 244</td>
+<td style="text-align: center;">840 ± 179</td>
+<td style="text-align: center;">654 ± 567</td>
+<td style="text-align: center;"><strong>939 ± 65</strong></td>
+<td style="text-align: center;">584 ± 507</td>
+<td>245 ± 424</td>
+<td style="text-align: center;"><strong>976 ± 21</strong></td>
+</tr>
+</tbody>
+</table>
+<p>We found batch size to be an important hyperparameter for sample efficiency for the dreamer. This is not surprising as we train the actor-critic policy with batch size number of imagined trajectories in each update. The increase in batch size alone made our vanilla dreamer baseline reach better or comparable scores to the model-free baselines. This highlights the importance of changing relevant hyperparameters for obtaining strong baselines. Which we found most model-free papers ignored, maybe due to the lack of time.</p>
+<p>Our dreamer 2 + colour and dreamer 2 + CURL approaches <strong>out-perform</strong> model-free approaches on <strong>2 out of 3</strong> tested environments, namely “Cheetah, Run” and “Ball Cup, Catch. The colour augmentation has good gains to sample efficiency on both the tasks, even though Dreamer 2 +CURL is a bit ahead on”Ball Cup, Catch”. * “Finger, Spin” environment is challenging for the world model in all the settings requiring further investigation.</p>
+</section>
+<section id="distracting-control-100k" class="level3">
+<h3 class="anchored" data-anchor-id="distracting-control-100k">Distracting Control 100k</h3>
+<p>We compare the mean returns of the best agent for our dreamer 2 approaches. In each environment, we test the agent on the corresponding distracting control environment. In all the tasks there is a considerable drop in mean returns. This is expected as we only test in new environments.</p>
+<p>In “Cheetah, Run” and “Cup, catch” tasks, Dreamer 2 with colour augmentation performs the best. But the “Finger, Spin” task again acts as a confounder, where the baseline performs better. It’s safe to say that more experiments with more environments are necessary.</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="saiprasanna.in/posts/2022-10-augmented-dreams/cheetah_run_dc.png" class="img-fluid" alt="bar graph of returns for cheetah run in distracting control"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="saiprasanna.in/posts/2022-10-augmented-dreams/cup_catch_dc.png" class="img-fluid" alt="bar graph of returns for cup catch in distracting control"></p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="saiprasanna.in/posts/2022-10-augmented-dreams/finger_spin_dc.png" class="img-fluid" alt="bar graph of returns for finger spin in distracting control"></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="future-work" class="level2">
+<h2 class="anchored" data-anchor-id="future-work">Future Work</h2>
+<p>One good extension to our approach is to add self-supervised learning auxiliary losses to the latent state of the world model. Here, we might apply self-supervised losses on augmented trajectories for the same episode encoded into states by the world model. This would encourage the world model to encode different augmented trajectories to the same latent space. As a consequence, it might lead to the extraction of more informative latent variables. Another advantage of adding auxiliary self-supervision losses to latent states is that it could allow removing the costly reconstruction loss in dreamer 2. The self-supervision signal alone could drive learning good latent representations. There’s a question of whether we can replace reconstruction loss with self-supervised loss in a principled manner from the maximum likelihood formulation used by PlaNET (<span class="citation" data-cites="hafnerLearningLatentDynamics2019">Hafner et al. (2019)</span>).</p>
+<p>Two straightforward SSL approaches are contrastive losses such as triplet loss or Contrastive Predictive coding on the latent states for the same episode with different augmentation. One challenge in contrastive learning-based SSL is obtaining negative samples. One can sample random latents from other trajectories or away from a window of a few time steps in the same trajectory. But it could end up being counter-productive as many observations that are in the same timesteps look similar and shouldn’t be considered as negative samples.</p>
+<p>Instead one could also consider self-supervised losses which don’t require negative samples, such as the Barlow Twins (<span class="citation" data-cites="Zbontar2021BarlowTS">Zbontar et al. (2021)</span>). <sup>3</sup></p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>We find Dreamer MbRL approach to be more sample efficient when combined with the techniques such as data-augmentation and self-supervised learning. These techniques are commonly used to make model-free RL more sample efficient on pixel inputs, but seldom tested on MbRL. Our experiments were constrained by the computational budget available to us. Experiments in more environments can help strengthen our claim. Finally, we identify avenues for future work in applying self-supervised losses directly to the latent state representations.</p>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p>This work was presented as a <a href="poster.pdf">poster presentation</a> at the Deep learning lab course, at the University of Freiburg. We thank <a href="https://nr.informatik.uni-freiburg.de/people/dennis-raith">Dennis Raith</a> for supervising our project and <a href="https://nr.informatik.uni-freiburg.de/people/joschka-boedecker">Prof.&nbsp;Joschka Boedecker</a> for his final feedback.</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-hafnerDreamControlLearning2020" class="csl-entry">
+Hafner, Danijar, Timothy Lillicrap, Jimmy Ba, and Mohammad Norouzi. 2020. <span>“Dream to Control: Learning Behaviors by Latent Imagination.”</span> <a href="http://arxiv.org/abs/1912.01603">http://arxiv.org/abs/1912.01603</a>.
+</div>
+<div id="ref-hafnerLearningLatentDynamics2019" class="csl-entry">
+Hafner, Danijar, Timothy Lillicrap, Ian Fischer, Ruben Villegas, David Ha, Honglak Lee, and James Davidson. 2019. <span>“Learning Latent Dynamics for Planning from Pixels.”</span> <a href="http://arxiv.org/abs/1811.04551">http://arxiv.org/abs/1811.04551</a>.
+</div>
+<div id="ref-jie2021" class="csl-entry">
+Jie, New Jun. 2021. <span>“BTRL: Barlow Twins for Model-Based Reinforcement Learning.”</span> <a href="https://jetnew.io/assets/pdf/new2021btrl.pdf">https://jetnew.io/assets/pdf/new2021btrl.pdf</a>.
+</div>
+<div id="ref-laskinReinforcementLearningAugmented2020" class="csl-entry">
+Laskin, Michael, Kimin Lee, Adam Stooke, Lerrel Pinto, Pieter Abbeel, and Aravind Srinivas. 2020. <span>“Reinforcement <span>Learning</span> with <span>Augmented Data</span>.”</span> <span>arXiv</span>. <a href="https://doi.org/10.48550/arXiv.2004.14990">https://doi.org/10.48550/arXiv.2004.14990</a>.
+</div>
+<div id="ref-srinivasCURLContrastiveUnsupervised2020" class="csl-entry">
+Srinivas, Aravind, Michael Laskin, and Pieter Abbeel. 2020. <span>“<span>CURL</span>: <span>Contrastive Unsupervised Representations</span> for <span>Reinforcement Learning</span>.”</span> <a href="http://arxiv.org/abs/2004.04136">http://arxiv.org/abs/2004.04136</a>.
+</div>
+<div id="ref-Stone2021TheDC" class="csl-entry">
+Stone, Austin, Oscar Ramirez, Kurt Konolige, and Rico Jonschkowski. 2021. <span>“The Distracting Control Suite - a Challenging Benchmark for Reinforcement Learning from Pixels.”</span> <em>ArXiv</em> abs/2101.02722.
+</div>
+<div id="ref-yaratsMasteringVisualContinuous2021" class="csl-entry">
+Yarats, Denis, Rob Fergus, Alessandro Lazaric, and Lerrel Pinto. 2021. <span>“Mastering <span>Visual Continuous Control</span>: <span>Improved Data-Augmented Reinforcement Learning</span>,”</span> July. <a href="https://doi.org/10.48550/arXiv.2107.09645">https://doi.org/10.48550/arXiv.2107.09645</a>.
+</div>
+<div id="ref-Zbontar2021BarlowTS" class="csl-entry">
+Zbontar, Jure, Li Jing, Ishan Misra, Yann LeCun, and Stéphane Deny. 2021. <span>“Barlow Twins: Self-Supervised Learning via Redundancy Reduction.”</span> In <em>ICML</em>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Despite the availability of faster simulators, we might still want to train directly in the real world. Check out this <a href="https://www.youtube.com/watch?v=vMEdchIjzfE&amp;t=838s">video clip</a> with the argument made for it by Prof.&nbsp;Sergey Levine.↩︎</p></li>
+<li id="fn2"><p>DrQv2 paper doesn’t report DmControl100k baseline. We extract the 100k benchmark results by parsing their <a href="https://github.com/facebookresearch/drqv2/tree/main/curves">results</a>↩︎</p></li>
+<li id="fn3"><p><span class="citation" data-cites="jie2021">Jie (2021)</span> has done some experiments on using Barlow Twins on Dreamer.↩︎</p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{prasanna,karimfarid,diegofernandez2022,
+  author = {Sai Prasanna, Karim Farid, Diego Fernandez},
+  editor = {},
+  title = {Augmented {Dreams:} {Data} {Augmentation} \&amp;
+    {Self-supervised} Learning in {Model-Based} {Reinforcement}
+    {Learning}},
+  date = {2022-10-23},
+  url = {saiprasanna.in/posts/2022-10-augmented-dreams},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-prasanna,karimfarid,diegofernandez2022" class="csl-entry quarto-appendix-citeas">
+Sai Prasanna, Karim Farid, Diego Fernandez. 2022. <span>“Augmented
+Dreams: Data Augmentation &amp; Self-Supervised Learning in Model-Based
+Reinforcement Learning.”</span> October 23, 2022. <a href="https://saiprasanna.in/posts/2022-10-augmented-dreams">saiprasanna.in/posts/2022-10-augmented-dreams</a>.
+</div></div></section></div> ]]></description>
+  <category>Reinforcement Learning</category>
+  <guid>saiprasanna.in/posts/2022-10-augmented-dreams/index.html</guid>
+  <pubDate>Sun, 23 Oct 2022 00:00:00 GMT</pubDate>
+  <media:content url="saiprasanna.in/posts/2022-10-augmented-dreams/dreamer.png" medium="image" type="image/png" height="104" width="144"/>
+</item>
 <item>
   <title>When BERT plays the lottery, All Tickets are winning!</title>
   <link>saiprasanna.in/posts/2022-10-when-bert-plays-the-lottery/index.html</link>
@@ -2065,6 +2349,27 @@ This paper applies neural networks to get better accuracy and alleviate errors.<
   <media:content url="https://i.stack.imgur.com/oYpue.png" medium="image" type="image/png"/>
 </item>
 <item>
+  <title>Creation and Consumption</title>
+  <link>saiprasanna.in/posts/creation-and-consumption/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>The amount of content available for consumption in our digital age is staggering. Movies, TV, video games, videos, blogs, emails, chat messages all compete for our limited time.</p>
+<p>I think mindful consumption is of great importance. We can start being aware of what our consumption inlets are. Just the awareness of this can create great impact on how we choose to spend our time.</p>
+<p>I am not arguing against consuming media, but for having healthy awareness on wether it has negative effects on one’s creative spirit. It is important in my opinion to keep the act of creation balanced with consumption.</p>
+<p>To contemplate, and engage actively with the world through some outlet is a form of habit I hope we can get into. This outlet can be anything, writing, music, coding for open source, some personal project etc.</p>
+<p>I think it is more fulfilling to move towards a balanced consumption to creation ratio.</p>
+
+
+
+ ]]></description>
+  <category>Note to self</category>
+  <guid>saiprasanna.in/posts/creation-and-consumption/index.html</guid>
+  <pubDate>Sun, 10 Jul 2016 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Function Currying, Composition in Redux Middleware</title>
   <link>saiprasanna.in/posts/function-currying-and-composition/index.html</link>
   <description><![CDATA[ 
@@ -2129,27 +2434,6 @@ return promise
   <category>Redux</category>
   <category>Functional Programming</category>
   <guid>saiprasanna.in/posts/function-currying-and-composition/index.html</guid>
-  <pubDate>Sun, 10 Jul 2016 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Creation and Consumption</title>
-  <link>saiprasanna.in/posts/creation-and-consumption/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>The amount of content available for consumption in our digital age is staggering. Movies, TV, video games, videos, blogs, emails, chat messages all compete for our limited time.</p>
-<p>I think mindful consumption is of great importance. We can start being aware of what our consumption inlets are. Just the awareness of this can create great impact on how we choose to spend our time.</p>
-<p>I am not arguing against consuming media, but for having healthy awareness on wether it has negative effects on one’s creative spirit. It is important in my opinion to keep the act of creation balanced with consumption.</p>
-<p>To contemplate, and engage actively with the world through some outlet is a form of habit I hope we can get into. This outlet can be anything, writing, music, coding for open source, some personal project etc.</p>
-<p>I think it is more fulfilling to move towards a balanced consumption to creation ratio.</p>
-
-
-
- ]]></description>
-  <category>Note to self</category>
-  <guid>saiprasanna.in/posts/creation-and-consumption/index.html</guid>
   <pubDate>Sun, 10 Jul 2016 00:00:00 GMT</pubDate>
 </item>
 <item>

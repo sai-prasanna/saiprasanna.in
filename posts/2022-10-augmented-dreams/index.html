@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sai Prasanna, Karim Farid, Diego Fernandez">
+<meta name="dcterms.date" content="2022-10-23">
+<meta name="description" content="Improving sample efficiency of Model-Based Reinforcement learning with data augmentation and SSL.">
+
+<title>λf.(λg.f (g g)) (λg.f (g g)) Sai - Augmented Dreams: Data Augmentation &amp; Self-supervised learning in Model-Based Reinforcement Learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">λf.(λg.f (g g)) (λg.f (g g)) Sai</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/sai-prasanna"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/sai_prasanna"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Augmented Dreams: Data Augmentation &amp; Self-supervised learning in Model-Based Reinforcement Learning</h1>
+                  <div>
+        <div class="description">
+          <p>Improving sample efficiency of Model-Based Reinforcement learning with data augmentation and SSL.</p>
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Reinforcement Learning</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Sai Prasanna, Karim Farid, Diego Fernandez </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 23, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#related-work" id="toc-related-work" class="nav-link" data-scroll-target="#related-work">Related Work</a>
+  <ul class="collapse">
+  <li><a href="#model-based-rl-from-pixels" id="toc-model-based-rl-from-pixels" class="nav-link" data-scroll-target="#model-based-rl-from-pixels">Model-Based RL from pixels</a></li>
+  <li><a href="#model-free-rl-from-pixels" id="toc-model-free-rl-from-pixels" class="nav-link" data-scroll-target="#model-free-rl-from-pixels">Model-free RL from pixels</a></li>
+  </ul></li>
+  <li><a href="#our-approach" id="toc-our-approach" class="nav-link" data-scroll-target="#our-approach">Our Approach</a>
+  <ul class="collapse">
+  <li><a href="#augmentations" id="toc-augmentations" class="nav-link" data-scroll-target="#augmentations">Augmentations</a></li>
+  <li><a href="#dmcontrol100k-benchmark" id="toc-dmcontrol100k-benchmark" class="nav-link" data-scroll-target="#dmcontrol100k-benchmark">DMControl100k Benchmark</a></li>
+  <li><a href="#distracting-control-suite" id="toc-distracting-control-suite" class="nav-link" data-scroll-target="#distracting-control-suite">Distracting Control Suite</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#dmcontrol-100k" id="toc-dmcontrol-100k" class="nav-link" data-scroll-target="#dmcontrol-100k">DmControl 100k</a></li>
+  <li><a href="#distracting-control-100k" id="toc-distracting-control-100k" class="nav-link" data-scroll-target="#distracting-control-100k">Distracting Control 100k</a></li>
+  </ul></li>
+  <li><a href="#future-work" id="toc-future-work" class="nav-link" data-scroll-target="#future-work">Future Work</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Deep Reinforcement learning agents take a lot of interactions for training directly on high-dimensional inputs such as images. This could be time-consuming and/or infeasible if we were to train directly in the real world. Training in a simulator is faster and safer than real-world training. Simulators such as NVIDIA Isaac SIM can now render realistic scenes. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It would still be ideal to have sample efficient agents that don’t require millions of environment interactions for relatively simple tasks.</p>
+<p>In this work, we experiment with further improving the sample efficiency of the MbRL approach, “Dreamer” with data augmentation and SSL. We find that data augmentation can aid sample efficiency. Our code is available <a href="github.com/sai-prasanna/dreamer_augment">here</a>.</p>
+</section>
+<section id="related-work" class="level2">
+<h2 class="anchored" data-anchor-id="related-work">Related Work</h2>
+<section id="model-based-rl-from-pixels" class="level3">
+<h3 class="anchored" data-anchor-id="model-based-rl-from-pixels">Model-Based RL from pixels</h3>
+<p>Model-based reinforcement learning (MbRL) comes with a promise of sample efficiency. In MbRL, we learn a model of the environment where given the current state and action, our model learns to predict the future, i.e.&nbsp;the next state and reward. If we learn good-enough models of the world, we can use that to directly plan actions that maximize future rewards by simulating the actions using the model and picking the action that leads to the best return (model predictive control) or even learn agents by sampling from the model instead of interacting with the actual environment. And learning models are arguably more suited to the capabilities of neural networks compared to learning the policy or value function as it is a supervised learning problem.</p>
+<p>In 2019-2021, a series of works authored by <a href="danijar.com">Danijar Hafner</a> demonstrated that MbRL can be applied directly on pixel inputs and reach good performance and sample efficiency. They evaluated their approach on environments such as Atari for discrete action spaces and dmcontrol for continuous control.</p>
+<section id="planet" class="level4">
+<h4 class="anchored" data-anchor-id="planet">PlaNET</h4>
+<p>In the first work, <strong>PlaNet</strong> <span class="citation" data-cites="hafnerLearningLatentDynamics2019">(<a href="#ref-hafnerLearningLatentDynamics2019" role="doc-biblioref">Hafner et al. 2019</a>)</span>, the authors came up with an effective way to learn a latent forward dynamics model for pixel observations. This “world model” allows one to directly plan in latent space. In PlaNet, they used Model Predictive Control (MPC) to obtain a policy directly from the learnt model.</p>
+<div class="quarto-figure quarto-figure-center" style="text-align: center;">
+<figure class="figure">
+<p><img src="dreamer.png" class="img-fluid figure-img" alt="Architecture diagram of learning latent dynamics from pixels with reconstruction in dreamer world model"></p>
+<p></p><figcaption class="figure-caption">World Model training in PlaNet and Dreamer</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="dreamer" class="level4">
+<h4 class="anchored" data-anchor-id="dreamer">Dreamer</h4>
+<p>In the next work, <strong>Dreamer</strong> <span class="citation" data-cites="hafnerDreamControlLearning2020">(<a href="#ref-hafnerDreamControlLearning2020" role="doc-biblioref">Hafner et al. 2020</a>)</span>, they replaced the MPC policy with a learnt policy. They learnt an actor-critic agent directly on the rollouts sampled from the model (or the “dreams of the model”) instead of the real environment. Since the learnt model is differentiable, they could improve the policy directly without using high-variance policy gradient estimates.</p>
+<p>For a summary of these approaches, take a look at the following blog posts <a href="https://ai.googleblog.com/2019/02/introducing-PlaNet-deep-planning.html">PlaNet</a>, <a href="https://ai.googleblog.com/2020/03/introducing-dreamer-scalable.html">Dreamer v1</a>, and <a href="https://ai.googleblog.com/2021/02/mastering-atari-with-discrete-world.html">Dreamer v2</a>.</p>
+</section>
+</section>
+<section id="model-free-rl-from-pixels" class="level3">
+<h3 class="anchored" data-anchor-id="model-free-rl-from-pixels">Model-free RL from pixels</h3>
+<p>Concurrently, there was a race to bring sample efficiency to model-free approaches. Works such as <strong>CURL</strong> <span class="citation" data-cites="srinivasCURLContrastiveUnsupervised2020">(<a href="#ref-srinivasCURLContrastiveUnsupervised2020" role="doc-biblioref">Srinivas, Laskin, and Abbeel 2020</a>)</span>, <strong>DRQv2</strong> <span class="citation" data-cites="yaratsMasteringVisualContinuous2021">(<a href="#ref-yaratsMasteringVisualContinuous2021" role="doc-biblioref">Yarats et al. 2021</a>)</span>, <strong>RAD</strong> <span class="citation" data-cites="laskinReinforcementLearningAugmented2020">(<a href="#ref-laskinReinforcementLearningAugmented2020" role="doc-biblioref">Laskin et al. 2020</a>)</span> competed to achieve sample efficiency without learning a dynamics model.</p>
+<p>These approaches fall under two broad categories.</p>
+<ol type="1">
+<li>Data augmentation-only approach</li>
+<li>Data augmentation with Self-Supervised learning (SSL).</li>
+</ol>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center" style="text-align: center;">
+<figure class="figure">
+<p><img src="drqv2.png" class="img-fluid figure-img" alt="A block diagram of DrQv2"></p>
+<p></p><figcaption class="figure-caption">DrQv2</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center" style="text-align: center;">
+<figure class="figure">
+<p><img src="curl.png" class="img-fluid figure-img" alt="A block diagram of CURL"></p>
+<p></p><figcaption class="figure-caption">CURL</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>The <strong>first</strong> category of approaches applies data augmentation on the pixel observations leaving the optimized RL objective (or loss) unchanged.</p>
+<p>In the <strong>second</strong> category of approaches, there is a self-supervised Auxillary loss added to the RL objective. While the data-augmentation-only approach improves sample efficiency, it relies only on the reward as a signal to train.</p>
+<p>The second approach always adds the auxiliary self-supervised signal to train the pixel encoder (CNN). This could prove beneficial in the sparse reward setting where the reward is not a sufficient signal to train representation learning CNN. For a detailed comparison of these two approaches have a look at the <a href="https://bair.berkeley.edu/blog/2020/07/19/curl-rad/">BAIR blog</a>.</p>
+</section>
+</section>
+<section id="our-approach" class="level2">
+<h2 class="anchored" data-anchor-id="our-approach">Our Approach</h2>
+<p>We apply data augmentation and/or self-supervised learning (SSL) over Dreamer(v2). This could allow us to exploit the sample efficiency of both MbRL and augmentations/SSL. We also test whether data augmentation and/or self-supervised learning helps with robustness to changes in the image backgrounds.</p>
+<section id="augmentations" class="level3">
+<h3 class="anchored" data-anchor-id="augmentations">Augmentations</h3>
+<p>In Dreamer, the world model is trained with batches consisting of episode fragments. For all our experiments, we apply the same augmentation to all the input images in an episode. This consistent augmentation avoids adding unrecoverable noise to the dynamics. For the reconstruction objective, we use the unaugmented images as the ground truth. This acts as additional regularization for learning the latent representations from pixels.</p>
+<p>We have three main settings for our augmentations.</p>
+<section id="colour" class="level4">
+<h4 class="anchored" data-anchor-id="colour">1. Colour</h4>
+<p>Here we apply various augmentations such as changes to contrast, sharpness and adding Colour jitter.</p>
+<div class="quarto-figure quarto-figure-center" style="text-align: center;">
+<figure class="figure">
+<p><img src="color_augmentation.png" class="img-fluid figure-img" alt="Few images from a sample of dmcontrol task with Colour augmentation"></p>
+<p></p><figcaption class="figure-caption">Colour Augmentation</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="randshift" class="level4">
+<h4 class="anchored" data-anchor-id="randshift">2. RandShift</h4>
+<p>Here, we pad the image with a 4-pixel border which mirrors the existing border and then crops the resulting image to the original image size at a random point. This surprisingly simple augmentation has proven effective for improving sample efficiency in model-free RL methods such as <span class="citation" data-cites="yaratsMasteringVisualContinuous2021">(<a href="#ref-yaratsMasteringVisualContinuous2021" role="doc-biblioref">Yarats et al. 2021</a>)</span>.</p>
+<div class="quarto-figure quarto-figure-center" style="text-align: center;">
+<figure class="figure">
+<p><img src="randshift_aug.png" class="img-fluid figure-img" alt="Few images from a sample of dmcontrol task with Randshift augmentation"></p>
+<p></p><figcaption class="figure-caption">RandShift Augmentation</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="curl" class="level4">
+<h4 class="anchored" data-anchor-id="curl">3. CURL</h4>
+<p>In this setting, we follow CURL<span class="citation" data-cites="srinivasCURLContrastiveUnsupervised2020">(<a href="#ref-srinivasCURLContrastiveUnsupervised2020" role="doc-biblioref">Srinivas, Laskin, and Abbeel 2020</a>)</span> in obtaining larger images (<em>84x84</em>) from the environment and cropping them to our default setting (<em>64x64</em>). We add the self-supervised learning auxiliary loss to the output vectors from the observation encoder CNN in the Dreamer 2 world model.</p>
+</section>
+</section>
+<section id="dmcontrol100k-benchmark" class="level3">
+<h3 class="anchored" data-anchor-id="dmcontrol100k-benchmark">DMControl100k Benchmark</h3>
+<p>We experiment on the Cheetah, Finger Spin, and Ball Cup Catch environments in the DMControl suite. We choose these environments as they’re widely used in model-free RL papers for establishing sample efficiency. We also fix the total number of real environment steps to 100,000 (100k).</p>
+</section>
+<section id="distracting-control-suite" class="level3">
+<h3 class="anchored" data-anchor-id="distracting-control-suite">Distracting Control Suite</h3>
+<p><span class="citation" data-cites="Stone2021TheDC">Stone et al. (<a href="#ref-Stone2021TheDC" role="doc-biblioref">2021</a>)</span> introduces the Distracting Control benchmark. They extend DM Control by introducing visual distractions. These distractions create variations in background, colour, and camera pose. We are interested in measuring the robustness against the distractors introduced by our new training regime with augmentation. Hence, we only use distracting control environments for testing our trained agents. Due to the limited computational resources, we are able to only compare the vanilla dreamer 2 agent with the agents trained on augmented inputs. We do not test the model-free baselines on these approaches.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="distracting_control.png" class="img-fluid figure-img" alt="An example image from distracting control suite where the default starry blue background replaced by another image"></p>
+<p></p><figcaption class="figure-caption">Distracting Control: Example</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="dmcontrol-100k" class="level3">
+<h3 class="anchored" data-anchor-id="dmcontrol-100k">DmControl 100k</h3>
+<p>We use the results reported by <strong>CURL</strong> <span class="citation" data-cites="srinivasCURLContrastiveUnsupervised2020">(<a href="#ref-srinivasCURLContrastiveUnsupervised2020" role="doc-biblioref">Srinivas, Laskin, and Abbeel 2020</a>)</span>, <strong>DrQv2</strong> <span class="citation" data-cites="yaratsMasteringVisualContinuous2021">(<a href="#ref-yaratsMasteringVisualContinuous2021" role="doc-biblioref">Yarats et al. 2021</a>)</span> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, and <strong>RAD</strong> <span class="citation" data-cites="laskinReinforcementLearningAugmented2020">(<a href="#ref-laskinReinforcementLearningAugmented2020" role="doc-biblioref">Laskin et al. 2020</a>)</span> as external baselines. We run three seeds of torch implementation of <a href="https://github.com/jsikyoon/dreamer-torch">Dreamer v2</a> as our internal baseline. We build our augmentations upon this dreamer implementation, resulting in the following three experimental settings.</p>
+<ol type="1">
+<li>Colour augmentation (Dreamer <strong>+Colour</strong>)</li>
+<li>RandShift augmentation (Dreamer <strong>+RandShift</strong>)</li>
+<li>Colour and RandShift (Dreamer2 <strong>+RandShift +Colour</strong>)</li>
+<li>CURL (Dreamer2 <strong>+CURL</strong>)</li>
+</ol>
+<table class="table">
+<caption><strong>DMControl100k</strong> Benchmark results with 100k environment steps</caption>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 20%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Environment</th>
+<th style="text-align: center;">CURL</th>
+<th style="text-align: center;">DrQv2</th>
+<th style="text-align: center;">RAD</th>
+<th style="text-align: center;">Dreamer 2</th>
+<th style="text-align: center;">Dreamer 2 +Colour</th>
+<th style="text-align: center;">Dreamer 2 +RandShift</th>
+<th>Dreamer 2 +Colour +RandShift</th>
+<th style="text-align: center;">Dreamer 2 +CURL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cheetah, Run</td>
+<td style="text-align: center;">299 ± 48</td>
+<td style="text-align: center;">272 ± 129</td>
+<td style="text-align: center;">447 ± 88</td>
+<td style="text-align: center;">377 ± 69</td>
+<td style="text-align: center;"><strong>470 ± 38</strong></td>
+<td style="text-align: center;">463 ± 3</td>
+<td>248 ± 226</td>
+<td style="text-align: center;">227 ± 153</td>
+</tr>
+<tr class="even">
+<td>Finger, Spin</td>
+<td style="text-align: center;">767 ± 56</td>
+<td style="text-align: center;">352 ± 310</td>
+<td style="text-align: center;"><strong>856 ± 73</strong></td>
+<td style="text-align: center;">668 ± 460</td>
+<td style="text-align: center;">270 ± 99</td>
+<td style="text-align: center;">376 ± 288</td>
+<td>528 ± 207</td>
+<td style="text-align: center;">679 ± 282</td>
+</tr>
+<tr class="odd">
+<td>Ball Cup, Catch</td>
+<td style="text-align: center;">769 ± 43</td>
+<td style="text-align: center;">359 ± 244</td>
+<td style="text-align: center;">840 ± 179</td>
+<td style="text-align: center;">654 ± 567</td>
+<td style="text-align: center;"><strong>939 ± 65</strong></td>
+<td style="text-align: center;">584 ± 507</td>
+<td>245 ± 424</td>
+<td style="text-align: center;"><strong>976 ± 21</strong></td>
+</tr>
+</tbody>
+</table>
+<p>We found batch size to be an important hyperparameter for sample efficiency for the dreamer. This is not surprising as we train the actor-critic policy with batch size number of imagined trajectories in each update. The increase in batch size alone made our vanilla dreamer baseline reach better or comparable scores to the model-free baselines. This highlights the importance of changing relevant hyperparameters for obtaining strong baselines. Which we found most model-free papers ignored, maybe due to the lack of time.</p>
+<p>Our dreamer 2 + colour and dreamer 2 + CURL approaches <strong>out-perform</strong> model-free approaches on <strong>2 out of 3</strong> tested environments, namely “Cheetah, Run” and “Ball Cup, Catch. The colour augmentation has good gains to sample efficiency on both the tasks, even though Dreamer 2 +CURL is a bit ahead on”Ball Cup, Catch”. * “Finger, Spin” environment is challenging for the world model in all the settings requiring further investigation.</p>
+</section>
+<section id="distracting-control-100k" class="level3">
+<h3 class="anchored" data-anchor-id="distracting-control-100k">Distracting Control 100k</h3>
+<p>We compare the mean returns of the best agent for our dreamer 2 approaches. In each environment, we test the agent on the corresponding distracting control environment. In all the tasks there is a considerable drop in mean returns. This is expected as we only test in new environments.</p>
+<p>In “Cheetah, Run” and “Cup, catch” tasks, Dreamer 2 with colour augmentation performs the best. But the “Finger, Spin” task again acts as a confounder, where the baseline performs better. It’s safe to say that more experiments with more environments are necessary.</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="cheetah_run_dc.png" class="img-fluid" alt="bar graph of returns for cheetah run in distracting control"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="cup_catch_dc.png" class="img-fluid" alt="bar graph of returns for cup catch in distracting control"></p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="finger_spin_dc.png" class="img-fluid" alt="bar graph of returns for finger spin in distracting control"></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="future-work" class="level2">
+<h2 class="anchored" data-anchor-id="future-work">Future Work</h2>
+<p>One good extension to our approach is to add self-supervised learning auxiliary losses to the latent state of the world model. Here, we might apply self-supervised losses on augmented trajectories for the same episode encoded into states by the world model. This would encourage the world model to encode different augmented trajectories to the same latent space. As a consequence, it might lead to the extraction of more informative latent variables. Another advantage of adding auxiliary self-supervision losses to latent states is that it could allow removing the costly reconstruction loss in dreamer 2. The self-supervision signal alone could drive learning good latent representations. There’s a question of whether we can replace reconstruction loss with self-supervised loss in a principled manner from the maximum likelihood formulation used by PlaNET (<span class="citation" data-cites="hafnerLearningLatentDynamics2019">Hafner et al. (<a href="#ref-hafnerLearningLatentDynamics2019" role="doc-biblioref">2019</a>)</span>).</p>
+<p>Two straightforward SSL approaches are contrastive losses such as triplet loss or Contrastive Predictive coding on the latent states for the same episode with different augmentation. One challenge in contrastive learning-based SSL is obtaining negative samples. One can sample random latents from other trajectories or away from a window of a few time steps in the same trajectory. But it could end up being counter-productive as many observations that are in the same timesteps look similar and shouldn’t be considered as negative samples.</p>
+<p>Instead one could also consider self-supervised losses which don’t require negative samples, such as the Barlow Twins (<span class="citation" data-cites="Zbontar2021BarlowTS">Zbontar et al. (<a href="#ref-Zbontar2021BarlowTS" role="doc-biblioref">2021</a>)</span>). <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>We find Dreamer MbRL approach to be more sample efficient when combined with the techniques such as data-augmentation and self-supervised learning. These techniques are commonly used to make model-free RL more sample efficient on pixel inputs, but seldom tested on MbRL. Our experiments were constrained by the computational budget available to us. Experiments in more environments can help strengthen our claim. Finally, we identify avenues for future work in applying self-supervised losses directly to the latent state representations.</p>
+</section>
+<section id="acknowledgements" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
+<p>This work was presented as a <a href="poster.pdf">poster presentation</a> at the Deep learning lab course, at the University of Freiburg. We thank <a href="https://nr.informatik.uni-freiburg.de/people/dennis-raith">Dennis Raith</a> for supervising our project and <a href="https://nr.informatik.uni-freiburg.de/people/joschka-boedecker">Prof.&nbsp;Joschka Boedecker</a> for his final feedback.</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-hafnerDreamControlLearning2020" class="csl-entry" role="doc-biblioentry">
+Hafner, Danijar, Timothy Lillicrap, Jimmy Ba, and Mohammad Norouzi. 2020. <span>“Dream to Control: Learning Behaviors by Latent Imagination.”</span> <a href="http://arxiv.org/abs/1912.01603">http://arxiv.org/abs/1912.01603</a>.
+</div>
+<div id="ref-hafnerLearningLatentDynamics2019" class="csl-entry" role="doc-biblioentry">
+Hafner, Danijar, Timothy Lillicrap, Ian Fischer, Ruben Villegas, David Ha, Honglak Lee, and James Davidson. 2019. <span>“Learning Latent Dynamics for Planning from Pixels.”</span> <a href="http://arxiv.org/abs/1811.04551">http://arxiv.org/abs/1811.04551</a>.
+</div>
+<div id="ref-jie2021" class="csl-entry" role="doc-biblioentry">
+Jie, New Jun. 2021. <span>“BTRL: Barlow Twins for Model-Based Reinforcement Learning.”</span> <a href="https://jetnew.io/assets/pdf/new2021btrl.pdf">https://jetnew.io/assets/pdf/new2021btrl.pdf</a>.
+</div>
+<div id="ref-laskinReinforcementLearningAugmented2020" class="csl-entry" role="doc-biblioentry">
+Laskin, Michael, Kimin Lee, Adam Stooke, Lerrel Pinto, Pieter Abbeel, and Aravind Srinivas. 2020. <span>“Reinforcement <span>Learning</span> with <span>Augmented Data</span>.”</span> <span>arXiv</span>. <a href="https://doi.org/10.48550/arXiv.2004.14990">https://doi.org/10.48550/arXiv.2004.14990</a>.
+</div>
+<div id="ref-srinivasCURLContrastiveUnsupervised2020" class="csl-entry" role="doc-biblioentry">
+Srinivas, Aravind, Michael Laskin, and Pieter Abbeel. 2020. <span>“<span>CURL</span>: <span>Contrastive Unsupervised Representations</span> for <span>Reinforcement Learning</span>.”</span> <a href="http://arxiv.org/abs/2004.04136">http://arxiv.org/abs/2004.04136</a>.
+</div>
+<div id="ref-Stone2021TheDC" class="csl-entry" role="doc-biblioentry">
+Stone, Austin, Oscar Ramirez, Kurt Konolige, and Rico Jonschkowski. 2021. <span>“The Distracting Control Suite - a Challenging Benchmark for Reinforcement Learning from Pixels.”</span> <em>ArXiv</em> abs/2101.02722.
+</div>
+<div id="ref-yaratsMasteringVisualContinuous2021" class="csl-entry" role="doc-biblioentry">
+Yarats, Denis, Rob Fergus, Alessandro Lazaric, and Lerrel Pinto. 2021. <span>“Mastering <span>Visual Continuous Control</span>: <span>Improved Data-Augmented Reinforcement Learning</span>,”</span> July. <a href="https://doi.org/10.48550/arXiv.2107.09645">https://doi.org/10.48550/arXiv.2107.09645</a>.
+</div>
+<div id="ref-Zbontar2021BarlowTS" class="csl-entry" role="doc-biblioentry">
+Zbontar, Jure, Li Jing, Ishan Misra, Yann LeCun, and Stéphane Deny. 2021. <span>“Barlow Twins: Self-Supervised Learning via Redundancy Reduction.”</span> In <em>ICML</em>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Despite the availability of faster simulators, we might still want to train directly in the real world. Check out this <a href="https://www.youtube.com/watch?v=vMEdchIjzfE&amp;t=838s">video clip</a> with the argument made for it by Prof.&nbsp;Sergey Levine.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>DrQv2 paper doesn’t report DmControl100k baseline. We extract the 100k benchmark results by parsing their <a href="https://github.com/facebookresearch/drqv2/tree/main/curves">results</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><span class="citation" data-cites="jie2021">Jie (<a href="#ref-jie2021" role="doc-biblioref">2021</a>)</span> has done some experiments on using Barlow Twins on Dreamer.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{prasanna,karimfarid,diegofernandez2022,
+  author = {Sai Prasanna, Karim Farid, Diego Fernandez},
+  editor = {},
+  title = {Augmented {Dreams:} {Data} {Augmentation} \&amp;
+    {Self-supervised} Learning in {Model-Based} {Reinforcement}
+    {Learning}},
+  date = {2022-10-23},
+  url = {saiprasanna.in/posts/2022-10-augmented-dreams},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-prasanna,karimfarid,diegofernandez2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Sai Prasanna, Karim Farid, Diego Fernandez. 2022. <span>“Augmented
+Dreams: Data Augmentation &amp; Self-Supervised Learning in Model-Based
+Reinforcement Learning.”</span> October 23, 2022. <a href="https://saiprasanna.in/posts/2022-10-augmented-dreams">saiprasanna.in/posts/2022-10-augmented-dreams</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="sai-prasanna/saiprasanna.in" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
