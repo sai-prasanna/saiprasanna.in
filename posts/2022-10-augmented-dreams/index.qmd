@@ -3,7 +3,7 @@ categories:
 - Reinforcement Learning
 date: "2022-10-23"
 layout: post
-title: "Augmented Dreams: Data Augmentation & Self-supervised learning in Model-Based Reinforcement Learning"
+title: "Augmented Dreams: Data Augmentation & Self-supervised learning with Model-Based Reinforcement Learning"
 description: | 
   Improving sample efficiency of Model-Based Reinforcement learning with data augmentation and SSL. 
 toc: true

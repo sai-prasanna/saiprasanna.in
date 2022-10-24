@@ -11,7 +11,7 @@ bibliography: references.bib
 
 In 2020, I was working in [Zoho](zoho.com) focusing on natural language processing (NLP). It was around time when there was an explosion of self-supervised models such as BERT, RoBERTA etc in NLP. I had some research questions about these pre-trained models. I approached Dr. Anna Rogers, an amazing researcher working on interpretability in twitter. I asked her about some research directions in NLP I was considering. As our interests coincided, she graciously offered to mentor me.
 
-![BERT plays the lottery](bert-lottery.webp){fig-alt="A cartoon of BERT sesame street along with a bandit machine."}
+![BERT plays the lottery: Image from https://thegradient.pub/when-bert-plays-the-lottery-all-tickets-are-winning/](bert-lottery.webp){fig-alt="A cartoon of BERT sesame street along with a bandit machine." style="text-align: center;"}
 
 :::{.callout-tip}
 Twitter is a powerful tool to reach out to top researchers in your field of interest.
