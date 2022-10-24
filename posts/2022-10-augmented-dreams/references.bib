@@ -1,0 +1,107 @@
+
+@unpublished{hafnerDreamControlLearning2020,
+  title = {Dream to Control: Learning Behaviors by Latent Imagination},
+  shorttitle = {Dream to Control},
+  author = {Hafner, Danijar and Lillicrap, Timothy and Ba, Jimmy and Norouzi, Mohammad},
+  date = {2020-03-17},
+  eprint = {1912.01603},
+  eprinttype = {arxiv},
+  primaryclass = {cs},
+  url = {http://arxiv.org/abs/1912.01603},
+  urldate = {2022-01-13},
+  abstract = {Learned world models summarize an agent's experience to facilitate learning complex behaviors. While learning world models from high-dimensional sensory inputs is becoming feasible through deep learning, there are many potential ways for deriving behaviors from them. We present Dreamer, a reinforcement learning agent that solves long-horizon tasks from images purely by latent imagination. We efficiently learn behaviors by propagating analytic gradients of learned state values back through trajectories imagined in the compact state space of a learned world model. On 20 challenging visual control tasks, Dreamer exceeds existing approaches in data-efficiency, computation time, and final performance.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Machine Learning,Computer Science - Robotics},
+  file = {/home/sai/Dropbox/zotero/pdf/hafnerDreamControlLearning2020.pdf;/home/sai/Zotero/storage/S5X7FX4N/1912.html}
+}
+@inproceedings{Zbontar2021BarlowTS,
+  title={Barlow Twins: Self-Supervised Learning via Redundancy Reduction},
+  author={Jure Zbontar and Li Jing and Ishan Misra and Yann LeCun and St{\'e}phane Deny},
+  booktitle={ICML},
+  year={2021}
+}
+@misc{jie2021, title={BTRL: Barlow Twins for Model-Based Reinforcement Learning}, url={https://jetnew.io/assets/pdf/new2021btrl.pdf}, author={Jie, New Jun}, year={2021}} 
+@unpublished{hafnerLearningLatentDynamics2019,
+  title = {Learning Latent Dynamics for Planning from Pixels},
+  author = {Hafner, Danijar and Lillicrap, Timothy and Fischer, Ian and Villegas, Ruben and Ha, David and Lee, Honglak and Davidson, James},
+  date = {2019-06-04},
+  eprint = {1811.04551},
+  eprinttype = {arxiv},
+  primaryclass = {cs, stat},
+  url = {http://arxiv.org/abs/1811.04551},
+  urldate = {2022-01-10},
+  abstract = {Planning has been very successful for control tasks with known environment dynamics. To leverage planning in unknown environments, the agent needs to learn the dynamics from interactions with the world. However, learning dynamics models that are accurate enough for planning has been a long-standing challenge, especially in image-based domains. We propose the Deep Planning Network (PlaNet), a purely model-based agent that learns the environment dynamics from images and chooses actions through fast online planning in latent space. To achieve high performance, the dynamics model must accurately predict the rewards ahead for multiple time steps. We approach this using a latent dynamics model with both deterministic and stochastic transition components. Moreover, we propose a multi-step variational inference objective that we name latent overshooting. Using only pixel observations, our agent solves continuous control tasks with contact dynamics, partial observability, and sparse rewards, which exceed the difficulty of tasks that were previously solved by planning with learned models. PlaNet uses substantially fewer episodes and reaches final performance close to and sometimes higher than strong model-free algorithms.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Machine Learning,Cross Embodiment Generalization,Reinforcement learning,Statistics - Machine Learning},
+  file = {/home/sai/Dropbox/zotero/pdf/hafnerLearningLatentDynamics2019.pdf}
+}
+
+@unpublished{hafnerMasteringAtariDiscrete2021,
+  title = {Mastering Atari with Discrete World Models},
+  author = {Hafner, Danijar and Lillicrap, Timothy and Norouzi, Mohammad and Ba, Jimmy},
+  date = {2021-05-03},
+  eprint = {2010.02193},
+  eprinttype = {arxiv},
+  primaryclass = {cs, stat},
+  url = {http://arxiv.org/abs/2010.02193},
+  urldate = {2022-01-13},
+  abstract = {Intelligent agents need to generalize from past experience to achieve goals in complex environments. World models facilitate such generalization and allow learning behaviors from imagined outcomes to increase sample-efficiency. While learning world models from image inputs has recently become feasible for some tasks, modeling Atari games accurately enough to derive successful behaviors has remained an open challenge for many years. We introduce DreamerV2, a reinforcement learning agent that learns behaviors purely from predictions in the compact latent space of a powerful world model. The world model uses discrete representations and is trained separately from the policy. DreamerV2 constitutes the first agent that achieves human-level performance on the Atari benchmark of 55 tasks by learning behaviors inside a separately trained world model. With the same computational budget and wall-clock time, Dreamer V2 reaches 200M frames and surpasses the final performance of the top single-GPU agents IQN and Rainbow. DreamerV2 is also applicable to tasks with continuous actions, where it learns an accurate world model of a complex humanoid robot and solves stand-up and walking from only pixel inputs.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Artificial Intelligence,Computer Science - Machine Learning,Statistics - Machine Learning},
+  file = {/home/sai/Dropbox/zotero/pdf/hafnerMasteringAtariDiscrete2021.pdf;/home/sai/Zotero/storage/7YZYEXJ2/2010.html}
+}
+
+@misc{laskinReinforcementLearningAugmented2020,
+  title = {Reinforcement {{Learning}} with {{Augmented Data}}},
+  author = {Laskin, Michael and Lee, Kimin and Stooke, Adam and Pinto, Lerrel and Abbeel, Pieter and Srinivas, Aravind},
+  date = {2020-11-05},
+  number = {arXiv:2004.14990},
+  eprint = {2004.14990},
+  eprinttype = {arxiv},
+  primaryclass = {cs, stat},
+  publisher = {{arXiv}},
+  doi = {10.48550/arXiv.2004.14990},
+  url = {http://arxiv.org/abs/2004.14990},
+  urldate = {2022-10-01},
+  abstract = {Learning from visual observations is a fundamental yet challenging problem in Reinforcement Learning (RL). Although algorithmic advances combined with convolutional neural networks have proved to be a recipe for success, current methods are still lacking on two fronts: (a) data-efficiency of learning and (b) generalization to new environments. To this end, we present Reinforcement Learning with Augmented Data (RAD), a simple plug-and-play module that can enhance most RL algorithms. We perform the first extensive study of general data augmentations for RL on both pixel-based and state-based inputs, and introduce two new data augmentations - random translate and random amplitude scale. We show that augmentations such as random translate, crop, color jitter, patch cutout, random convolutions, and amplitude scale can enable simple RL algorithms to outperform complex state-of-the-art methods across common benchmarks. RAD sets a new state-of-the-art in terms of data-efficiency and final performance on the DeepMind Control Suite benchmark for pixel-based control as well as OpenAI Gym benchmark for state-based control. We further demonstrate that RAD significantly improves test-time generalization over existing methods on several OpenAI ProcGen benchmarks. Our RAD module and training code are available at https://www.github.com/MishaLaskin/rad.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
+  file = {/home/sai/Dropbox/zotero/pdf/laskinReinforcementLearningAugmented2020.pdf;/home/sai/Zotero/storage/3PBPPYQP/2004.html}
+}
+
+@unpublished{srinivasCURLContrastiveUnsupervised2020,
+  title = {{{CURL}}: {{Contrastive Unsupervised Representations}} for {{Reinforcement Learning}}},
+  shorttitle = {{{CURL}}},
+  author = {Srinivas, Aravind and Laskin, Michael and Abbeel, Pieter},
+  date = {2020-09-21},
+  eprint = {2004.04136},
+  eprinttype = {arxiv},
+  primaryclass = {cs, stat},
+  url = {http://arxiv.org/abs/2004.04136},
+  urldate = {2021-07-29},
+  abstract = {We present CURL: Contrastive Unsupervised Representations for Reinforcement Learning. CURL extracts high-level features from raw pixels using contrastive learning and performs off-policy control on top of the extracted features. CURL outperforms prior pixel-based methods, both model-based and model-free, on complex tasks in the DeepMind Control Suite and Atari Games showing 1.9x and 1.2x performance gains at the 100K environment and interaction steps benchmarks respectively. On the DeepMind Control Suite, CURL is the first image-based algorithm to nearly match the sample-efficiency of methods that use state-based features. Our code is open-sourced and available at https://github.com/MishaLaskin/curl.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Statistics - Machine Learning},
+  file = {/home/sai/Dropbox/zotero/pdf/srinivasCURLContrastiveUnsupervised2020.pdf;/home/sai/Zotero/storage/HEKTJEVR/2004.html}
+}
+
+@article{yaratsMasteringVisualContinuous2021,
+  title = {Mastering {{Visual Continuous Control}}: {{Improved Data-Augmented Reinforcement Learning}}},
+  shorttitle = {Mastering {{Visual Continuous Control}}},
+  author = {Yarats, Denis and Fergus, Rob and Lazaric, Alessandro and Pinto, Lerrel},
+  date = {2021-07-20},
+  doi = {10.48550/arXiv.2107.09645},
+  url = {https://arxiv.org/abs/2107.09645v1},
+  urldate = {2022-06-08},
+  abstract = {We present DrQ-v2, a model-free reinforcement learning (RL) algorithm for visual continuous control. DrQ-v2 builds on DrQ, an off-policy actor-critic approach that uses data augmentation to learn directly from pixels. We introduce several improvements that yield state-of-the-art results on the DeepMind Control Suite. Notably, DrQ-v2 is able to solve complex humanoid locomotion tasks directly from pixel observations, previously unattained by model-free RL. DrQ-v2 is conceptually simple, easy to implement, and provides significantly better computational footprint compared to prior work, with the majority of tasks taking just 8 hours to train on a single GPU. Finally, we publicly release DrQ-v2's implementation to provide RL practitioners with a strong and computationally efficient baseline.},
+  langid = {english},
+  file = {/home/sai/Dropbox/zotero/pdf/yaratsMasteringVisualContinuous2021.pdf;/home/sai/Zotero/storage/ZFIN7KF4/2107.html}
+}
+
+@article{Stone2021TheDC,
+  title={The Distracting Control Suite - A Challenging Benchmark for Reinforcement Learning from Pixels},
+  author={Austin Stone and Oscar Ramirez and Kurt Konolige and Rico Jonschkowski},
+  journal={ArXiv},
+  year={2021},
+  volume={abs/2101.02722}
+}
