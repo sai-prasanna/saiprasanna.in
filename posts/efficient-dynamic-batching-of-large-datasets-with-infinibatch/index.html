@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.251">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,11 +19,12 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -48,47 +49,17 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -113,7 +84,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -122,12 +99,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
@@ -138,38 +117,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">λf.(λg.f (g g)) (λg.f (g g)) Sai</span>
+    <span class="navbar-title"><em>λf.(λg.f (g g)) (λg.f (g g))</em> <strong>Sai</strong></span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">About</a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/sai-prasanna"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/sai-prasanna"> <i class="bi bi-github" role="img">
 </i> 
- </a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/sai_prasanna"><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com/sai_prasanna"> <i class="bi bi-twitter" role="img">
 </i> 
- </a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -196,6 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <p class="date">September 13, 2020</p>
       </div>
     </div>
+    
       
     </div>
     
@@ -242,14 +223,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
+
 <p>We will explore how to efficiently batch large datasets with varied sequence length for training using <a href="https://github.com/microsoft/infinibatch/">infinibatch</a>. The focus will be on solving multiple challenges associated with this and making it work with <code>dataloader</code> abstraction in pytorch library. Though our focus is on pytorch, Infinibatch is a pure python library agnostic of the deep learning library.</p>
 <p>This post was inspired by this thread on twitter. &gt; twitter: https://twitter.com/marian_nmt/status/1292850875715604480</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -257,8 +239,8 @@ Note
 <p>We will use <a href="https://blog.einstein.ai/the-wikitext-long-term-dependency-language-modeling-dataset/">wikitext-103</a> dataset as an example. It’s a dataset with sentences from wikipedia. It has 103,227,021 word level tokens in it’s training split. It is used only for illustration, the techniques discussed here are can work for far larger dataset sizes.</p>
 </div>
 </div>
-<div class="cell" data-outputid="b2293107-5487-4715-8c63-0863531cb557" data-execution_count="1">
-<details>
+<div id="cell-2" class="cell" data-outputid="b2293107-5487-4715-8c63-0863531cb557" data-execution_count="1">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget https:<span class="op">//</span>s3.amazonaws.com<span class="op">/</span>research.metamind.io<span class="op">/</span>wikitext<span class="op">/</span>wikitext<span class="op">-</span><span class="dv">103</span><span class="op">-</span>raw<span class="op">-</span>v1.<span class="bu">zip</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>unzip wikitext<span class="op">-</span><span class="dv">103</span><span class="op">-</span>raw<span class="op">-</span>v1.<span class="bu">zip</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -286,8 +268,8 @@ Note
 <h3 class="anchored" data-anchor-id="tokenization-and-length-distribution">Tokenization and length distribution</h3>
 <p>Let’s implement a typical dynamic padding workflow with pytorch dataloader and a subword level tokenizer. We use BERT-base-cased tokenizer from huggingface’s transformers library. This tokenizes words to subwords. The BERT model was pre-trained with maximum subword length of 512. We can theoretically use sequence lengths larger than that but for our purposes we will leave it as such at 512.</p>
 <p>We will use torch’s <a href="https://pytorch.org/docs/stable/data.html">dataset and dataloader</a> abstraction for this. It will as both an illustration of real world usage and is convinent as it helps avoid having to entire tokenized dataset in memory. We still have to load the sentences into memory once. This is not a problem for small datasets, but for very large corpuses it’s a big problem as mentioned before.</p>
-<div class="cell" data-outputid="20390f6a-10b2-4073-bdad-213f1d35045a" data-execution_count="2">
-<details>
+<div id="cell-8" class="cell" data-outputid="20390f6a-10b2-4073-bdad-213f1d35045a" data-execution_count="2">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>microsoft<span class="op">/</span>infinibatch.git transformers torch</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Dict, List</span>
@@ -304,7 +286,7 @@ Note
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="3">
+<div id="cell-9" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Wiki103(Dataset):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, tokenizer: PreTrainedTokenizerFast, data_path<span class="op">=</span><span class="st">"wikitext-103-raw/wiki.train.raw"</span>, max_length: <span class="bu">int</span> <span class="op">=</span> <span class="dv">512</span>):</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tokenizer <span class="op">=</span> tokenizer</span>
@@ -319,7 +301,7 @@ Note
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__getitem__</span>(<span class="va">self</span>, i) <span class="op">-&gt;</span> Dict[<span class="bu">str</span>, torch.Tensor]:</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.tokenizer(<span class="va">self</span>.sentences[i], max_length<span class="op">=</span><span class="va">self</span>.max_length, truncation<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-outputid="99722997-5edb-49aa-9206-c68979125c34" data-execution_count="4">
+<div id="cell-10" class="cell" data-outputid="99722997-5edb-49aa-9206-c68979125c34" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="st">"bert-base-cased"</span>, use_fast<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>wiki_dataset <span class="op">=</span> Wiki103(tokenizer<span class="op">=</span>tokenizer)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sequence_lengths <span class="op">=</span> []</span>
@@ -327,42 +309,44 @@ Note
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    sequence_lengths.append(<span class="bu">len</span>(example[<span class="st">"input_ids"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"cd77a1ae224f4a14a8a72edb6c1003e7","version_major":2,"version_minor":0}
+{"model_id":"cd77a1ae224f4a14a8a72edb6c1003e7","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code></code></pre>
+<pre><code>
+</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"c970f42678fe494f829848541ef975df","version_major":2,"version_minor":0}
+{"model_id":"c970f42678fe494f829848541ef975df","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code></code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>1164464it [04:25, 4380.35it/s]</code></pre>
 </div>
 </div>
 <p>By plotting the truncated <code>Subword sequence length vs Frequency</code> we see a distribution with a large variance.</p>
-<div class="cell" data-outputid="db2d5efd-77b8-44ed-d9ca-515a77f27ae2" data-execution_count="5">
-<details>
+<div id="cell-12" class="cell" data-outputid="db2d5efd-77b8-44ed-d9ca-515a77f27ae2" data-execution_count="5">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.style.context(<span class="st">'fivethirtyeight'</span>):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>[<span class="dv">7</span>,<span class="dv">5</span>])</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    n, bins, patches <span class="op">=</span> plt.hist(x<span class="op">=</span>sequence_lengths, bins<span class="op">=</span><span class="dv">50</span>, color<span class="op">=</span><span class="st">'#0504aa'</span>,alpha<span class="op">=</span><span class="fl">0.7</span>, rwidth<span class="op">=</span><span class="fl">0.85</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, alpha<span class="op">=</span><span class="fl">0.75</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Subword Sequence Length'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    plt.xticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    plt.yticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Sequence Length Distribution'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.style.context(<span class="st">'fivethirtyeight'</span>):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>[<span class="dv">7</span>,<span class="dv">5</span>])</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    n, bins, patches <span class="op">=</span> plt.hist(x<span class="op">=</span>sequence_lengths, bins<span class="op">=</span><span class="dv">50</span>, color<span class="op">=</span><span class="st">'#0504aa'</span>,alpha<span class="op">=</span><span class="fl">0.7</span>, rwidth<span class="op">=</span><span class="fl">0.85</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, alpha<span class="op">=</span><span class="fl">0.75</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Subword Sequence Length'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    plt.xticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    plt.yticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Sequence Length Distribution'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="index_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -370,33 +354,33 @@ Note
 <h3 class="anchored" data-anchor-id="dynamic-padding">Dynamic Padding</h3>
 <p>From the above graph we can intuit that if we draw random samples from the data to form a mini-batch, we would have few examples which are significantly longer than the rest. This would mean that we would add a lot of padding tokens. This holds even if we clean the very short length instances as noise.</p>
 <p>Let’s implement dynamic padding and measure how much. We can use torch’s <code>DataLoader</code> abstraction to do efficient batching with multi-processing. Since our tokenized outputs are of different lengths we have to implement a collate function to pad them dynamically together. We can pass the <code>tokenizer.pad</code> function implemented in huggingface’s tokenizer as the collate function.</p>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> collate_fn(examples: List[Dict[<span class="bu">str</span>, torch.Tensor]]) <span class="op">-&gt;</span> Dict[<span class="bu">str</span>, torch.Tensor]:</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Since huggingface has already implemented this, this function is just to illustrate what a collator does.</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tokenizer.pad(examples, return_tensors<span class="op">=</span><span class="st">'pt'</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>dataloader <span class="op">=</span> DataLoader(dataset<span class="op">=</span>wiki_dataset, batch_size<span class="op">=</span><span class="dv">32</span>, collate_fn<span class="op">=</span>collate_fn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-14" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> collate_fn(examples: List[Dict[<span class="bu">str</span>, torch.Tensor]]) <span class="op">-&gt;</span> Dict[<span class="bu">str</span>, torch.Tensor]:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Since huggingface has already implemented this, this function is just to illustrate what a collator does.</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tokenizer.pad(examples, return_tensors<span class="op">=</span><span class="st">'pt'</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>dataloader <span class="op">=</span> DataLoader(dataset<span class="op">=</span>wiki_dataset, batch_size<span class="op">=</span><span class="dv">32</span>, collate_fn<span class="op">=</span>collate_fn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s assume that we can use maximum a batch size of 32 for max sequence length of 512 for our model in our training hardware without out-of-memory errors. The tokens per batch would be <code>512 * 32 = 16384</code>. We can now compute how much of it is padding tokens and what is the distribution of the batch’s sequence length(which depends on the maximum element in the batch).</p>
-<div class="cell" data-outputid="f25e7bea-9d40-4ad0-d8f0-b2e197018005" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>total_tokens <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>padding_tokens <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>batch_lengths <span class="op">=</span> []</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch <span class="kw">in</span> tqdm.tqdm(<span class="bu">iter</span>(dataloader)):</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    batched_input_ids <span class="op">=</span> batch[<span class="st">"input_ids"</span>]</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    batch_lengths.append(batched_input_ids.shape[<span class="dv">1</span>])</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    total_tokens <span class="op">+=</span> batched_input_ids.numel()</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    padding_tokens <span class="op">+=</span> batched_input_ids[batched_input_ids <span class="op">==</span> tokenizer.pad_token_id].numel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-16" class="cell" data-outputid="f25e7bea-9d40-4ad0-d8f0-b2e197018005" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>total_tokens <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>padding_tokens <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>batch_lengths <span class="op">=</span> []</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch <span class="kw">in</span> tqdm.tqdm(<span class="bu">iter</span>(dataloader)):</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    batched_input_ids <span class="op">=</span> batch[<span class="st">"input_ids"</span>]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    batch_lengths.append(batched_input_ids.shape[<span class="dv">1</span>])</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    total_tokens <span class="op">+=</span> batched_input_ids.numel()</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    padding_tokens <span class="op">+=</span> batched_input_ids[batched_input_ids <span class="op">==</span> tokenizer.pad_token_id].numel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>100%|██████████| 36390/36390 [06:04&lt;00:00, 99.96it/s] </code></pre>
 </div>
 </div>
-<div class="cell" data-outputid="0b1acde0-2567-4f4b-cfc9-d30d8d9fa183" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total Batches    : </span><span class="sc">{</span><span class="bu">len</span>(<span class="bu">iter</span>(dataloader))<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Padding Tokens   : </span><span class="sc">{</span>padding_tokens<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Input Tokens     : </span><span class="sc">{</span>total_tokens <span class="op">-</span> padding_tokens<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total Tokens     : </span><span class="sc">{</span>total_tokens<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Padding Tokens % : </span><span class="sc">{</span>(padding_tokens<span class="op">*</span><span class="dv">100</span>)<span class="op">/</span>total_tokens<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-17" class="cell" data-outputid="0b1acde0-2567-4f4b-cfc9-d30d8d9fa183" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total Batches    : </span><span class="sc">{</span><span class="bu">len</span>(<span class="bu">iter</span>(dataloader))<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Padding Tokens   : </span><span class="sc">{</span>padding_tokens<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Input Tokens     : </span><span class="sc">{</span>total_tokens <span class="op">-</span> padding_tokens<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total Tokens     : </span><span class="sc">{</span>total_tokens<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Padding Tokens % : </span><span class="sc">{</span>(padding_tokens<span class="op">*</span><span class="dv">100</span>)<span class="op">/</span>total_tokens<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Total Batches    : 36390
 Padding Tokens   : 244072396
@@ -407,23 +391,27 @@ Padding Tokens % : 67.09493267712108</code></pre>
 </div>
 <p>Surprise, surprise, <strong>67% of our net tokens are padding tokens</strong>. This would imply that of all the computations that we do, only 33% of is done for useful work. This starkly highlights the problem with static batch lengths even when accounting for dynamic padding.</p>
 <p>Let’s also plot the distribution of batch lengths.</p>
-<div class="cell" data-outputid="dd2980fb-b374-4454-9212-ff07ef9ef4b5" data-execution_count="9">
-<details>
+<div id="cell-19" class="cell" data-outputid="dd2980fb-b374-4454-9212-ff07ef9ef4b5" data-execution_count="9">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.style.context(<span class="st">'fivethirtyeight'</span>):</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>[<span class="dv">7</span>,<span class="dv">5</span>])</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    n, bins, patches <span class="op">=</span> plt.hist(x<span class="op">=</span>batch_lengths, bins<span class="op">=</span><span class="dv">50</span>, color<span class="op">=</span><span class="st">'#0504aa'</span>,alpha<span class="op">=</span><span class="fl">0.7</span>, rwidth<span class="op">=</span><span class="fl">0.85</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, alpha<span class="op">=</span><span class="fl">0.75</span>)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Batch Sequence Length'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    plt.xticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    plt.yticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Static Batch - Dynamic Padding Length Distribution'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.style.context(<span class="st">'fivethirtyeight'</span>):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>[<span class="dv">7</span>,<span class="dv">5</span>])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    n, bins, patches <span class="op">=</span> plt.hist(x<span class="op">=</span>batch_lengths, bins<span class="op">=</span><span class="dv">50</span>, color<span class="op">=</span><span class="st">'#0504aa'</span>,alpha<span class="op">=</span><span class="fl">0.7</span>, rwidth<span class="op">=</span><span class="fl">0.85</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, alpha<span class="op">=</span><span class="fl">0.75</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Batch Sequence Length'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    plt.xticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    plt.yticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Static Batch - Dynamic Padding Length Distribution'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="index_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>As batches are randomly sampled, we see a normal distribution as we can should expect by the Central Limit Theorem. The frequency in the final bin is deviant because we have a significant number of sentences which we had truncated, hence batches with them will have the maximum sequence length.</p>
@@ -453,30 +441,30 @@ Padding Tokens % : 67.09493267712108</code></pre>
 <section id="loading-and-shuffling-large-datasets-1" class="level2">
 <h2 class="anchored" data-anchor-id="loading-and-shuffling-large-datasets-1">1. Loading and shuffling large datasets</h2>
 <p>Following the infinibatch tutorial, we divide our dataset into multiple gzip chunks of 10000 sentences each.</p>
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mkdir <span class="op">-</span>p wikitext<span class="op">-</span><span class="dv">103</span><span class="op">-</span>chunks</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>split  <span class="op">-</span>a <span class="dv">4</span> <span class="op">--</span>lines <span class="dv">10000</span>  <span class="op">--</span>numeric<span class="op">-</span>suffixes <span class="op">--</span><span class="bu">filter</span> <span class="st">'gzip &gt; wikitext-103-chunks/$FILE.txt.gz'</span> wikitext<span class="op">-</span><span class="dv">103</span><span class="op">-</span>raw<span class="op">/</span>wiki.train.raw  train.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-25" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>mkdir <span class="op">-</span>p wikitext<span class="op">-</span><span class="dv">103</span><span class="op">-</span>chunks</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>split  <span class="op">-</span>a <span class="dv">4</span> <span class="op">--</span>lines <span class="dv">10000</span>  <span class="op">--</span>numeric<span class="op">-</span>suffixes <span class="op">--</span><span class="bu">filter</span> <span class="st">'gzip &gt; wikitext-103-chunks/$FILE.txt.gz'</span> wikitext<span class="op">-</span><span class="dv">103</span><span class="op">-</span>raw<span class="op">/</span>wiki.train.raw  train.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can now create an iterator using infinibatch with a function that can deserialize a shard. Infinibatch takes care of loading multiple in a shuffled order. We can control the amount of deserialized individual examples from the shards be buffered using <code>buffer_size</code> parameter. The library returns a python iterable. We can call <code>next(iterable)</code> or iterate with a <code>for</code> to get the examples.</p>
 <p>Note: Passing <code>train=True</code> creates an infinite iterator that cycles after a full run on the dataset. The <code>chunked_dataset_iterator</code> method returns a composition of iterators, you can refer the source code <a href="https://github.com/microsoft/infinibatch/blob/master/infinibatch/iterators.py">here</a></p>
-<div class="cell" data-outputid="98e9fbf6-b426-4da2-eef2-4c7feff5cc55" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gzip, glob</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> infinibatch <span class="im">import</span> datasets, iterators</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_chunk(path):</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(path, <span class="st">"rb"</span>) <span class="im">as</span> fp:</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        lines <span class="op">=</span> gzip.decompress(fp.read()).decode(encoding<span class="op">=</span><span class="st">'utf-8'</span>).splitlines()</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        lines <span class="op">=</span> [sentence.strip() <span class="cf">for</span> sentence <span class="kw">in</span> lines <span class="cf">if</span> <span class="bu">len</span>(sentence.strip()) <span class="op">&gt;</span> <span class="dv">2</span>]</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">iter</span>(lines)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>sentence_it <span class="op">=</span> datasets.chunked_dataset_iterator(</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    chunk_refs <span class="op">=</span> glob.glob(<span class="st">'wikitext-103-chunks/train.*.txt.gz'</span>),</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    read_chunk_fn <span class="op">=</span> read_chunk,</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    buffer_size <span class="op">=</span> <span class="dv">100000</span>, seed <span class="op">=</span> <span class="dv">1337</span>, train<span class="op">=</span><span class="va">True</span>, shuffle<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">next</span>(sentence_it))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-27" class="cell" data-outputid="98e9fbf6-b426-4da2-eef2-4c7feff5cc55" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gzip, glob</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> infinibatch <span class="im">import</span> datasets, iterators</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_chunk(path):</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(path, <span class="st">"rb"</span>) <span class="im">as</span> fp:</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        lines <span class="op">=</span> gzip.decompress(fp.read()).decode(encoding<span class="op">=</span><span class="st">'utf-8'</span>).splitlines()</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        lines <span class="op">=</span> [sentence.strip() <span class="cf">for</span> sentence <span class="kw">in</span> lines <span class="cf">if</span> <span class="bu">len</span>(sentence.strip()) <span class="op">&gt;</span> <span class="dv">2</span>]</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">iter</span>(lines)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>sentence_it <span class="op">=</span> datasets.chunked_dataset_iterator(</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    chunk_refs <span class="op">=</span> glob.glob(<span class="st">'wikitext-103-chunks/train.*.txt.gz'</span>),</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    read_chunk_fn <span class="op">=</span> read_chunk,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    buffer_size <span class="op">=</span> <span class="dv">100000</span>, seed <span class="op">=</span> <span class="dv">1337</span>, train<span class="op">=</span><span class="va">True</span>, shuffle<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">next</span>(sentence_it))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>In 1993 , David Mirkin hired Scully to write for The Simpsons , as a replacement for the departing Conan O 'Brien , after reading some of his sample scripts . He began as a writer and producer for the show during its fifth season and wrote the episodes " Lisa 's Rival " , " Two Dozen and One Greyhounds " and " Lisa on Ice " which aired in season six . " Lisa 's Rival " was his first episode ; he wrote the script , but the original concept had been conceived by O 'Brien . Similarly , he wrote the script for " Two Dozen and One Greyhounds " , which was based on an idea by Al Jean and Mike Reiss . " Lisa on Ice " was inspired by Scully 's love of ice hockey and featured many experiences from his childhood , as was " Marge Be Not Proud " ( which he wrote for season seven ) which was based " one of the most traumatic moments " of his life , when he was caught shoplifting aged twelve . He jokingly told Variety that " It 's great to be paid for reliving the horrors of your life . " He also wrote " Team Homer " and " Lisa 's Date with Density " . Scully noted : " I wrote a lot of Lisa 's shows . I have five daughters , so I like Lisa a lot . I like Homer , too . Homer comes very naturally to me : I don 't know if that 's a good or a bad thing . A lot of my favorite episodes are the ones when Homer and Lisa are in conflict with each other ... They 're very human , I think that 's their appeal . "</code></pre>
 </div>
@@ -485,16 +473,16 @@ Padding Tokens % : 67.09493267712108</code></pre>
 <h3 class="anchored" data-anchor-id="tensorize-our-dataset-with-a-map-iterator">Tensorize our dataset with a map iterator</h3>
 <p>We can now compose our tokenizer upon our sentence iterator. Infinibatch has two ways of doing this, 1. <code>MapIterator</code> 2. <code>ParallelMapIterator</code></p>
 <p>If you use pytorch and need multiprocessing to do costly transformations over your data on the fly, use the <code>ParallelMap</code> and set the <code>num_processes</code> with what you would have with <code>num_workers</code>. And set <code>num_workers=0</code> in your dataloader.</p>
-<div class="cell" data-outputid="a3fc83c0-b76c-4304-d04f-e976d5160e53" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tokenize_fn <span class="op">=</span> partial(tokenizer, max_length<span class="op">=</span><span class="dv">512</span>, truncation<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>features_it <span class="op">=</span> iterators.ParallelMapIterator(</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>sentence_it,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    num_processes<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    num_items_per_process<span class="op">=</span><span class="dv">1000</span>,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>tokenize_fn</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">next</span>(features_it)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-29" class="cell" data-outputid="a3fc83c0-b76c-4304-d04f-e976d5160e53" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tokenize_fn <span class="op">=</span> partial(tokenizer, max_length<span class="op">=</span><span class="dv">512</span>, truncation<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>features_it <span class="op">=</span> iterators.ParallelMapIterator(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>sentence_it,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    num_processes<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    num_items_per_process<span class="op">=</span><span class="dv">1000</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>tokenize_fn</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="bu">next</span>(features_it)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>{'input_ids': [101, 1130, 1949, 117, 1681, 20522, 4314, 4327, 20452, 16125, 1106, 3593, 1111, 1109, 20726, 117, 1112, 170, 5627, 1111, 1103, 18646, 17727, 152, 112, 9620, 117, 1170, 3455, 1199, 1104, 1117, 6876, 15690, 119, 1124, 1310, 1112, 170, 2432, 1105, 2451, 1111, 1103, 1437, 1219, 1157, 3049, 1265, 1105, 1724, 1103, 3426, 107, 6516, 112, 188, 155, 15895, 107, 117, 107, 1960, 2091, 10947, 1105, 1448, 6285, 16930, 1116, 107, 1105, 107, 6516, 1113, 6172, 107, 1134, 4086, 1107, 1265, 1565, 119, 107, 6516, 112, 188, 155, 15895, 107, 1108, 1117, 1148, 2004, 132, 1119, 1724, 1103, 5444, 117, 1133, 1103, 1560, 3400, 1125, 1151, 10187, 1118, 152, 112, 9620, 119, 10321, 117, 1119, 1724, 1103, 5444, 1111, 107, 1960, 2091, 10947, 1105, 1448, 6285, 16930, 1116, 107, 117, 1134, 1108, 1359, 1113, 1126, 1911, 1118, 2586, 2893, 1105, 2639, 11336, 14788, 119, 107, 6516, 1113, 6172, 107, 1108, 3768, 1118, 20452, 16125, 112, 188, 1567, 1104, 2854, 4700, 1105, 2081, 1242, 5758, 1121, 1117, 5153, 117, 1112, 1108, 107, 9751, 2176, 4108, 1753, 5096, 4867, 107, 113, 1134, 1119, 1724, 1111, 1265, 1978, 114, 1134, 1108, 1359, 107, 1141, 1104, 1103, 1211, 23057, 4899, 107, 1104, 1117, 1297, 117, 1165, 1119, 1108, 2347, 4130, 18867, 4079, 4030, 119, 1124, 18114, 1193, 1500, 15526, 1115, 107, 1135, 112, 188, 1632, 1106, 1129, 3004, 1111, 1231, 2646, 3970, 1103, 5367, 1116, 1104, 1240, 1297, 119, 107, 1124, 1145, 1724, 107, 2649, 12353, 107, 1105, 107, 6516, 112, 188, 14265, 1114, 14760, 13730, 107, 119, 20452, 16125, 2382, 131, 107, 146, 1724, 170, 1974, 1104, 6516, 112, 188, 2196, 119, 146, 1138, 1421, 5421, 117, 1177, 146, 1176, 6516, 170, 1974, 119, 146, 1176, 12353, 117, 1315, 119, 12353, 2502, 1304, 8534, 1106, 1143, 131, 146, 1274, 112, 189, 1221, 1191, 1115, 112, 188, 170, 1363, 1137, 170, 2213, 1645, 119, 138, 1974, 1104, 1139, 5095, 3426, 1132, 1103, 3200, 1165, 12353, 1105, 6516, 1132, 1107, 4139, 1114, 1296, 1168, 119, 119, 119, 1220, 112, 1231, 1304, 1769, 117, 146, 1341, 1115, 112, 188, 1147, 5767, 119, 107, 102], 'token_type_ids': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}</code></pre>
 </div>
@@ -544,24 +532,24 @@ Padding Tokens % : 67.09493267712108</code></pre>
 <p>First we sort this window with lengths in decreasing order. The sort order is stable. This preserves the shuffling of equal sized elements from previous iterator. So for our example it would be [a, b, e, c, d, f]</p>
 <p>Now we can Compute the dynamic batch sizes by applying the function <code>batch_size</code> iteratively till the window is exhausted. Assume our function is <code>lambda longest_instance: 60 // len(longest_instance)</code>. Then applying it once we get first longest item <code>a</code>, current batch size will be <code>60 //50 = 1</code>. The next longest item remaining can be used to calculate the size of the next batch and so on. So we will end up with [a], [b, e], [c, d, f]. Each of them will have 60 tokens.</p>
 <p>You can take a look at the code that does this computation <a href="https://github.com/microsoft/infinibatch/blob/master/infinibatch/iterators.py#L1080">here</a>.</p>
-<div class="cell" data-outputid="5223316b-2086-4efe-97d3-0d83f87cf96e" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>tokens_per_batch <span class="op">=</span> <span class="dv">32</span> <span class="op">*</span> <span class="dv">512</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>batches_it <span class="op">=</span> iterators.BucketedReadaheadBatchIterator(</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>features_it,</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># read_ahead is the number of items to be read from previous iterator,</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># these are sorted and over which dynamic batches are formed.</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    read_ahead<span class="op">=</span><span class="dv">10000</span>, </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># key determines the length used to sort and choose the longest remaining record.</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    key<span class="op">=</span><span class="kw">lambda</span> example: <span class="bu">len</span>(example[<span class="st">'input_ids'</span>]), </span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Determines the dynamic batch size</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="kw">lambda</span> longest_example: tokens_per_batch <span class="op">//</span> <span class="bu">len</span>(longest_example[<span class="st">'input_ids'</span>]),</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span><span class="dv">0</span> </span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>dynamic_batch_wo_padding <span class="op">=</span> <span class="bu">next</span>(batches_it)</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dynamic batch size: </span><span class="sc">{</span><span class="bu">len</span>(dynamic_batch_wo_padding)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>dynamic_batch_wo_padding <span class="op">=</span> <span class="bu">next</span>(batches_it)</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dynamic batch size: </span><span class="sc">{</span><span class="bu">len</span>(dynamic_batch_wo_padding)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dynamic_batch_wo_padding[:<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-31" class="cell" data-outputid="5223316b-2086-4efe-97d3-0d83f87cf96e" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tokens_per_batch <span class="op">=</span> <span class="dv">32</span> <span class="op">*</span> <span class="dv">512</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>batches_it <span class="op">=</span> iterators.BucketedReadaheadBatchIterator(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>features_it,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># read_ahead is the number of items to be read from previous iterator,</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># these are sorted and over which dynamic batches are formed.</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    read_ahead<span class="op">=</span><span class="dv">10000</span>, </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># key determines the length used to sort and choose the longest remaining record.</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    key<span class="op">=</span><span class="kw">lambda</span> example: <span class="bu">len</span>(example[<span class="st">'input_ids'</span>]), </span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Determines the dynamic batch size</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="kw">lambda</span> longest_example: tokens_per_batch <span class="op">//</span> <span class="bu">len</span>(longest_example[<span class="st">'input_ids'</span>]),</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span><span class="dv">0</span> </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>dynamic_batch_wo_padding <span class="op">=</span> <span class="bu">next</span>(batches_it)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dynamic batch size: </span><span class="sc">{</span><span class="bu">len</span>(dynamic_batch_wo_padding)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>dynamic_batch_wo_padding <span class="op">=</span> <span class="bu">next</span>(batches_it)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dynamic batch size: </span><span class="sc">{</span><span class="bu">len</span>(dynamic_batch_wo_padding)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dynamic_batch_wo_padding[:<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Dynamic batch size: 124
 Dynamic batch size: 94
@@ -569,58 +557,58 @@ Dynamic batch size: 94
 </div>
 </div>
 <p>Now we can collate our examples and see how much this scheme has saved us. Since a training iterator is infinite, we will recreate our iterators with a non-infinite iterator.</p>
-<div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sentence_it_finite <span class="op">=</span> datasets.chunked_dataset_iterator(</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    chunk_refs <span class="op">=</span> glob.glob(<span class="st">'wikitext-103-chunks/train.*.txt.gz'</span>),</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    read_chunk_fn <span class="op">=</span> read_chunk,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    buffer_size <span class="op">=</span> <span class="dv">100000</span>, </span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    seed <span class="op">=</span> <span class="dv">1337</span>, </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    train<span class="op">=</span><span class="va">False</span>, </span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">False</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>features_it_finite <span class="op">=</span> iterators.ParallelMapIterator(</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>sentence_it_finite,</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    num_processes<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    num_items_per_process<span class="op">=</span><span class="dv">1000</span>,</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>tokenize_fn</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>batches_it_finite <span class="op">=</span> iterators.BucketedReadaheadBatchIterator(</span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>features_it_finite,</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    read_ahead<span class="op">=</span><span class="dv">10000</span>, <span class="co"># Determines the window for the bucket which</span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># will be sorted and  converted to batches.</span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    key<span class="op">=</span><span class="kw">lambda</span> example: <span class="bu">len</span>(example[<span class="st">'input_ids'</span>]), <span class="co"># Determines the length used</span></span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># to sort and choose the longest remaining record.</span></span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="kw">lambda</span> longest: tokens_per_batch <span class="op">//</span> <span class="bu">len</span>(longest[<span class="st">'input_ids'</span>]),</span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determines the dynamic batch size</span></span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span><span class="dv">0</span> </span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>collate_fn <span class="op">=</span> partial(tokenizer.pad, return_tensors<span class="op">=</span><span class="st">'pt'</span>)</span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>tensors_it_finite <span class="op">=</span> iterators.MapIterator(</span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    batches_it_finite,</span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>collate_fn</span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-33" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sentence_it_finite <span class="op">=</span> datasets.chunked_dataset_iterator(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    chunk_refs <span class="op">=</span> glob.glob(<span class="st">'wikitext-103-chunks/train.*.txt.gz'</span>),</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    read_chunk_fn <span class="op">=</span> read_chunk,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    buffer_size <span class="op">=</span> <span class="dv">100000</span>, </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    seed <span class="op">=</span> <span class="dv">1337</span>, </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    train<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">False</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>features_it_finite <span class="op">=</span> iterators.ParallelMapIterator(</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>sentence_it_finite,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    num_processes<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    num_items_per_process<span class="op">=</span><span class="dv">1000</span>,</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>tokenize_fn</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>batches_it_finite <span class="op">=</span> iterators.BucketedReadaheadBatchIterator(</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>features_it_finite,</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    read_ahead<span class="op">=</span><span class="dv">10000</span>, <span class="co"># Determines the window for the bucket which</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># will be sorted and  converted to batches.</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    key<span class="op">=</span><span class="kw">lambda</span> example: <span class="bu">len</span>(example[<span class="st">'input_ids'</span>]), <span class="co"># Determines the length used</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># to sort and choose the longest remaining record.</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="kw">lambda</span> longest: tokens_per_batch <span class="op">//</span> <span class="bu">len</span>(longest[<span class="st">'input_ids'</span>]),</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determines the dynamic batch size</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span><span class="dv">0</span> </span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>collate_fn <span class="op">=</span> partial(tokenizer.pad, return_tensors<span class="op">=</span><span class="st">'pt'</span>)</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>tensors_it_finite <span class="op">=</span> iterators.MapIterator(</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>    batches_it_finite,</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>collate_fn</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-outputid="2296d9db-6643-4d3d-f8ae-afd17ded5935" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>total_batches_dynamic <span class="op">=</span> <span class="dv">0</span> </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>total_tokens_dynamic <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>padding_tokens_dynamic <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>batch_lengths_dynamic <span class="op">=</span> []</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch <span class="kw">in</span> tqdm.tqdm(tensors_it_finite):</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    total_batches_dynamic <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    batched_input_ids <span class="op">=</span> batch[<span class="st">"input_ids"</span>]</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    batch_lengths_dynamic.append(batched_input_ids.shape[<span class="dv">1</span>])</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    total_tokens_dynamic <span class="op">+=</span> batched_input_ids.numel()</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    padding_tokens_dynamic <span class="op">+=</span> batched_input_ids[batched_input_ids <span class="op">==</span> tokenizer.pad_token_id].numel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-34" class="cell" data-outputid="2296d9db-6643-4d3d-f8ae-afd17ded5935" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>total_batches_dynamic <span class="op">=</span> <span class="dv">0</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>total_tokens_dynamic <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>padding_tokens_dynamic <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>batch_lengths_dynamic <span class="op">=</span> []</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch <span class="kw">in</span> tqdm.tqdm(tensors_it_finite):</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    total_batches_dynamic <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    batched_input_ids <span class="op">=</span> batch[<span class="st">"input_ids"</span>]</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    batch_lengths_dynamic.append(batched_input_ids.shape[<span class="dv">1</span>])</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    total_tokens_dynamic <span class="op">+=</span> batched_input_ids.numel()</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    padding_tokens_dynamic <span class="op">+=</span> batched_input_ids[batched_input_ids <span class="op">==</span> tokenizer.pad_token_id].numel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>7650it [08:11, 15.57it/s]</code></pre>
 </div>
 </div>
-<div class="cell" data-outputid="27ddbb47-2dc9-4aa9-8a35-163d9ad5fe8a" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total Batches    : </span><span class="sc">{</span>total_batches_dynamic<span class="sc">}</span><span class="ss">"</span>) <span class="co"># Seeing the tqdm stats.</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Padding Tokens   : </span><span class="sc">{</span>padding_tokens_dynamic<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Input Tokens     : </span><span class="sc">{</span>total_tokens_dynamic <span class="op">-</span> padding_tokens_dynamic<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total Tokens     : </span><span class="sc">{</span>total_tokens_dynamic<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Padding Tokens % : </span><span class="sc">{</span>(padding_tokens_dynamic<span class="op">*</span><span class="dv">100</span>)<span class="op">/</span>total_tokens_dynamic<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-35" class="cell" data-outputid="27ddbb47-2dc9-4aa9-8a35-163d9ad5fe8a" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total Batches    : </span><span class="sc">{</span>total_batches_dynamic<span class="sc">}</span><span class="ss">"</span>) <span class="co"># Seeing the tqdm stats.</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Padding Tokens   : </span><span class="sc">{</span>padding_tokens_dynamic<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Input Tokens     : </span><span class="sc">{</span>total_tokens_dynamic <span class="op">-</span> padding_tokens_dynamic<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total Tokens     : </span><span class="sc">{</span>total_tokens_dynamic<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Padding Tokens % : </span><span class="sc">{</span>(padding_tokens_dynamic<span class="op">*</span><span class="dv">100</span>)<span class="op">/</span>total_tokens_dynamic<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Total Batches    : 7650
 Padding Tokens   : 3838939
@@ -632,23 +620,27 @@ Padding Tokens % : 3.1074896620497463</code></pre>
 <p>We have <strong>reduced</strong> the % of <strong>padding tokens</strong> per epoch from <strong>67% to just around 3%</strong>.The total batches needed to process it in the same max tokens per batch limitation hence got reduced nearly five times from 36390 to 7642.</p>
 <p>The processing time is just one minute extra. I guess that might be due to IO, but you could try benchmarking that with more rigour.</p>
 <p>Now, plotting the length distribution for dynamic batches.</p>
-<div class="cell" data-outputid="1e6ebe34-7066-4719-94a0-de85dc36ee99" data-execution_count="17">
-<details>
+<div id="cell-37" class="cell" data-outputid="1e6ebe34-7066-4719-94a0-de85dc36ee99" data-execution_count="17">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.style.context(<span class="st">'fivethirtyeight'</span>):</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>[<span class="dv">7</span>,<span class="dv">5</span>])</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    n, bins, patches <span class="op">=</span> plt.hist(x<span class="op">=</span>batch_lengths_dynamic, bins<span class="op">=</span><span class="dv">50</span>, color<span class="op">=</span><span class="st">'#0504aa'</span>,alpha<span class="op">=</span><span class="fl">0.7</span>, rwidth<span class="op">=</span><span class="fl">0.85</span>)</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, alpha<span class="op">=</span><span class="fl">0.75</span>)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Batch Sequence Length'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    plt.xticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    plt.yticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Dynamic Batch - Dynamic Padding Length Distribution'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.style.context(<span class="st">'fivethirtyeight'</span>):</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>[<span class="dv">7</span>,<span class="dv">5</span>])</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    n, bins, patches <span class="op">=</span> plt.hist(x<span class="op">=</span>batch_lengths_dynamic, bins<span class="op">=</span><span class="dv">50</span>, color<span class="op">=</span><span class="st">'#0504aa'</span>,alpha<span class="op">=</span><span class="fl">0.7</span>, rwidth<span class="op">=</span><span class="fl">0.85</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, alpha<span class="op">=</span><span class="fl">0.75</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Batch Sequence Length'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    plt.xticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    plt.yticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Dynamic Batch - Dynamic Padding Length Distribution'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="index_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We now see that the expected per batch sequence length has reduced from 300 to 200.</p>
@@ -658,48 +650,48 @@ Padding Tokens % : 3.1074896620497463</code></pre>
 <h2 class="anchored" data-anchor-id="static-batch-sizes-with-sorted-window">Static Batch Sizes with Sorted Window</h2>
 <p>In practise using variable batch sizes could be a problem depending on your task. As tokens in an instance are already correlated, having few instances (though longer) in one batch might give a more noisy gradient update than many shorter instances in a batch. This is my <strong>speculation</strong> as to why I wasn’t able to make purely dynamic batch sizes work well with a token classification fine-tuning on BERT.</p>
 <p>But all is not lost here, we can still use bucketing to have uniform length batches with fewer padding tokens. Let’s checkout the padding tokens % when we fix the batch size as 32 but sort a window of 10 batches (320 instances) and then form batches.</p>
-<div class="cell" data-outputid="05fb3403-6f54-4df1-b64a-17bbbb6728a6" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sentence_it_finite <span class="op">=</span> datasets.chunked_dataset_iterator(</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    chunk_refs <span class="op">=</span> glob.glob(<span class="st">'wikitext-103-chunks/train.*.txt.gz'</span>),</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    read_chunk_fn <span class="op">=</span> read_chunk,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    buffer_size <span class="op">=</span> <span class="dv">100000</span>, </span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    seed <span class="op">=</span> <span class="dv">1337</span>, </span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    train<span class="op">=</span><span class="va">False</span>, </span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">False</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>features_it_finite <span class="op">=</span> iterators.ParallelMapIterator(</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>sentence_it_finite,</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    num_processes<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    num_items_per_process<span class="op">=</span><span class="dv">1000</span>,</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>tokenize_fn</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>batches_it_finite <span class="op">=</span> iterators.BucketedReadaheadBatchIterator(</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>features_it_finite,</span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    key<span class="op">=</span><span class="kw">lambda</span> example: <span class="bu">len</span>(example[<span class="st">'input_ids'</span>]), <span class="co"># Determines the length used</span></span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    read_ahead<span class="op">=</span><span class="dv">320</span>, <span class="co"># Setting this ten times the static batch size.</span></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="dv">32</span>,</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span><span class="dv">0</span> </span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>collate_fn <span class="op">=</span> partial(tokenizer.pad, return_tensors<span class="op">=</span><span class="st">'pt'</span>)</span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>tensors_it_finite <span class="op">=</span> iterators.MapIterator(</span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>    batches_it_finite,</span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>collate_fn</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>total_batches_bucket_sorted <span class="op">=</span> <span class="dv">0</span> </span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>total_tokens_bucket_sorted<span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>padding_tokens_bucket_sorted <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>batch_lengths_bucket_sorted <span class="op">=</span> []</span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch <span class="kw">in</span> tqdm.tqdm(tensors_it_finite):</span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>    total_batches_bucket_sorted <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>    batched_input_ids <span class="op">=</span> batch[<span class="st">"input_ids"</span>]</span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>    batch_lengths_bucket_sorted.append(batched_input_ids.shape[<span class="dv">1</span>])</span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>    total_tokens_bucket_sorted <span class="op">+=</span> batched_input_ids.numel()</span>
-<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>    padding_tokens_bucket_sorted <span class="op">+=</span> batched_input_ids[batched_input_ids <span class="op">==</span> tokenizer.pad_token_id].numel()</span>
-<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total Batches    : </span><span class="sc">{</span>total_batches_bucket_sorted<span class="sc">}</span><span class="ss">"</span>) <span class="co"># Seeing the tqdm stats.</span></span>
-<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Padding Tokens   : </span><span class="sc">{</span>padding_tokens_bucket_sorted<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Input Tokens     : </span><span class="sc">{</span>total_tokens_bucket_sorted <span class="op">-</span> padding_tokens_bucket_sorted<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total Tokens     : </span><span class="sc">{</span>total_tokens_bucket_sorted<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Padding Tokens % : </span><span class="sc">{</span>(padding_tokens_bucket_sorted<span class="op">*</span><span class="dv">100</span>)<span class="op">/</span>total_tokens_bucket_sorted<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-40" class="cell" data-outputid="05fb3403-6f54-4df1-b64a-17bbbb6728a6" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sentence_it_finite <span class="op">=</span> datasets.chunked_dataset_iterator(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    chunk_refs <span class="op">=</span> glob.glob(<span class="st">'wikitext-103-chunks/train.*.txt.gz'</span>),</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    read_chunk_fn <span class="op">=</span> read_chunk,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    buffer_size <span class="op">=</span> <span class="dv">100000</span>, </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    seed <span class="op">=</span> <span class="dv">1337</span>, </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    train<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">False</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>features_it_finite <span class="op">=</span> iterators.ParallelMapIterator(</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>sentence_it_finite,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    num_processes<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    num_items_per_process<span class="op">=</span><span class="dv">1000</span>,</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>tokenize_fn</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>batches_it_finite <span class="op">=</span> iterators.BucketedReadaheadBatchIterator(</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>features_it_finite,</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    key<span class="op">=</span><span class="kw">lambda</span> example: <span class="bu">len</span>(example[<span class="st">'input_ids'</span>]), <span class="co"># Determines the length used</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    read_ahead<span class="op">=</span><span class="dv">320</span>, <span class="co"># Setting this ten times the static batch size.</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="dv">32</span>,</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span><span class="dv">0</span> </span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>collate_fn <span class="op">=</span> partial(tokenizer.pad, return_tensors<span class="op">=</span><span class="st">'pt'</span>)</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>tensors_it_finite <span class="op">=</span> iterators.MapIterator(</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    batches_it_finite,</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>collate_fn</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>total_batches_bucket_sorted <span class="op">=</span> <span class="dv">0</span> </span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>total_tokens_bucket_sorted<span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>padding_tokens_bucket_sorted <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>batch_lengths_bucket_sorted <span class="op">=</span> []</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch <span class="kw">in</span> tqdm.tqdm(tensors_it_finite):</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>    total_batches_bucket_sorted <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>    batched_input_ids <span class="op">=</span> batch[<span class="st">"input_ids"</span>]</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>    batch_lengths_bucket_sorted.append(batched_input_ids.shape[<span class="dv">1</span>])</span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>    total_tokens_bucket_sorted <span class="op">+=</span> batched_input_ids.numel()</span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>    padding_tokens_bucket_sorted <span class="op">+=</span> batched_input_ids[batched_input_ids <span class="op">==</span> tokenizer.pad_token_id].numel()</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total Batches    : </span><span class="sc">{</span>total_batches_bucket_sorted<span class="sc">}</span><span class="ss">"</span>) <span class="co"># Seeing the tqdm stats.</span></span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Padding Tokens   : </span><span class="sc">{</span>padding_tokens_bucket_sorted<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Input Tokens     : </span><span class="sc">{</span>total_tokens_bucket_sorted <span class="op">-</span> padding_tokens_bucket_sorted<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total Tokens     : </span><span class="sc">{</span>total_tokens_bucket_sorted<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Padding Tokens % : </span><span class="sc">{</span>(padding_tokens_bucket_sorted<span class="op">*</span><span class="dv">100</span>)<span class="op">/</span>total_tokens_bucket_sorted<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>36390it [08:26, 71.81it/s]</code></pre>
 </div>
@@ -711,93 +703,94 @@ Input Tokens     : 119699332
 Total Tokens     : 151505584
 Padding Tokens % : 20.993451964120347</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
-</div>
 </div>
 <p>So we see that the % of total padding tokens has decreased from 67% to 20%. And we can see from the below the distribution of sequence length of batches is close to the distribution of individual sequence lengths. This is different from the case where we made static batches without sorting.</p>
-<div class="cell" data-outputid="a75613f8-5e54-4d43-bbea-4a0424339d21" data-execution_count="19">
-<details>
+<div id="cell-42" class="cell" data-outputid="a75613f8-5e54-4d43-bbea-4a0424339d21" data-execution_count="19">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.style.context(<span class="st">'fivethirtyeight'</span>):</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>[<span class="dv">7</span>,<span class="dv">5</span>])</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    n, bins, patches <span class="op">=</span> plt.hist(x<span class="op">=</span>batch_lengths_bucket_sorted, bins<span class="op">=</span><span class="dv">50</span>, color<span class="op">=</span><span class="st">'#0504aa'</span>,alpha<span class="op">=</span><span class="fl">0.7</span>, rwidth<span class="op">=</span><span class="fl">0.85</span>)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, alpha<span class="op">=</span><span class="fl">0.75</span>)</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Batch Sequence Length'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    plt.xticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    plt.yticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Window Sorted Static Batching + Dynamic Padding Length Distribution'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.style.context(<span class="st">'fivethirtyeight'</span>):</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>[<span class="dv">7</span>,<span class="dv">5</span>])</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    n, bins, patches <span class="op">=</span> plt.hist(x<span class="op">=</span>batch_lengths_bucket_sorted, bins<span class="op">=</span><span class="dv">50</span>, color<span class="op">=</span><span class="st">'#0504aa'</span>,alpha<span class="op">=</span><span class="fl">0.7</span>, rwidth<span class="op">=</span><span class="fl">0.85</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, alpha<span class="op">=</span><span class="fl">0.75</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Batch Sequence Length'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    plt.xticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    plt.yticks(fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Frequency'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Window Sorted Static Batching + Dynamic Padding Length Distribution'</span>,fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="index_files/figure-html/cell-20-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
 <section id="checkpointing-1" class="level2">
 <h2 class="anchored" data-anchor-id="checkpointing-1">3. Checkpointing</h2>
 <p>One cool feature of <code>infinibatch</code> is that you can checkpoint a particular state in which the composed iterators is at and restore (rewind?) it back to that state. This is very cool considering it works recursively on the composed iterators and even on infinite iterator. Let’s recreate our iterators and check this out.</p>
-<div class="cell" data-execution_count="20">
-<details>
+<div id="cell-44" class="cell" data-execution_count="20">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>sentence_it <span class="op">=</span> datasets.chunked_dataset_iterator(</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    chunk_refs <span class="op">=</span> glob.glob(<span class="st">'wikitext-103-chunks/train.*.txt.gz'</span>),</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    read_chunk_fn <span class="op">=</span> read_chunk,</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    buffer_size <span class="op">=</span> <span class="dv">100000</span>, </span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    seed <span class="op">=</span> <span class="dv">1337</span>, </span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    train<span class="op">=</span><span class="va">False</span>, </span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">False</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>features_it <span class="op">=</span> iterators.ParallelMapIterator(</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>sentence_it,</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    num_processes<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    num_items_per_process<span class="op">=</span><span class="dv">1000</span>,</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>tokenize_fn</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>batches_it <span class="op">=</span> iterators.BucketedReadaheadBatchIterator(</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>features_it,</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    read_ahead<span class="op">=</span><span class="dv">10000</span>, <span class="co"># Determines the window for the bucket which</span></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># will be sorted and  converted to batches.</span></span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    key<span class="op">=</span><span class="kw">lambda</span> example: <span class="bu">len</span>(example[<span class="st">'input_ids'</span>]), <span class="co"># Determines the length used</span></span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># to sort and choose the longest remaining record.</span></span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="kw">lambda</span> longest: tokens_per_batch <span class="op">//</span> <span class="bu">len</span>(longest[<span class="st">'input_ids'</span>]),</span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determines the dynamic batch size</span></span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span><span class="dv">0</span> </span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>collate_fn <span class="op">=</span> partial(tokenizer.pad, return_tensors<span class="op">=</span><span class="st">'pt'</span>)</span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>tensors_it <span class="op">=</span> iterators.MapIterator(</span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>    batches_it,</span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>collate_fn</span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>sentence_it <span class="op">=</span> datasets.chunked_dataset_iterator(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    chunk_refs <span class="op">=</span> glob.glob(<span class="st">'wikitext-103-chunks/train.*.txt.gz'</span>),</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    read_chunk_fn <span class="op">=</span> read_chunk,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    buffer_size <span class="op">=</span> <span class="dv">100000</span>, </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    seed <span class="op">=</span> <span class="dv">1337</span>, </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    train<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">False</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>features_it <span class="op">=</span> iterators.ParallelMapIterator(</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>sentence_it,</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    num_processes<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    num_items_per_process<span class="op">=</span><span class="dv">1000</span>,</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>tokenize_fn</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>batches_it <span class="op">=</span> iterators.BucketedReadaheadBatchIterator(</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    source_iterator<span class="op">=</span>features_it,</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    read_ahead<span class="op">=</span><span class="dv">10000</span>, <span class="co"># Determines the window for the bucket which</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># will be sorted and  converted to batches.</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    key<span class="op">=</span><span class="kw">lambda</span> example: <span class="bu">len</span>(example[<span class="st">'input_ids'</span>]), <span class="co"># Determines the length used</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># to sort and choose the longest remaining record.</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="kw">lambda</span> longest: tokens_per_batch <span class="op">//</span> <span class="bu">len</span>(longest[<span class="st">'input_ids'</span>]),</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determines the dynamic batch size</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span><span class="dv">0</span> </span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>collate_fn <span class="op">=</span> partial(tokenizer.pad, return_tensors<span class="op">=</span><span class="st">'pt'</span>)</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>tensors_it <span class="op">=</span> iterators.MapIterator(</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>    batches_it,</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>collate_fn</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-outputid="157ac2b8-95c2-4021-af89-b9be82530835" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>initial_state <span class="op">=</span> tensors_it.getstate() </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Initial State of composed iterators"</span>, initial_state)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw 5 batches</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>batches <span class="op">=</span> [<span class="bu">next</span>(tensors_it) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Current State after sampling 5 batches: </span><span class="sc">{</span>tensors_it<span class="sc">.</span>getstate()<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset the Iterator</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>tensors_it.setstate(initial_state)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Redraw 5 batches</span></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>redraw_batches <span class="op">=</span> [<span class="bu">next</span>(tensors_it) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"State after resampling 5 batches: </span><span class="sc">{</span>tensors_it<span class="sc">.</span>getstate()<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Check equal</span></span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>all_equal <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> b1, b2 <span class="kw">in</span> <span class="bu">zip</span>(batches, redraw_batches):</span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> b1:</span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> torch.<span class="bu">all</span>(b1[k].eq(b2[k])):</span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>        all_equal <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> all_equal:</span>
-<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
-<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"All items drawn after resetting are equal: </span><span class="sc">{</span>all_equal<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-45" class="cell" data-outputid="157ac2b8-95c2-4021-af89-b9be82530835" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>initial_state <span class="op">=</span> tensors_it.getstate() </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Initial State of composed iterators"</span>, initial_state)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw 5 batches</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>batches <span class="op">=</span> [<span class="bu">next</span>(tensors_it) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Current State after sampling 5 batches: </span><span class="sc">{</span>tensors_it<span class="sc">.</span>getstate()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset the Iterator</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>tensors_it.setstate(initial_state)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Redraw 5 batches</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>redraw_batches <span class="op">=</span> [<span class="bu">next</span>(tensors_it) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"State after resampling 5 batches: </span><span class="sc">{</span>tensors_it<span class="sc">.</span>getstate()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Check equal</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>all_equal <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> b1, b2 <span class="kw">in</span> <span class="bu">zip</span>(batches, redraw_batches):</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> b1:</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> torch.<span class="bu">all</span>(b1[k].eq(b2[k])):</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>        all_equal <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> all_equal:</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"All items drawn after resetting are equal: </span><span class="sc">{</span>all_equal<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Initial State of composed iterators {'source_state': None, 'random_state': None, 'num_served': 0}
 Current State after sampling 5 batches: {'source_state': {'source_state': None, 'flattened_items_yielded': 0}, 'random_state': (3, (2147483648, 766982754, 497961170, 3952298588, 2331775348, 1811986599, 3100132149, 3188119873, 3937547222, 215718963, 3315684082, 2978012849, 2428261856, 1298227695, 1704729580, 54668373, 3285201915, 3285178464, 1552935063, 988471319, 3135387943, 1691402966, 2757551880, 416056905, 907387413, 1072924981, 33903495, 2168419592, 2429050353, 831159753, 430343641, 3315943586, 1761671042, 864453023, 334804929, 1627478028, 2596811275, 3468733638, 3994375553, 1457139722, 3139722021, 1334790738, 2656639915, 3535811098, 1464315470, 2397423927, 885719490, 1140895889, 3284299483, 2854516462, 2734973817, 147484763, 792049954, 114360641, 3345458839, 1159898878, 1410498733, 2242989638, 453922141, 1344019764, 413870456, 3089405849, 1494382840, 470157779, 4266372830, 2831181573, 1361928602, 1589253513, 1381373062, 753045124, 987032420, 781978839, 2953638767, 3258570111, 3006718191, 1675218601, 1854232715, 3655829819, 1731242722, 2192104666, 1736665161, 740150002, 1195833394, 1610203160, 159492766, 4041488705, 3128952632, 2867295744, 3272632449, 886824304, 1791482600, 221114776, 3867175393, 4020804062, 1077871826, 1298953503, 996366221, 4149754679, 2483052703, 2615558283, 274318093, 1716359450, 4099129961, 1026774175, 288240973, 1459347562, 2365566296, 3690105224, 3065780221, 2050634722, 2652606621, 3185241207, 3026457375, 3456165734, 1880121515, 3398461093, 1795638629, 2379692076, 608668379, 1261955525, 84456522, 1913485156, 106878280, 757183891, 2913957588, 160418091, 2025664758, 141497907, 1657818026, 3053760160, 672193054, 4157546743, 223046484, 1623470498, 1201972930, 675008814, 684162366, 1738776330, 3025656654, 159760723, 1908867305, 3933381342, 2545706671, 467196949, 1427819885, 842150314, 4032903454, 2140851898, 3269883445, 975813755, 4177392955, 1556690684, 2535611513, 462962732, 67591358, 1729610528, 2025206740, 3153739740, 3255032049, 4186226368, 1070144624, 3107867195, 1621006038, 63742485, 835629717, 3189842019, 3950227584, 3184714559, 841836938, 1685394870, 657939920, 766156242, 1412314179, 1048281639, 4037161120, 2044490307, 1923947830, 3900790422, 907554295, 276417304, 860658646, 3574201134, 3508771399, 2110232300, 1636296241, 1405006077, 1093408401, 3243057343, 1519791182, 1994660136, 3829840937, 2644974199, 957955566, 3487641161, 1646922510, 1907939989, 3836029453, 3429168778, 201307778, 72550089, 2464394982, 1695794191, 3344785682, 996786130, 3589457196, 1241754792, 1291082245, 4224603667, 1194379475, 2693491244, 881186965, 2705535111, 445306946, 440274268, 1980827733, 2482488861, 3205215943, 2119332222, 2928713046, 1418736938, 652581136, 2474070665, 2208621536, 4171251876, 2303664214, 443762656, 2981912989, 2199228311, 2652261633, 3166738494, 3443009210, 3498764432, 424010848, 4065487566, 2262993542, 1756076712, 1477098233, 2742171915, 306185806, 3610666541, 923091830, 1034267993, 2336668648, 1880719718, 676878038, 3788797208, 3763351494, 3985428106, 1101865631, 1130501258, 3672967388, 3432003530, 4124438011, 1660392285, 4025484827, 2108074566, 3815409682, 42955331, 3248965569, 1643835718, 1246665668, 1071162194, 3814069229, 115491158, 985096811, 3311029186, 2990827378, 3101633320, 1648574497, 1470117052, 174145027, 2019894819, 2035501481, 459104123, 3507464599, 2093352659, 3369174406, 618767835, 4009895756, 935587447, 3956987426, 33753995, 307782427, 2473424805, 1440371818, 2382619594, 2138695812, 3164510238, 1318650933, 2910086616, 3886677510, 566832801, 3718063320, 1559818704, 183047272, 1142362855, 26306548, 645536402, 3875596208, 2272778168, 3512733409, 1897046338, 38248886, 2570759766, 1806313150, 860304898, 2433450338, 4124013408, 1216634590, 1275388896, 1169566669, 652504502, 761221427, 1448403764, 3129135949, 2513214949, 1269533687, 2413509541, 1226750363, 2450740925, 4094137910, 945759293, 3636927736, 3178020081, 2509964157, 3878869300, 1848504895, 2018369720, 1579755740, 1023627943, 924838836, 2653160914, 1812804174, 1521323076, 4012390528, 1338763317, 2608655937, 16022784, 1672945066, 2177189646, 2944458483, 2213810972, 1369873847, 1224017670, 130901785, 3595066712, 2259115284, 3316038259, 455873927, 2917250465, 3599550610, 1502173758, 684943436, 3079863840, 3144992244, 942855823, 1771140188, 2118780653, 3411494225, 2711180217, 4239611184, 1371891067, 3398566397, 3105518599, 1310665701, 3345178451, 2959821156, 242241789, 2148966880, 3192740583, 404401893, 3605380577, 1446464038, 3920522056, 2577523013, 1079274576, 286634372, 1752710796, 2351075979, 981312309, 3410516352, 3468455736, 1938779182, 1592494371, 1533303080, 88045436, 438252489, 1220512168, 3487004938, 3724852871, 1073434882, 3728218947, 2977555283, 4105408406, 3553772656, 1462006821, 3917158017, 119003006, 3470530198, 3439192457, 2829375771, 3555715155, 32324691, 588735808, 1459221702, 803072782, 2699519868, 1530797005, 79738580, 671990400, 4289511388, 3207115447, 2584684068, 832698998, 760958416, 1217440464, 2517898131, 2418819938, 3629956222, 3445024962, 206619378, 365007395, 522114139, 1707954431, 540423623, 1786750801, 369253262, 4239016754, 147889201, 1637777773, 236798285, 2806120188, 586972608, 2201782716, 1323327827, 819485723, 406078680, 3407345698, 1537169369, 1821691865, 527271655, 3751827102, 1465426495, 3321682429, 2179672664, 401355478, 1068871880, 24609462, 1403522408, 2311580015, 1532058170, 3877815340, 1768430711, 1619755157, 2832904331, 475102697, 354987331, 3295386430, 2816873951, 1039415736, 363972779, 1499307670, 2895506264, 3746345349, 2678027234, 3251899088, 955392878, 2329157295, 1343358773, 309573887, 2410178377, 2843173466, 361132917, 1755816798, 1319204283, 609284796, 1998842567, 1892325921, 223190385, 1483015769, 2876023365, 3876009312, 3199738344, 491524099, 160383137, 1219178873, 3870310498, 1114580266, 4279604166, 855339774, 1983818547, 2297848784, 4118592947, 4084409863, 2225095054, 4215601993, 946447434, 4205503762, 146088676, 778046685, 1876936928, 3157333726, 2173097090, 3215738813, 4135448234, 1219619643, 1936128689, 2897130162, 3336043946, 3779039524, 4200886837, 1359380925, 3402593091, 3140713935, 50855190, 3122065768, 1501584468, 2512255124, 687125154, 2666013386, 837819715, 3057258172, 3653455791, 2868624990, 322131992, 42534870, 4036564806, 798099710, 3533853670, 190914037, 3726947981, 2601169403, 602059656, 1365668439, 1918780004, 394790500, 277566007, 3891847777, 3365421094, 3139612253, 1380519090, 1183088424, 4203794803, 3049949521, 4214159484, 3446206962, 1875544460, 3207220027, 3288287026, 913535288, 178159620, 1410694581, 4190575040, 880731713, 1427805121, 404869072, 3413191414, 2865934056, 2899472677, 4239222733, 688404529, 3923323887, 933651074, 1199453686, 642723732, 2850614853, 3104368451, 3054041024, 3129913503, 2805843726, 1829781129, 3479062313, 650272704, 4224852052, 4085038685, 2616580676, 1793860711, 585126334, 2995262791, 520446536, 3855655015, 1571815563, 2240778227, 2051010344, 1694977983, 788402852, 1988089041, 2035558649, 1800063056, 1234412692, 2490862867, 417320514, 2415019489, 3374117797, 136034611, 898704236, 1247106941, 3923519397, 3563607190, 2454738671, 3522360389, 2672645476, 146828884, 3985140042, 4233949333, 1184742586, 860278824, 2815489967, 983483427, 3190081845, 3288865305, 3575181235, 1292151129, 4007823805, 4049420597, 3499391972, 1611182906, 1721268432, 2944249577, 2487212557, 789127738, 4027610014, 1057334138, 2902720905, 624), None), 'num_served': 5}
@@ -811,12 +804,12 @@ All items drawn after resetting are equal: True</code></pre>
 <section id="making-infinibatch-work-with-pytorch-dataloaders" class="level1">
 <h1>Making Infinibatch work with Pytorch Dataloaders</h1>
 <p>Infinibatch by its very nature can be used only with <code>IterableDataset</code>. The training iterator with shuffling is infinite, so you must limit the training batches to some <code>n</code> steps if you want to maintain the notion of “epochs” to start validation. Or you can eschew whole notion of epochs by validating every <code>nth</code> step or both.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -824,12 +817,12 @@ Note
 <p>The multi processing workers of <code>DataLoader</code> should be set to zero, with <code>num_workers=0</code>. Rather use <code>ParallelMapIterator</code> to parallelize your pre-processing.</p>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -837,12 +830,12 @@ Note
 <p>While using <code>IterableDataset</code> in the typical multi-gpu <code>DistributedDataParallel</code> (ddp) setup, you should pass <code>instance_rank</code> and <code>num_instances</code> to have different slices of data distributed to different training devices.</p>
 </div>
 </div>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -850,116 +843,116 @@ Warning
 <p>When using finite iterators with <code>ddp</code> for validation set, if you split the data using <code>instance_rank</code> option, the validation can get stuck.This can happen either when your dataset is not divisible by number of <code>ddp</code> processes or doing dynamic batching caused an uneven number of batches produced for each instance. So it’s better to do the validation in one GPU setting <code>instance_rank=0</code>. This is a quick hack, if you find a better option please let me know in the comments.</p>
 </div>
 </div>
-<div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> IterableDataset</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.distributed <span class="im">as</span> dist</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> IterableCheckpointedDataset(IterableDataset):</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Wraps a CheckpointableIterator into a PyTorch IterableDataset, which is </span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">    recognized by its type by PyTorch's DataLoader class.</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, source: iterators.CheckpointableIterator, </span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>                 should_reset: <span class="bu">bool</span>):</span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._source <span class="op">=</span> source</span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._source_state <span class="op">=</span> source.getstate()</span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._should_reset <span class="op">=</span> should_reset</span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):  <span class="co"># this is called in the forked clone</span></span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>        worker_info <span class="op">=</span> torch.utils.data.get_worker_info()</span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> (</span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>            worker_info <span class="kw">is</span> <span class="va">None</span> <span class="kw">or</span> worker_info.num_workers <span class="op">==</span> <span class="dv">1</span></span>
-<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>        )  <span class="co"># not supported since we can't get at the checkpoint for each worker</span></span>
-<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._should_reset:</span>
-<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>            <span class="co"># For training, since it's infinite iterator, if we train for </span></span>
-<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>            <span class="co"># `n` batches with total instances less than dataset size</span></span>
-<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>            <span class="co"># it's better not to reset the iterator by itself will cycle back</span></span>
-<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>            <span class="co"># with a new shuffle order when all the instances are iterated once.</span></span>
-<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._source.setstate(<span class="va">self</span>._source_state)</span>
-<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._source</span>
-<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_wiki_dataloader(chunks_glob: <span class="bu">str</span>,</span>
-<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>                           tokenizer: PreTrainedTokenizerFast,</span>
-<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>                           is_train: <span class="bu">bool</span>,</span>
-<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>                           max_seq_len: <span class="bu">int</span> <span class="op">=</span> <span class="dv">512</span>,</span>
-<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a>                           tokens_per_batch: <span class="bu">int</span> <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> <span class="dv">16</span>, </span>
-<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a>                           num_workers: <span class="bu">int</span> <span class="op">=</span> <span class="dv">4</span>,</span>
-<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a>                           buffer_size: <span class="bu">int</span> <span class="op">=</span> <span class="dv">100000</span>, </span>
-<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a>                           seed: <span class="bu">int</span> <span class="op">=</span> <span class="dv">1337</span>) <span class="op">-&gt;</span> DataLoader:</span>
-<span id="cb36-41"><a href="#cb36-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-42"><a href="#cb36-42" aria-hidden="true" tabindex="-1"></a>    num_instances <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb36-43"><a href="#cb36-43" aria-hidden="true" tabindex="-1"></a>    instance_rank <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb36-44"><a href="#cb36-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> dist.is_available() <span class="kw">and</span> is_train:</span>
-<span id="cb36-45"><a href="#cb36-45" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Only in training mode we want the data to be split.</span></span>
-<span id="cb36-46"><a href="#cb36-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># This is a hack to make dynamic batched iterators work while using ddp.</span></span>
-<span id="cb36-47"><a href="#cb36-47" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If we were to split the data and number of batches turned out uneven, then</span></span>
-<span id="cb36-48"><a href="#cb36-48" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Iterator might exhaust early in one GPU leaving it stuck there forever.</span></span>
-<span id="cb36-49"><a href="#cb36-49" aria-hidden="true" tabindex="-1"></a>        <span class="co"># So we rather choose to do the same validation in all the GPUs.</span></span>
-<span id="cb36-50"><a href="#cb36-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
-<span id="cb36-51"><a href="#cb36-51" aria-hidden="true" tabindex="-1"></a>            num_instances <span class="op">=</span> dist.get_world_size()</span>
-<span id="cb36-52"><a href="#cb36-52" aria-hidden="true" tabindex="-1"></a>            instance_rank <span class="op">=</span> dist.get_rank()</span>
-<span id="cb36-53"><a href="#cb36-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">AssertionError</span>:</span>
-<span id="cb36-54"><a href="#cb36-54" aria-hidden="true" tabindex="-1"></a>            <span class="cf">pass</span></span>
-<span id="cb36-55"><a href="#cb36-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-56"><a href="#cb36-56" aria-hidden="true" tabindex="-1"></a>    sentence_it <span class="op">=</span> datasets.chunked_dataset_iterator(</span>
-<span id="cb36-57"><a href="#cb36-57" aria-hidden="true" tabindex="-1"></a>        chunk_refs <span class="op">=</span> glob.glob(chunks_glob),</span>
-<span id="cb36-58"><a href="#cb36-58" aria-hidden="true" tabindex="-1"></a>        read_chunk_fn <span class="op">=</span> read_chunk,</span>
-<span id="cb36-59"><a href="#cb36-59" aria-hidden="true" tabindex="-1"></a>        buffer_size <span class="op">=</span> buffer_size, </span>
-<span id="cb36-60"><a href="#cb36-60" aria-hidden="true" tabindex="-1"></a>        seed <span class="op">=</span> seed,</span>
-<span id="cb36-61"><a href="#cb36-61" aria-hidden="true" tabindex="-1"></a>        num_instances<span class="op">=</span>num_instances,</span>
-<span id="cb36-62"><a href="#cb36-62" aria-hidden="true" tabindex="-1"></a>        instance_rank<span class="op">=</span>instance_rank,</span>
-<span id="cb36-63"><a href="#cb36-63" aria-hidden="true" tabindex="-1"></a>        train<span class="op">=</span>is_train,</span>
-<span id="cb36-64"><a href="#cb36-64" aria-hidden="true" tabindex="-1"></a>        shuffle<span class="op">=</span>is_train <span class="co"># Shuffle Only on Train</span></span>
-<span id="cb36-65"><a href="#cb36-65" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb36-66"><a href="#cb36-66" aria-hidden="true" tabindex="-1"></a>    tokenize_fn <span class="op">=</span> partial(tokenizer, max_length<span class="op">=</span>max_seq_len, truncation<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb36-67"><a href="#cb36-67" aria-hidden="true" tabindex="-1"></a>    features_it <span class="op">=</span> iterators.ParallelMapIterator(</span>
-<span id="cb36-68"><a href="#cb36-68" aria-hidden="true" tabindex="-1"></a>        source_iterator<span class="op">=</span>sentence_it,</span>
-<span id="cb36-69"><a href="#cb36-69" aria-hidden="true" tabindex="-1"></a>        num_processes<span class="op">=</span>num_workers,</span>
-<span id="cb36-70"><a href="#cb36-70" aria-hidden="true" tabindex="-1"></a>        num_items_per_process<span class="op">=</span><span class="dv">1000</span>,</span>
-<span id="cb36-71"><a href="#cb36-71" aria-hidden="true" tabindex="-1"></a>        transform<span class="op">=</span>tokenize_fn</span>
-<span id="cb36-72"><a href="#cb36-72" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb36-73"><a href="#cb36-73" aria-hidden="true" tabindex="-1"></a>    batches_it <span class="op">=</span> iterators.BucketedReadaheadBatchIterator(</span>
-<span id="cb36-74"><a href="#cb36-74" aria-hidden="true" tabindex="-1"></a>        source_iterator<span class="op">=</span>features_it,</span>
-<span id="cb36-75"><a href="#cb36-75" aria-hidden="true" tabindex="-1"></a>        read_ahead<span class="op">=</span><span class="dv">10000</span>, </span>
-<span id="cb36-76"><a href="#cb36-76" aria-hidden="true" tabindex="-1"></a>        key<span class="op">=</span><span class="kw">lambda</span> example: <span class="bu">len</span>(example[<span class="st">'input_ids'</span>]),</span>
-<span id="cb36-77"><a href="#cb36-77" aria-hidden="true" tabindex="-1"></a>        batch_size<span class="op">=</span><span class="kw">lambda</span> longest: tokens_per_batch <span class="op">//</span> <span class="bu">len</span>(longest[<span class="st">'input_ids'</span>]),</span>
-<span id="cb36-78"><a href="#cb36-78" aria-hidden="true" tabindex="-1"></a>        seed<span class="op">=</span>seed</span>
-<span id="cb36-79"><a href="#cb36-79" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb36-80"><a href="#cb36-80" aria-hidden="true" tabindex="-1"></a>    collate_fn <span class="op">=</span> partial(tokenizer.pad, return_tensors<span class="op">=</span><span class="st">'pt'</span>)</span>
-<span id="cb36-81"><a href="#cb36-81" aria-hidden="true" tabindex="-1"></a>    tensors_it <span class="op">=</span> iterators.MapIterator(</span>
-<span id="cb36-82"><a href="#cb36-82" aria-hidden="true" tabindex="-1"></a>        batches_it,</span>
-<span id="cb36-83"><a href="#cb36-83" aria-hidden="true" tabindex="-1"></a>        transform<span class="op">=</span>collate_fn</span>
-<span id="cb36-84"><a href="#cb36-84" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb36-85"><a href="#cb36-85" aria-hidden="true" tabindex="-1"></a>    dataset <span class="op">=</span> IterableCheckpointedDataset(</span>
-<span id="cb36-86"><a href="#cb36-86" aria-hidden="true" tabindex="-1"></a>        source<span class="op">=</span>tensors_it,</span>
-<span id="cb36-87"><a href="#cb36-87" aria-hidden="true" tabindex="-1"></a>        should_reset<span class="op">=</span><span class="kw">not</span> is_train <span class="co">#Reset only for validation</span></span>
-<span id="cb36-88"><a href="#cb36-88" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb36-89"><a href="#cb36-89" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> DataLoader(dataset, </span>
-<span id="cb36-90"><a href="#cb36-90" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># Very important to set this to 0.</span></span>
-<span id="cb36-91"><a href="#cb36-91" aria-hidden="true" tabindex="-1"></a>                      num_workers<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb36-92"><a href="#cb36-92" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># Important as we have already batched. </span></span>
-<span id="cb36-93"><a href="#cb36-93" aria-hidden="true" tabindex="-1"></a>                      batch_size<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb36-94"><a href="#cb36-94" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># Since batch has only one member which has all the </span></span>
-<span id="cb36-95"><a href="#cb36-95" aria-hidden="true" tabindex="-1"></a>                      <span class="co">#tensors already collated, we just return it.</span></span>
-<span id="cb36-96"><a href="#cb36-96" aria-hidden="true" tabindex="-1"></a>                      collate_fn<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">0</span>] </span>
-<span id="cb36-97"><a href="#cb36-97" aria-hidden="true" tabindex="-1"></a>                      )</span>
-<span id="cb36-98"><a href="#cb36-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-99"><a href="#cb36-99" aria-hidden="true" tabindex="-1"></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="st">"bert-base-cased"</span>, use_fast<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb36-100"><a href="#cb36-100" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> create_wiki_dataloader(<span class="st">'wikitext-103-chunks/train.*.txt.gz'</span>,</span>
-<span id="cb36-101"><a href="#cb36-101" aria-hidden="true" tabindex="-1"></a>                                      tokenizer<span class="op">=</span>tokenizer,</span>
-<span id="cb36-102"><a href="#cb36-102" aria-hidden="true" tabindex="-1"></a>                                      is_train<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb36-103"><a href="#cb36-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-104"><a href="#cb36-104" aria-hidden="true" tabindex="-1"></a>val_loader <span class="op">=</span>  create_wiki_dataloader(<span class="st">'wikitext-103-chunks/train.*.txt.gz'</span>,</span>
-<span id="cb36-105"><a href="#cb36-105" aria-hidden="true" tabindex="-1"></a>                                      tokenizer<span class="op">=</span>tokenizer,</span>
-<span id="cb36-106"><a href="#cb36-106" aria-hidden="true" tabindex="-1"></a>                                      is_train<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb36-107"><a href="#cb36-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-108"><a href="#cb36-108" aria-hidden="true" tabindex="-1"></a><span class="co">#print(next(iter(train_loader)))</span></span>
-<span id="cb36-109"><a href="#cb36-109" aria-hidden="true" tabindex="-1"></a><span class="co">#print(next(iter(val_loader)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-48" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> IterableDataset</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.distributed <span class="im">as</span> dist</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> IterableCheckpointedDataset(IterableDataset):</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Wraps a CheckpointableIterator into a PyTorch IterableDataset, which is </span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co">    recognized by its type by PyTorch's DataLoader class.</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, source: iterators.CheckpointableIterator, </span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>                 should_reset: <span class="bu">bool</span>):</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._source <span class="op">=</span> source</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._source_state <span class="op">=</span> source.getstate()</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._should_reset <span class="op">=</span> should_reset</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):  <span class="co"># this is called in the forked clone</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>        worker_info <span class="op">=</span> torch.utils.data.get_worker_info()</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> (</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>            worker_info <span class="kw">is</span> <span class="va">None</span> <span class="kw">or</span> worker_info.num_workers <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>        )  <span class="co"># not supported since we can't get at the checkpoint for each worker</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._should_reset:</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>            <span class="co"># For training, since it's infinite iterator, if we train for </span></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>            <span class="co"># `n` batches with total instances less than dataset size</span></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>            <span class="co"># it's better not to reset the iterator by itself will cycle back</span></span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>            <span class="co"># with a new shuffle order when all the instances are iterated once.</span></span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._source.setstate(<span class="va">self</span>._source_state)</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._source</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_wiki_dataloader(chunks_glob: <span class="bu">str</span>,</span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>                           tokenizer: PreTrainedTokenizerFast,</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>                           is_train: <span class="bu">bool</span>,</span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>                           max_seq_len: <span class="bu">int</span> <span class="op">=</span> <span class="dv">512</span>,</span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>                           tokens_per_batch: <span class="bu">int</span> <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> <span class="dv">16</span>, </span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>                           num_workers: <span class="bu">int</span> <span class="op">=</span> <span class="dv">4</span>,</span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>                           buffer_size: <span class="bu">int</span> <span class="op">=</span> <span class="dv">100000</span>, </span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>                           seed: <span class="bu">int</span> <span class="op">=</span> <span class="dv">1337</span>) <span class="op">-&gt;</span> DataLoader:</span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a>    num_instances <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>    instance_rank <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> dist.is_available() <span class="kw">and</span> is_train:</span>
+<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Only in training mode we want the data to be split.</span></span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># This is a hack to make dynamic batched iterators work while using ddp.</span></span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If we were to split the data and number of batches turned out uneven, then</span></span>
+<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Iterator might exhaust early in one GPU leaving it stuck there forever.</span></span>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a>        <span class="co"># So we rather choose to do the same validation in all the GPUs.</span></span>
+<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a>            num_instances <span class="op">=</span> dist.get_world_size()</span>
+<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a>            instance_rank <span class="op">=</span> dist.get_rank()</span>
+<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">AssertionError</span>:</span>
+<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a>            <span class="cf">pass</span></span>
+<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a>    sentence_it <span class="op">=</span> datasets.chunked_dataset_iterator(</span>
+<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a>        chunk_refs <span class="op">=</span> glob.glob(chunks_glob),</span>
+<span id="cb34-58"><a href="#cb34-58" aria-hidden="true" tabindex="-1"></a>        read_chunk_fn <span class="op">=</span> read_chunk,</span>
+<span id="cb34-59"><a href="#cb34-59" aria-hidden="true" tabindex="-1"></a>        buffer_size <span class="op">=</span> buffer_size, </span>
+<span id="cb34-60"><a href="#cb34-60" aria-hidden="true" tabindex="-1"></a>        seed <span class="op">=</span> seed,</span>
+<span id="cb34-61"><a href="#cb34-61" aria-hidden="true" tabindex="-1"></a>        num_instances<span class="op">=</span>num_instances,</span>
+<span id="cb34-62"><a href="#cb34-62" aria-hidden="true" tabindex="-1"></a>        instance_rank<span class="op">=</span>instance_rank,</span>
+<span id="cb34-63"><a href="#cb34-63" aria-hidden="true" tabindex="-1"></a>        train<span class="op">=</span>is_train,</span>
+<span id="cb34-64"><a href="#cb34-64" aria-hidden="true" tabindex="-1"></a>        shuffle<span class="op">=</span>is_train <span class="co"># Shuffle Only on Train</span></span>
+<span id="cb34-65"><a href="#cb34-65" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb34-66"><a href="#cb34-66" aria-hidden="true" tabindex="-1"></a>    tokenize_fn <span class="op">=</span> partial(tokenizer, max_length<span class="op">=</span>max_seq_len, truncation<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb34-67"><a href="#cb34-67" aria-hidden="true" tabindex="-1"></a>    features_it <span class="op">=</span> iterators.ParallelMapIterator(</span>
+<span id="cb34-68"><a href="#cb34-68" aria-hidden="true" tabindex="-1"></a>        source_iterator<span class="op">=</span>sentence_it,</span>
+<span id="cb34-69"><a href="#cb34-69" aria-hidden="true" tabindex="-1"></a>        num_processes<span class="op">=</span>num_workers,</span>
+<span id="cb34-70"><a href="#cb34-70" aria-hidden="true" tabindex="-1"></a>        num_items_per_process<span class="op">=</span><span class="dv">1000</span>,</span>
+<span id="cb34-71"><a href="#cb34-71" aria-hidden="true" tabindex="-1"></a>        transform<span class="op">=</span>tokenize_fn</span>
+<span id="cb34-72"><a href="#cb34-72" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb34-73"><a href="#cb34-73" aria-hidden="true" tabindex="-1"></a>    batches_it <span class="op">=</span> iterators.BucketedReadaheadBatchIterator(</span>
+<span id="cb34-74"><a href="#cb34-74" aria-hidden="true" tabindex="-1"></a>        source_iterator<span class="op">=</span>features_it,</span>
+<span id="cb34-75"><a href="#cb34-75" aria-hidden="true" tabindex="-1"></a>        read_ahead<span class="op">=</span><span class="dv">10000</span>, </span>
+<span id="cb34-76"><a href="#cb34-76" aria-hidden="true" tabindex="-1"></a>        key<span class="op">=</span><span class="kw">lambda</span> example: <span class="bu">len</span>(example[<span class="st">'input_ids'</span>]),</span>
+<span id="cb34-77"><a href="#cb34-77" aria-hidden="true" tabindex="-1"></a>        batch_size<span class="op">=</span><span class="kw">lambda</span> longest: tokens_per_batch <span class="op">//</span> <span class="bu">len</span>(longest[<span class="st">'input_ids'</span>]),</span>
+<span id="cb34-78"><a href="#cb34-78" aria-hidden="true" tabindex="-1"></a>        seed<span class="op">=</span>seed</span>
+<span id="cb34-79"><a href="#cb34-79" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb34-80"><a href="#cb34-80" aria-hidden="true" tabindex="-1"></a>    collate_fn <span class="op">=</span> partial(tokenizer.pad, return_tensors<span class="op">=</span><span class="st">'pt'</span>)</span>
+<span id="cb34-81"><a href="#cb34-81" aria-hidden="true" tabindex="-1"></a>    tensors_it <span class="op">=</span> iterators.MapIterator(</span>
+<span id="cb34-82"><a href="#cb34-82" aria-hidden="true" tabindex="-1"></a>        batches_it,</span>
+<span id="cb34-83"><a href="#cb34-83" aria-hidden="true" tabindex="-1"></a>        transform<span class="op">=</span>collate_fn</span>
+<span id="cb34-84"><a href="#cb34-84" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb34-85"><a href="#cb34-85" aria-hidden="true" tabindex="-1"></a>    dataset <span class="op">=</span> IterableCheckpointedDataset(</span>
+<span id="cb34-86"><a href="#cb34-86" aria-hidden="true" tabindex="-1"></a>        source<span class="op">=</span>tensors_it,</span>
+<span id="cb34-87"><a href="#cb34-87" aria-hidden="true" tabindex="-1"></a>        should_reset<span class="op">=</span><span class="kw">not</span> is_train <span class="co">#Reset only for validation</span></span>
+<span id="cb34-88"><a href="#cb34-88" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb34-89"><a href="#cb34-89" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> DataLoader(dataset, </span>
+<span id="cb34-90"><a href="#cb34-90" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># Very important to set this to 0.</span></span>
+<span id="cb34-91"><a href="#cb34-91" aria-hidden="true" tabindex="-1"></a>                      num_workers<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb34-92"><a href="#cb34-92" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># Important as we have already batched. </span></span>
+<span id="cb34-93"><a href="#cb34-93" aria-hidden="true" tabindex="-1"></a>                      batch_size<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb34-94"><a href="#cb34-94" aria-hidden="true" tabindex="-1"></a>                      <span class="co"># Since batch has only one member which has all the </span></span>
+<span id="cb34-95"><a href="#cb34-95" aria-hidden="true" tabindex="-1"></a>                      <span class="co">#tensors already collated, we just return it.</span></span>
+<span id="cb34-96"><a href="#cb34-96" aria-hidden="true" tabindex="-1"></a>                      collate_fn<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">0</span>] </span>
+<span id="cb34-97"><a href="#cb34-97" aria-hidden="true" tabindex="-1"></a>                      )</span>
+<span id="cb34-98"><a href="#cb34-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-99"><a href="#cb34-99" aria-hidden="true" tabindex="-1"></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="st">"bert-base-cased"</span>, use_fast<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb34-100"><a href="#cb34-100" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> create_wiki_dataloader(<span class="st">'wikitext-103-chunks/train.*.txt.gz'</span>,</span>
+<span id="cb34-101"><a href="#cb34-101" aria-hidden="true" tabindex="-1"></a>                                      tokenizer<span class="op">=</span>tokenizer,</span>
+<span id="cb34-102"><a href="#cb34-102" aria-hidden="true" tabindex="-1"></a>                                      is_train<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb34-103"><a href="#cb34-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-104"><a href="#cb34-104" aria-hidden="true" tabindex="-1"></a>val_loader <span class="op">=</span>  create_wiki_dataloader(<span class="st">'wikitext-103-chunks/train.*.txt.gz'</span>,</span>
+<span id="cb34-105"><a href="#cb34-105" aria-hidden="true" tabindex="-1"></a>                                      tokenizer<span class="op">=</span>tokenizer,</span>
+<span id="cb34-106"><a href="#cb34-106" aria-hidden="true" tabindex="-1"></a>                                      is_train<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb34-107"><a href="#cb34-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-108"><a href="#cb34-108" aria-hidden="true" tabindex="-1"></a><span class="co">#print(next(iter(train_loader)))</span></span>
+<span id="cb34-109"><a href="#cb34-109" aria-hidden="true" tabindex="-1"></a><span class="co">#print(next(iter(val_loader)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -1010,6 +1003,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1078,13 +1098,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1101,7 +1123,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   // Switch to dark mode if need be
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
-  } 
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1109,9 +1133,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1123,17 +1161,51 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("saiprasanna\.in");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1143,8 +1215,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1156,33 +1237,288 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
 <script src="https://utteranc.es/client.js" repo="sai-prasanna/saiprasanna.in" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
+
 
 
 

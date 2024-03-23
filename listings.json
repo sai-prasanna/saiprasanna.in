@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2024-03-cross-entropy-method/index.html",
       "/posts/2022-10-augmented-dreams/index.html",
       "/posts/2022-10-when-bert-plays-the-lottery/index.html",
       "/posts/efficient-dynamic-batching-of-large-datasets-with-infinibatch/index.html",
@@ -17,8 +18,8 @@
       "/posts/Manjaro-Linux/index.html",
       "/posts/crashes-are-optional/index.html",
       "/posts/open-for-collaboration-closed-for-disturbance-rethinking-open-office-layout/index.html",
-      "/posts/creation-and-consumption/index.html",
       "/posts/function-currying-and-composition/index.html",
+      "/posts/creation-and-consumption/index.html",
       "/posts/speed-up-ios-development/index.html",
       "/posts/MIT-OCW-Algorithms/index.html",
       "/posts/new-blog/index.html"

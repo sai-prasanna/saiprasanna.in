@@ -1,91 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>saiprasanna.in/posts/2022-10-when-bert-plays-the-lottery/index.html</loc>
-    <lastmod>2022-10-24T20:59:40.583Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/new-blog/index.html</loc>
-    <lastmod>2022-10-24T20:59:41.719Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/efficient-dynamic-batching-of-large-datasets-with-infinibatch/index.html</loc>
-    <lastmod>2022-10-24T20:59:42.543Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/neural-module-networks/index.html</loc>
-    <lastmod>2022-10-24T20:59:42.939Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/roam-research-software-for-building-a-second-brain/index.html</loc>
-    <lastmod>2022-10-24T20:59:43.459Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/learning-long-term-dependencies-rnn/index.html</loc>
-    <lastmod>2022-10-24T20:59:43.811Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/gods-own-programming-language/index.html</loc>
-    <lastmod>2022-10-24T20:59:44.211Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/neural-open-information-extraction/index.html</loc>
-    <lastmod>2022-10-24T20:59:44.567Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/creation-and-consumption/index.html</loc>
-    <lastmod>2022-10-24T20:59:44.891Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/MIT-OCW-Algorithms/index.html</loc>
-    <lastmod>2022-10-24T20:59:45.239Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/2022-10-augmented-dreams/index.html</loc>
-    <lastmod>2022-10-24T20:59:46.607Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/function-currying-and-composition/index.html</loc>
-    <lastmod>2022-10-24T20:59:48.655Z</lastmod>
+    <loc>saiprasanna.in/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.319Z</lastmod>
   </url>
   <url>
     <loc>saiprasanna.in/posts/dependency-injection-what-why-and-how/index.html</loc>
-    <lastmod>2022-10-24T20:59:49.263Z</lastmod>
+    <lastmod>2024-03-23T19:17:55.327Z</lastmod>
   </url>
   <url>
-    <loc>saiprasanna.in/posts/semantic-legion-1/index.html</loc>
-    <lastmod>2022-10-24T20:59:49.707Z</lastmod>
+    <loc>saiprasanna.in/posts/2022-10-augmented-dreams/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.319Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/new-blog/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.331Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/neural-module-networks/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.331Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/gods-own-programming-language/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.331Z</lastmod>
   </url>
   <url>
     <loc>saiprasanna.in/posts/ACL-2019-Conference-Summary/index.html</loc>
-    <lastmod>2022-10-24T20:59:50.163Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/semeval-19-semi-supervised-domain-adaptation-for-suggestion-mining/index.html</loc>
-    <lastmod>2022-10-24T20:59:50.531Z</lastmod>
-  </url>
-  <url>
-    <loc>saiprasanna.in/posts/open-for-collaboration-closed-for-disturbance-rethinking-open-office-layout/index.html</loc>
-    <lastmod>2022-10-24T20:59:50.923Z</lastmod>
+    <lastmod>2024-03-23T19:17:55.327Z</lastmod>
   </url>
   <url>
     <loc>saiprasanna.in/posts/crashes-are-optional/index.html</loc>
-    <lastmod>2022-10-24T20:59:51.247Z</lastmod>
+    <lastmod>2024-03-23T19:17:55.327Z</lastmod>
   </url>
   <url>
-    <loc>saiprasanna.in/posts/speed-up-ios-development/index.html</loc>
-    <lastmod>2022-10-24T20:59:51.607Z</lastmod>
+    <loc>saiprasanna.in/posts/semeval-19-semi-supervised-domain-adaptation-for-suggestion-mining/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.331Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/learning-long-term-dependencies-rnn/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.331Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/open-for-collaboration-closed-for-disturbance-rethinking-open-office-layout/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.331Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/MIT-OCW-Algorithms/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.327Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/roam-research-software-for-building-a-second-brain/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.331Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/function-currying-and-composition/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.331Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/2022-10-when-bert-plays-the-lottery/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.323Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/efficient-dynamic-batching-of-large-datasets-with-infinibatch/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.331Z</lastmod>
   </url>
   <url>
     <loc>saiprasanna.in/posts/Manjaro-Linux/index.html</loc>
-    <lastmod>2022-10-24T20:59:51.963Z</lastmod>
+    <lastmod>2024-03-23T19:17:55.327Z</lastmod>
   </url>
   <url>
-    <loc>saiprasanna.in/index.html</loc>
-    <lastmod>2022-10-24T20:59:52.579Z</lastmod>
+    <loc>saiprasanna.in/posts/speed-up-ios-development/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.331Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/semantic-legion-1/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.331Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/2024-03-cross-entropy-method/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.327Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/neural-open-information-extraction/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.331Z</lastmod>
+  </url>
+  <url>
+    <loc>saiprasanna.in/posts/creation-and-consumption/index.html</loc>
+    <lastmod>2024-03-23T19:17:55.327Z</lastmod>
   </url>
   <url>
     <loc>saiprasanna.in/about.html</loc>
-    <lastmod>2022-10-24T20:59:52.899Z</lastmod>
+    <lastmod>2024-03-23T19:17:55.319Z</lastmod>
   </url>
 </urlset>

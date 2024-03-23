@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.251">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2022-10-23">
 <meta name="description" content="Improving sample efficiency of Model-Based Reinforcement learning with data augmentation and SSL.">
 
-<title>λf.(λg.f (g g)) (λg.f (g g)) Sai - Augmented Dreams: Data Augmentation &amp; Self-supervised learning in Model-Based Reinforcement Learning</title>
+<title>λf.(λg.f (g g)) (λg.f (g g)) Sai - Augmented Dreams: Data Augmentation &amp; Self-supervised learning with Model-Based Reinforcement Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,14 +20,16 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -41,8 +43,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -70,7 +71,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -79,8 +86,10 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -91,38 +100,39 @@ div.csl-indent {
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">λf.(λg.f (g g)) (λg.f (g g)) Sai</span>
+    <span class="navbar-title"><em>λf.(λg.f (g g)) (λg.f (g g))</em> <strong>Sai</strong></span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">About</a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/sai-prasanna"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/sai-prasanna"> <i class="bi bi-github" role="img">
 </i> 
- </a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/sai_prasanna"><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com/sai_prasanna"> <i class="bi bi-twitter" role="img">
 </i> 
- </a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -130,7 +140,7 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Augmented Dreams: Data Augmentation &amp; Self-supervised learning in Model-Based Reinforcement Learning</h1>
+      <h1 class="title">Augmented Dreams: Data Augmentation &amp; Self-supervised learning with Model-Based Reinforcement Learning</h1>
                   <div>
         <div class="description">
           <p>Improving sample efficiency of Model-Based Reinforcement learning with data augmentation and SSL.</p>
@@ -158,6 +168,7 @@ div.csl-indent {
         <p class="date">October 23, 2022</p>
       </div>
     </div>
+    
       
     </div>
     
@@ -199,10 +210,12 @@ div.csl-indent {
 
 
 
+
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Deep Reinforcement learning agents take a lot of interactions for training directly on high-dimensional inputs such as images. This could be time-consuming and/or infeasible if we were to train directly in the real world. Training in a simulator is faster and safer than real-world training. Simulators such as NVIDIA Isaac SIM can now render realistic scenes. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It would still be ideal to have sample efficient agents that don’t require millions of environment interactions for relatively simple tasks.</p>
 <p>In this work, we experiment with further improving the sample efficiency of the MbRL approach, “Dreamer” with data augmentation and SSL. We find that data augmentation can aid sample efficiency. Our code is available <a href="github.com/sai-prasanna/dreamer_augment">here</a>.</p>
+<p>TLDR; <a href="./poster.pdf">Poster</a> of the project.</p>
 </section>
 <section id="related-work" class="level2">
 <h2 class="anchored" data-anchor-id="related-work">Related Work</h2>
@@ -215,8 +228,8 @@ div.csl-indent {
 <p>In the first work, <strong>PlaNet</strong> <span class="citation" data-cites="hafnerLearningLatentDynamics2019">(<a href="#ref-hafnerLearningLatentDynamics2019" role="doc-biblioref">Hafner et al. 2019</a>)</span>, the authors came up with an effective way to learn a latent forward dynamics model for pixel observations. This “world model” allows one to directly plan in latent space. In PlaNet, they used Model Predictive Control (MPC) to obtain a policy directly from the learnt model.</p>
 <div class="quarto-figure quarto-figure-center" style="text-align: center;">
 <figure class="figure">
-<p><img src="dreamer.png" class="img-fluid figure-img" alt="Architecture diagram of learning latent dynamics from pixels with reconstruction in dreamer world model"></p>
-<p></p><figcaption class="figure-caption">World Model training in PlaNet and Dreamer</figcaption><p></p>
+<p><img src="dreamer.png" class="img-fluid figure-img"></p>
+<figcaption>World Model training in PlaNet and Dreamer</figcaption>
 </figure>
 </div>
 </section>
@@ -234,21 +247,24 @@ div.csl-indent {
 <li>Data augmentation-only approach</li>
 <li>Data augmentation with Self-Supervised learning (SSL).</li>
 </ol>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-nrow="1" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center" style="text-align: center;">
 <figure class="figure">
-<p><img src="drqv2.png" class="img-fluid figure-img" alt="A block diagram of DrQv2"></p>
-<p></p><figcaption class="figure-caption">DrQv2</figcaption><p></p>
+<p><img src="drqv2.png" class="img-fluid figure-img"></p>
+<figcaption>DrQv2</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center" style="text-align: center;">
 <figure class="figure">
-<p><img src="curl.png" class="img-fluid figure-img" alt="A block diagram of CURL"></p>
-<p></p><figcaption class="figure-caption">CURL</figcaption><p></p>
+<p><img src="curl.png" class="img-fluid figure-img"></p>
+<figcaption>CURL</figcaption>
 </figure>
 </div>
 </div>
@@ -271,8 +287,8 @@ div.csl-indent {
 <p>Here we apply various augmentations such as changes to contrast, sharpness and adding Colour jitter.</p>
 <div class="quarto-figure quarto-figure-center" style="text-align: center;">
 <figure class="figure">
-<p><img src="color_augmentation.png" class="img-fluid figure-img" alt="Few images from a sample of dmcontrol task with Colour augmentation"></p>
-<p></p><figcaption class="figure-caption">Colour Augmentation</figcaption><p></p>
+<p><img src="color_augmentation.png" class="img-fluid figure-img"></p>
+<figcaption>Colour Augmentation</figcaption>
 </figure>
 </div>
 </section>
@@ -281,8 +297,8 @@ div.csl-indent {
 <p>Here, we pad the image with a 4-pixel border which mirrors the existing border and then crops the resulting image to the original image size at a random point. This surprisingly simple augmentation has proven effective for improving sample efficiency in model-free RL methods such as <span class="citation" data-cites="yaratsMasteringVisualContinuous2021">(<a href="#ref-yaratsMasteringVisualContinuous2021" role="doc-biblioref">Yarats et al. 2021</a>)</span>.</p>
 <div class="quarto-figure quarto-figure-center" style="text-align: center;">
 <figure class="figure">
-<p><img src="randshift_aug.png" class="img-fluid figure-img" alt="Few images from a sample of dmcontrol task with Randshift augmentation"></p>
-<p></p><figcaption class="figure-caption">RandShift Augmentation</figcaption><p></p>
+<p><img src="randshift_aug.png" class="img-fluid figure-img"></p>
+<figcaption>RandShift Augmentation</figcaption>
 </figure>
 </div>
 </section>
@@ -300,8 +316,8 @@ div.csl-indent {
 <p><span class="citation" data-cites="Stone2021TheDC">Stone et al. (<a href="#ref-Stone2021TheDC" role="doc-biblioref">2021</a>)</span> introduces the Distracting Control benchmark. They extend DM Control by introducing visual distractions. These distractions create variations in background, colour, and camera pose. We are interested in measuring the robustness against the distractors introduced by our new training regime with augmentation. Hence, we only use distracting control environments for testing our trained agents. Due to the limited computational resources, we are able to only compare the vanilla dreamer 2 agent with the agents trained on augmented inputs. We do not test the model-free baselines on these approaches.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="distracting_control.png" class="img-fluid figure-img" alt="An example image from distracting control suite where the default starry blue background replaced by another image"></p>
-<p></p><figcaption class="figure-caption">Distracting Control: Example</figcaption><p></p>
+<p><img src="distracting_control.png" class="img-fluid figure-img"></p>
+<figcaption>Distracting Control: Example</figcaption>
 </figure>
 </div>
 </section>
@@ -386,8 +402,11 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="distracting-control-100k">Distracting Control 100k</h3>
 <p>We compare the mean returns of the best agent for our dreamer 2 approaches. In each environment, we test the agent on the corresponding distracting control environment. In all the tasks there is a considerable drop in mean returns. This is expected as we only test in new environments.</p>
 <p>In “Cheetah, Run” and “Cup, catch” tasks, Dreamer 2 with colour augmentation performs the best. But the “Finger, Spin” task again acts as a confounder, where the baseline performs better. It’s safe to say that more experiments with more environments are necessary.</p>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="cheetah_run_dc.png" class="img-fluid" alt="bar graph of returns for cheetah run in distracting control"></p>
 </div>
@@ -395,7 +414,7 @@ div.csl-indent {
 <p><img src="cup_catch_dc.png" class="img-fluid" alt="bar graph of returns for cup catch in distracting control"></p>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img src="finger_spin_dc.png" class="img-fluid" alt="bar graph of returns for finger spin in distracting control"></p>
 </div>
@@ -422,29 +441,29 @@ div.csl-indent {
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-hafnerDreamControlLearning2020" class="csl-entry" role="doc-biblioentry">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-hafnerDreamControlLearning2020" class="csl-entry" role="listitem">
 Hafner, Danijar, Timothy Lillicrap, Jimmy Ba, and Mohammad Norouzi. 2020. <span>“Dream to Control: Learning Behaviors by Latent Imagination.”</span> <a href="http://arxiv.org/abs/1912.01603">http://arxiv.org/abs/1912.01603</a>.
 </div>
-<div id="ref-hafnerLearningLatentDynamics2019" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hafnerLearningLatentDynamics2019" class="csl-entry" role="listitem">
 Hafner, Danijar, Timothy Lillicrap, Ian Fischer, Ruben Villegas, David Ha, Honglak Lee, and James Davidson. 2019. <span>“Learning Latent Dynamics for Planning from Pixels.”</span> <a href="http://arxiv.org/abs/1811.04551">http://arxiv.org/abs/1811.04551</a>.
 </div>
-<div id="ref-jie2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-jie2021" class="csl-entry" role="listitem">
 Jie, New Jun. 2021. <span>“BTRL: Barlow Twins for Model-Based Reinforcement Learning.”</span> <a href="https://jetnew.io/assets/pdf/new2021btrl.pdf">https://jetnew.io/assets/pdf/new2021btrl.pdf</a>.
 </div>
-<div id="ref-laskinReinforcementLearningAugmented2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-laskinReinforcementLearningAugmented2020" class="csl-entry" role="listitem">
 Laskin, Michael, Kimin Lee, Adam Stooke, Lerrel Pinto, Pieter Abbeel, and Aravind Srinivas. 2020. <span>“Reinforcement <span>Learning</span> with <span>Augmented Data</span>.”</span> <span>arXiv</span>. <a href="https://doi.org/10.48550/arXiv.2004.14990">https://doi.org/10.48550/arXiv.2004.14990</a>.
 </div>
-<div id="ref-srinivasCURLContrastiveUnsupervised2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-srinivasCURLContrastiveUnsupervised2020" class="csl-entry" role="listitem">
 Srinivas, Aravind, Michael Laskin, and Pieter Abbeel. 2020. <span>“<span>CURL</span>: <span>Contrastive Unsupervised Representations</span> for <span>Reinforcement Learning</span>.”</span> <a href="http://arxiv.org/abs/2004.04136">http://arxiv.org/abs/2004.04136</a>.
 </div>
-<div id="ref-Stone2021TheDC" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Stone2021TheDC" class="csl-entry" role="listitem">
 Stone, Austin, Oscar Ramirez, Kurt Konolige, and Rico Jonschkowski. 2021. <span>“The Distracting Control Suite - a Challenging Benchmark for Reinforcement Learning from Pixels.”</span> <em>ArXiv</em> abs/2101.02722.
 </div>
-<div id="ref-yaratsMasteringVisualContinuous2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-yaratsMasteringVisualContinuous2021" class="csl-entry" role="listitem">
 Yarats, Denis, Rob Fergus, Alessandro Lazaric, and Lerrel Pinto. 2021. <span>“Mastering <span>Visual Continuous Control</span>: <span>Improved Data-Augmented Reinforcement Learning</span>,”</span> July. <a href="https://doi.org/10.48550/arXiv.2107.09645">https://doi.org/10.48550/arXiv.2107.09645</a>.
 </div>
-<div id="ref-Zbontar2021BarlowTS" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Zbontar2021BarlowTS" class="csl-entry" role="listitem">
 Zbontar, Jure, Li Jing, Ishan Misra, Yann LeCun, and Stéphane Deny. 2021. <span>“Barlow Twins: Self-Supervised Learning via Redundancy Reduction.”</span> In <em>ICML</em>.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
@@ -454,20 +473,19 @@ Zbontar, Jure, Li Jing, Ishan Misra, Yann LeCun, and Stéphane Deny. 2021. <span
 <li id="fn2"><p>DrQv2 paper doesn’t report DmControl100k baseline. We extract the 100k benchmark results by parsing their <a href="https://github.com/facebookresearch/drqv2/tree/main/curves">results</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p><span class="citation" data-cites="jie2021">Jie (<a href="#ref-jie2021" role="doc-biblioref">2021</a>)</span> has done some experiments on using Barlow Twins on Dreamer.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{prasanna,karimfarid,diegofernandez2022,
-  author = {Sai Prasanna, Karim Farid, Diego Fernandez},
-  editor = {},
+</section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{prasanna, karim farid, diego fernandez2022,
+  author = {Prasanna, Karim Farid, Diego Fernandez, Sai},
   title = {Augmented {Dreams:} {Data} {Augmentation} \&amp;
-    {Self-supervised} Learning in {Model-Based} {Reinforcement}
+    {Self-supervised} Learning with {Model-Based} {Reinforcement}
     {Learning}},
   date = {2022-10-23},
   url = {saiprasanna.in/posts/2022-10-augmented-dreams},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-prasanna,karimfarid,diegofernandez2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Sai Prasanna, Karim Farid, Diego Fernandez. 2022. <span>“Augmented
-Dreams: Data Augmentation &amp; Self-Supervised Learning in Model-Based
-Reinforcement Learning.”</span> October 23, 2022. <a href="https://saiprasanna.in/posts/2022-10-augmented-dreams">saiprasanna.in/posts/2022-10-augmented-dreams</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-prasanna, karim farid, diego fernandez2022" class="csl-entry quarto-appendix-citeas" role="listitem">
+Prasanna, Karim Farid, Diego Fernandez, Sai. 2022. <span>“Augmented
+Dreams: Data Augmentation &amp; Self-Supervised Learning with
+Model-Based Reinforcement Learning.”</span> October 23, 2022. <a href="https://saiprasanna.in/posts/2022-10-augmented-dreams">saiprasanna.in/posts/2022-10-augmented-dreams</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -510,6 +528,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -578,13 +623,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -601,7 +648,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   // Switch to dark mode if need be
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
-  } 
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -609,9 +658,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -623,17 +686,51 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("saiprasanna\.in");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -643,8 +740,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -656,33 +762,288 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
 <script src="https://utteranc.es/client.js" repo="sai-prasanna/saiprasanna.in" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
+
 
 
 
