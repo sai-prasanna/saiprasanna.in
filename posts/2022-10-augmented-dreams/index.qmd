@@ -19,6 +19,7 @@ Deep Reinforcement learning agents take a lot of interactions for training direc
 
 In this work, we experiment with further improving the sample efficiency of the MbRL approach, "Dreamer" with data augmentation and SSL. We find that data augmentation can aid sample efficiency. Our code is available [here](github.com/sai-prasanna/dreamer_augment). 
 
+TLDR; [Poster](./poster.pdf) of the project.
 
 ## Related Work
 ### Model-Based RL from pixels

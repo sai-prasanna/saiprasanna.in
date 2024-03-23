@@ -19,8 +19,9 @@ about:
 
 ---
 
-I research reinforcement learning for robotics in the Robot learning lab at the University of Freiburg. My current work focuses on generalization for reinforcement learning applied to robotics. Send me a twitter dm if you wish to collabrate with me! 
+I research reinforcement learning for robotics in the Robot learning lab at the University of Freiburg. I am currently working on generalization in reinforcement learning with applications to robotics. Send me a twitter dm if you wish to collabrate with me! 
 
-I previously worked on applied research in NLP to build solutions for agara.ai and Zoho. I have research experience, publishing two papers at EMNLP conference 2020 and the SEMEVAL workshop 2019.
+I previously have done applied research in NLP to build solutions for agara.ai and Zoho. I have research experience, publishing two papers at EMNLP conference 2020 and the SEMEVAL workshop 2019.
 
 Here's my updated [resume](resume.pdf).
+
