@@ -9,7 +9,7 @@
 <meta name="dcterms.date" content="2024-03-23">
 <meta name="description" content="A deep dive into the math with code examples for the Cross Entropy Method (CEM).">
 
-<title>λf.(λg.f (g g)) (λg.f (g g)) Sai - An Annotated Guide to the Cross Entropy Method (CEM)</title>
+<title>λf.(λg.f (g g)) (λg.f (g g)) Sai - A Guide to the Cross Entropy Method (CEM)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -202,7 +202,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">An Annotated Guide to the Cross Entropy Method (CEM)</h1>
+      <h1 class="title">A Guide to the Cross Entropy Method (CEM)</h1>
                   <div>
         <div class="description">
           <p>A deep dive into the math with code examples for the Cross Entropy Method (CEM).</p>
@@ -247,7 +247,13 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#cem-algorithm-for-optimization" id="toc-cem-algorithm-for-optimization" class="nav-link" data-scroll-target="#cem-algorithm-for-optimization">CEM algorithm for optimization</a></li>
   </ul></li>
+  <li><a href="#discrete-or-combinatorial-optimization-with-cem" id="toc-discrete-or-combinatorial-optimization-with-cem" class="nav-link" data-scroll-target="#discrete-or-combinatorial-optimization-with-cem">Discrete or combinatorial optimization with CEM</a></li>
+  <li><a href="#planning-with-cem" id="toc-planning-with-cem" class="nav-link" data-scroll-target="#planning-with-cem">Planning with CEM</a>
+  <ul class="collapse">
+  <li><a href="#when-is-cem-appropriate-in-mbrl" id="toc-when-is-cem-appropriate-in-mbrl" class="nav-link" data-scroll-target="#when-is-cem-appropriate-in-mbrl">When is CEM appropriate in MbRL?</a></li>
+  </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
   </ul>
 </nav>
     </div>
@@ -663,23 +669,20 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Some references assume f(x) to be uniform. I do not understand how to have a uniform distribution if $ x $.</p>
+<p>Some references assume f(x) to be uniform. I do not understand how to have a uniform distribution if <span class="math inline">\(x \in [-\inf, \inf]\)</span>.</p>
 </div>
 </div>
 <section id="cem-algorithm-for-optimization" class="level3">
 <h3 class="anchored" data-anchor-id="cem-algorithm-for-optimization">CEM algorithm for optimization</h3>
 <ol type="1">
 <li><p>Define <span class="math inline">\(v_1 = u\)</span> where <span class="math inline">\(u\)</span> is some arbitrary initial parameter and set t=1. Let <span class="math inline">\(n_e = \lceil \rho n \rceil\)</span>.</p></li>
-<li><p>Generate <span class="math inline">\(n\)</span> i.i.d samples <span class="math inline">\(x_i, ... x_n\)</span> drawn from <span class="math inline">\(f(.; v_t)\)</span>. Calculate <span class="math inline">\(S_i = S(x_i)\)</span> for all i and order these from smallest to largest <span class="math inline">\(S_{(1)} ... \le S_{(n)}\)</span>. Let <span class="math inline">\(\gamma_t\)</span> to be the <span class="math inline">\((1 - \rho)\)</span>-quantile; that is <em>t = S</em>{(n - n_e + 1)}.</p></li>
+<li><p>Generate <span class="math inline">\(n\)</span> i.i.d samples <span class="math inline">\(x_i, ... x_n\)</span> drawn from <span class="math inline">\(f(.; v_t)\)</span>. Calculate <span class="math inline">\(S_i = S(x_i)\)</span> for all i and order these from smallest to largest <span class="math inline">\(S_{(1)} ... \le S_{(n)}\)</span>. Let <span class="math inline">\(\gamma_t\)</span> to be the <span class="math inline">\((1 - \rho)\)</span>-quantile; that is <span class="math inline">\(\gamma_t = S_{(n - n_e + 1)}\)</span>.</p></li>
 <li><p>Then, with the same samples we got in (2), we solve the following maximization to obtain <span class="math inline">\(v_{t+1}\)</span> <span class="math display">\[
          \begin{align*}
          v_{t+1} &amp;= \arg\max_{v} \dfrac{1}{n} \sum_{k=1}^{n} \left[\mathcal{1}_{\{S(x_k) \ge \gamma_t\}} \ln f(x_k; v)\right] , \\
          \end{align*}
    \]</span></p></li>
-<li><p><strong>If</strong> stopping criterion is not met <strong>and</strong> $t &lt; $;</p>
-<p>Set <span class="math inline">\(t = t+1\)</span> and reiterate from step 2.</p>
-<p><strong>Else</strong>;</p>
-<p>Stop.</p></li>
+<li><p><strong>If</strong> stopping criterion is not met <strong>and</strong> $t &lt; $; Set <span class="math inline">\(t = t+1\)</span> and reiterate from step 2. <strong>Else</strong>; Stop.</p></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -691,7 +694,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>An alternative heuristic is to update <span class="math inline">\(v_{t+1}\)</span> in step 3 with an exponential moving average instead of a simple replacement. $ v_{t+1} = (1 - ) v_t + v_{} $</p>
+<p>An alternative heuristic is to update <span class="math inline">\(v_{t+1}\)</span> in step 3 with an exponential moving average instead of a simple replacement. <span class="math inline">\(v_{t+1} = (1 - \alpha) v_t + \alpha v_{\text{new}}\)</span></p>
 </div>
 </div>
 <p>In practice, we pick f as a normal distribution for optimizing functions on a continuous domain. Moreover, in this case, we can pick both mean and standard deviation as the parameters of the distribution family. i.e., <span class="math inline">\(v_t = [\mu, \sigma]\)</span>. The maximization of step 3 is just the MLE estimate of elites, which is simply the mean and standard deviation for the elite samples for our normal distribution. Now, let us dive into the code to implement CEM and optimize the Rastrigin function, a highly nonlinear function with many local minima.</p>
@@ -771,9 +774,55 @@ Note
 <p>The above example illustrates how we can converge to the global minimum in black-box optimization with CEM.</p>
 </section>
 </section>
+<section id="discrete-or-combinatorial-optimization-with-cem" class="level1">
+<h1>Discrete or combinatorial optimization with CEM</h1>
+<p>We saw an example of applying CEM to optimize continuous parameters. It can also be applied to discrete settings. <span class="citation" data-cites="botev13crossentropy">Botev et al. (<a href="#ref-botev13crossentropy" role="doc-biblioref">2013</a>)</span> highlights a few examples of applying CEM to discrete optimization, such as the Knapsack packing problem, boolean satisfiability problem, and network planning problem.</p>
+</section>
+<section id="planning-with-cem" class="level1">
+<h1>Planning with CEM</h1>
+<p>Consider the reinforcement learning setting where we want a policy that maximizes rewards (or conversely minimizes some cost in optimal control setting) in an environment.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="rl.png" class="img-fluid figure-img"></p>
+<figcaption>RL Environment - <span class="citation" data-cites="Sutton1998">Sutton and Barto (<a href="#ref-Sutton1998" role="doc-biblioref">2018</a>)</span></figcaption>
+</figure>
+</div>
+<p>A policy comprises actions. Assume we have a simulator or even a learned model of the environment, which can predict the next state $P(S’|S, A) and the reward function <span class="math inline">\(R(S, A)\)</span> given the current state and action. Then, we can directly aim to optimize the set of actions that maximizes the rewards for a given horizon <span class="math inline">\(H\)</span>. <span class="math display">\[
+\begin{equation}
+\arg\max_{a_k, ... a_{k+H}} \sum_{t=k}^{k+H} R(s_t, a_t)
+\end{equation}
+\]</span></p>
+<p>Where starting from some arbirtary state (usually the current state) <span class="math inline">\(s_k\)</span> we can rollout future states <span class="math inline">\(s_k ... s_{k+H}\)</span> using the model, either sampling the next state or using the mode of the distribution if the next state is stochastic. Then, we compute the rewards and maximize them.</p>
+<p>We can apply CEM here on the trajectory <span class="math inline">\(a_1... a_k\)</span> to solve this problem.</p>
+<p>Since our model of the environment might be imperfect, the common practice is only to act the first action <span class="math inline">\(a_k\)</span> in the real environment and then re-solve the same problem from the real s_{k+1}. This is known as model predictive control (MPC).</p>
+<p>Some relevant works in MbRL using CEM for planning are <span class="citation" data-cites="hafner2018learning">Hafner et al. (<a href="#ref-hafner2018learning" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="ChuaCML18">Chua et al. (<a href="#ref-ChuaCML18" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="HansenSW22">Hansen, Su, and Wang (<a href="#ref-HansenSW22" role="doc-biblioref">2022</a>)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The above formulation does not yield an optimal trajectory even for a perfect model, as we do not consider the whole horizon till episode termination. If we learn an optimal value function V(S) along with the CEM policy, we can compute the final cost by using it. i.e., maximize <span class="math inline">\(\arg\max_{a_k, ... a_{k+H}} \sum_{t=k}^{k+H} R(s_t, a_t) + V(s_{k+H+1})\)</span> where we rely on the model being more accurate than the value for some steps. <span class="citation" data-cites="HansenSW22">Hansen, Su, and Wang (<a href="#ref-HansenSW22" role="doc-biblioref">2022</a>)</span> does this precisely.</p>
+</div>
+</div>
+<section id="when-is-cem-appropriate-in-mbrl" class="level3">
+<h3 class="anchored" data-anchor-id="when-is-cem-appropriate-in-mbrl">When is CEM appropriate in MbRL?</h3>
+<p>In modern deep MbRL, we usually learn a model that is based on a neural network. In this case, instead of CEM, we can consider optimizing actions based on gradients instead of black-box CEM, as we can compute the gradients of the rewards concerning the actions. But this is tricky as models parameterized by neural nets could have a non-convex optimization landscape, directly optimizing actions could get stuck in local minima. This is usually used to motivate using black-box approach such as CEM for planning. But note that there are new works <span class="citation" data-cites="v2023gradientbased">(<a href="#ref-v2023gradientbased" role="doc-biblioref">V et al. 2023</a>)</span> pointing to efficiency of pure-gradient based optimization even for complex models.</p>
+<p>And there is another issue, if the model is stochastic, we can only estimate an approximation of the gradient through the sampling step <span class="math inline">\(s_{t+1} \sim p(s_{t+1}| s_t, a_t)\)</span>. This can make our gradient based optimization in-exact. But I do not know if this is as big of an issue as getting stuck in local minima to motiviate using black box approach such as CEM.</p>
+<p>One hybrid approach is <span class="citation" data-cites="huang2021cemgd">Huang et al. (<a href="#ref-huang2021cemgd" role="doc-biblioref">2021</a>)</span>. They formulate a simple method to combine CEM with gradient-based optimization for planning. They initially used CEM for some steps to explore the optimization landscape more “globally” than the first-order gradients and then used gradient descent to converge quickly to some optima.</p>
+</section>
+</section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
 <p>We dived into the CEM algorithm for rare-event probability estimation and applied it to black-box function optimization. CEM has been used in model-based RL to optimize the trajectory of actions that lead to the best predicted summed reward under the model.</p>
+</section>
+<section id="acknowledgments" class="level1">
+<h1>Acknowledgments</h1>
+<p>This work was partly made possible by funding the Konrad Zuse School of Excellence in Learning and Intelligent Systems (ELIZA) grant.</p>
 
 
 
@@ -781,7 +830,7 @@ Note
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-bhattacharyya21demystifying" class="csl-entry" role="listitem">
-Bhattacharyya, Raunak. 2021. <span>“Draft: Demystifying the Cross Entropy Method.”</span>
+Bhattacharyya, Raunak. 2021. <span>“Draft: Demystifying the Cross Entropy Method.”</span> <a href="https://www.robots.ox.ac.uk/~raunakbh/AA228_HelperNote_CrossEntropyMethod.pdf">https://www.robots.ox.ac.uk/~raunakbh/AA228_HelperNote_CrossEntropyMethod.pdf</a>.
 </div>
 <div id="ref-deboer05tutorial" class="csl-entry" role="listitem">
 Boer, Pieter-Tjerk de, Dirk P. Kroese, Shie Mannor, and Reuven Y. Rubinstein. 2005. <span>“A Tutorial on the Cross-Entropy Method.”</span> <em>Annals of Operations Research</em> 134: 19–67. <a href="http://link.springer.com/article/10.1007/s10479-005-5724-z/fulltext.html">http://link.springer.com/article/10.1007/s10479-005-5724-z/fulltext.html</a>.
@@ -789,8 +838,26 @@ Boer, Pieter-Tjerk de, Dirk P. Kroese, Shie Mannor, and Reuven Y. Rubinstein. 20
 <div id="ref-botev13crossentropy" class="csl-entry" role="listitem">
 Botev, Z. I., D. P. Kroese, R. Y. Rubinstein, and P. L’Ecuyer. 2013. <span>“The Cross-Entropy Method for Optimization.”</span> <em>Handbook of Statistics - Machine Learning: Theory and Applications</em>, 35–59. <a href="https://people.smp.uq.edu.au/DirkKroese/ps/CEopt.pdf">https://people.smp.uq.edu.au/DirkKroese/ps/CEopt.pdf</a>.
 </div>
+<div id="ref-ChuaCML18" class="csl-entry" role="listitem">
+Chua, Kurtland, Roberto Calandra, Rowan McAllister, and Sergey Levine. 2018. <span>“Deep Reinforcement Learning in a Handful of Trials Using Probabilistic Dynamics Models.”</span> In <em>Advances in Neural Information Processing Systems 31: Annual Conference on Neural Information Processing Systems 2018, NeurIPS 2018, December 3-8, 2018, Montr<span>é</span>al, Canada</em>, edited by Samy Bengio, Hanna M. Wallach, Hugo Larochelle, Kristen Grauman, Nicolò Cesa-Bianchi, and Roman Garnett, 4759–70. <a href="https://proceedings.neurips.cc/paper/2018/hash/3de568f8597b94bda53149c7d7f5958c-Abstract.html">https://proceedings.neurips.cc/paper/2018/hash/3de568f8597b94bda53149c7d7f5958c-Abstract.html</a>.
+</div>
+<div id="ref-hafner2018learning" class="csl-entry" role="listitem">
+Hafner, Danijar, T. Lillicrap, Ian S. Fischer, Ruben Villegas, David R Ha, Honglak Lee, and James Davidson. 2018. <span>“Learning Latent Dynamics for Planning from Pixels.”</span> <em>International Conference on Machine Learning</em>. <a href="https://arxiv.org/abs/1811.04551v5">https://arxiv.org/abs/1811.04551v5</a>.
+</div>
+<div id="ref-HansenSW22" class="csl-entry" role="listitem">
+Hansen, Nicklas, Hao Su, and Xiaolong Wang. 2022. <span>“Temporal Difference Learning for Model Predictive Control.”</span> In <em>International Conference on Machine Learning, <span>ICML</span> 2022, 17-23 July 2022, Baltimore, Maryland, <span>USA</span></em>, edited by Kamalika Chaudhuri, Stefanie Jegelka, Le Song, Csaba Szepesvári, Gang Niu, and Sivan Sabato, 162:8387–8406. Proceedings of Machine Learning Research. PMLR. <a href="https://proceedings.mlr.press/v162/hansen22a.html">https://proceedings.mlr.press/v162/hansen22a.html</a>.
+</div>
+<div id="ref-huang2021cemgd" class="csl-entry" role="listitem">
+Huang, Kevin, Sahin Lale, Ugo Rosolia, Yuanyuan Shi, and Anima Anandkumar. 2021. <span>“CEM-GD: Cross-Entropy Method with Gradient Descent Planner for Model-Based Reinforcement Learning.”</span> <em>arXiv Preprint arXiv: 2112.07746</em>.
+</div>
 <div id="ref-rubinstein04crossentropy" class="csl-entry" role="listitem">
 Rubinstein, Reuven Y., and Dirk P. Kroese. 2004. <em>The Cross-Entropy Method</em>. Springer New York. <a href="http://link.springer.com/content/pdf/10.1007/978-1-4757-4321-0.pdf">http://link.springer.com/content/pdf/10.1007/978-1-4757-4321-0.pdf</a>.
+</div>
+<div id="ref-Sutton1998" class="csl-entry" role="listitem">
+Sutton, Richard S., and Andrew G. Barto. 2018. <em>Reinforcement Learning: An Introduction</em>. Second. The MIT Press. <a href="http://incompleteideas.net/book/the-book-2nd.html">http://incompleteideas.net/book/the-book-2nd.html</a>.
+</div>
+<div id="ref-v2023gradientbased" class="csl-entry" role="listitem">
+V, Jyothir S, Siddhartha Jalagam, Yann LeCun, and Vlad Sobal. 2023. <span>“Gradient-Based Planning with World Models.”</span> <em>arXiv Preprint arXiv: 2312.17227</em>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
