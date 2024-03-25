@@ -20,7 +20,7 @@
 
 
 
-<p>The Cross-entropy method (CEM) is a technique for rare event simulation that can also used for solving black-box function optimization. A black box optimization technique allows us to find a function’s extremum (minima or maxima) without computing gradients. It is useful when computing gradients is costly or not possible. Moreover, since it is a global technique, it is theoretically guaranteed to converge to a global optimum, although, as we will see, it might not be the case in practice.</p>
+<p>The Cross-entropy method (CEM) is a technique for rare event simulation that can also used for solving black-box function optimization. A black box optimization technique allows us to find a function’s extremum (minima or maxima) without computing gradients. It is useful when computing gradients is costly or not possible. Moreover, since it is a global technique, its solutions can converge to a global optimum.</p>
 <p>Our tutorial is adapted from the <span class="citation" data-cites="deboer05tutorial">Boer et al. (2005)</span>, <span class="citation" data-cites="rubinstein04crossentropy">Rubinstein and Kroese (2004)</span>, <span class="citation" data-cites="botev13crossentropy">Botev et al. (2013)</span> and <span class="citation" data-cites="bhattacharyya21demystifying">Bhattacharyya (2021)</span>.</p>
 <section id="rare-event-probability-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="rare-event-probability-estimation">Rare-event Probability Estimation</h2>
@@ -1398,7 +1398,7 @@ V, Jyothir S, Siddhartha Jalagam, Yann LeCun, and Vlad Sobal. 2023. <span>“Gra
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" data-layout-nrow="1">
+<div class="quarto-layout-panel" data-layout-nrow="1" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center" style="text-align: center;">
