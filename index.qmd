@@ -3,7 +3,7 @@ title: R. Sai Prasanna
 image: profile.jpg
 execute:
   echo: false
-  freeze: true
+  freeze: auto
 jupyter: python3
 about:
   template: trestles
@@ -63,7 +63,9 @@ for idx, data in yaml_data.items():
     pub_str += f"\n<div class='title'>{title_str}</div>"
 
     authors = data.pop("authors")
-    authors = ["<strong>Sai Prasanna</strong>" if a == "me" else a for a in authors]
+    authors = [
+        a.replace("Sai Prasanna", "<strong>Sai Prasanna</strong>") for a in authors
+    ]
     author_str = readable_list(authors)
     pub_str += f"\n<div class='authors'>{author_str}</div>"
 

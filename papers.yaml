@@ -1,7 +1,7 @@
 dreaming_many_worlds_24:
   title: "Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot Generalization"
   authors:
-      - Sai Prasanna
+      - Sai Prasanna*
       - Karim Farid*
       - Raghu Rajan
       - André Biedenkapp
@@ -35,7 +35,7 @@ bert_plays_20:
 zoho_semeval_19:
   title: "Zoho at SemEval-2019 Task 9: Semi-supervised Domain Adaptation using Tri-training for Suggestion Mining"
   authors:
-      - me
+      - Sai Prasanna
       - Sri Ananda Seelan
   venue:  In Proceedings of the 13th International Workshop on Semantic Evaluation, pages 1282–1286, Minneapolis, Minnesota, USA. Association for Computational Linguistics.
   link: https://aclanthology.org/S19-2225/
