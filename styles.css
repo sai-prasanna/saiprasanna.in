@@ -1,1 +1,14 @@
 /* css styles */
+
+.publication .title {
+    font-weight: bolder;
+    padding-bottom: 2px;
+}
+
+.publication .authors {
+    padding-bottom: 5px;
+}
+
+.publication .venue {
+    font-style: italic;
+}

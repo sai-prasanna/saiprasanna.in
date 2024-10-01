@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2022-10-23">
 <meta name="description" content="Improving sample efficiency of Model-Based Reinforcement learning with data augmentation and SSL.">
 
-<title>λf.(λg.f (g g)) (λg.f (g g)) Sai - Augmented Dreams: Data Augmentation &amp; Self-supervised learning with Model-Based Reinforcement Learning</title>
+<title>Augmented Dreams: Data Augmentation &amp; Self-supervised learning with Model-Based Reinforcement Learning – Dao of Sai</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,21 +105,26 @@ div.csl-indent {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title"><em>λf.(λg.f (g g)) (λg.f (g g))</em> <strong>Sai</strong></span>
+    <span class="navbar-title">Dao of Sai</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
-<span class="menu-text">About</span></a>
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Posts</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/sai-prasanna"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=ZiB7SdEAAAAJ&amp;hl=en"> <i class="bi bi-book" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -130,7 +135,7 @@ div.csl-indent {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
@@ -228,7 +233,7 @@ div.csl-indent {
 <p>In the first work, <strong>PlaNet</strong> <span class="citation" data-cites="hafnerLearningLatentDynamics2019">(<a href="#ref-hafnerLearningLatentDynamics2019" role="doc-biblioref">Hafner et al. 2019</a>)</span>, the authors came up with an effective way to learn a latent forward dynamics model for pixel observations. This “world model” allows one to directly plan in latent space. In PlaNet, they used Model Predictive Control (MPC) to obtain a policy directly from the learnt model.</p>
 <div class="quarto-figure quarto-figure-center" style="text-align: center;">
 <figure class="figure">
-<p><img src="dreamer.png" class="img-fluid figure-img"></p>
+<p><img src="dreamer.png" class="img-fluid figure-img" alt="Architecture diagram of learning latent dynamics from pixels with reconstruction in dreamer world model"></p>
 <figcaption>World Model training in PlaNet and Dreamer</figcaption>
 </figure>
 </div>
@@ -250,12 +255,12 @@ div.csl-indent {
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-nrow="1" data-layout-ncol="2">
+<div class="quarto-layout-panel" data-layout-ncol="2" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center" style="text-align: center;">
 <figure class="figure">
-<p><img src="drqv2.png" class="img-fluid figure-img"></p>
+<p><img src="drqv2.png" class="img-fluid figure-img" alt="A block diagram of DrQv2"></p>
 <figcaption>DrQv2</figcaption>
 </figure>
 </div>
@@ -263,7 +268,7 @@ div.csl-indent {
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center" style="text-align: center;">
 <figure class="figure">
-<p><img src="curl.png" class="img-fluid figure-img"></p>
+<p><img src="curl.png" class="img-fluid figure-img" alt="A block diagram of CURL"></p>
 <figcaption>CURL</figcaption>
 </figure>
 </div>
@@ -287,7 +292,7 @@ div.csl-indent {
 <p>Here we apply various augmentations such as changes to contrast, sharpness and adding Colour jitter.</p>
 <div class="quarto-figure quarto-figure-center" style="text-align: center;">
 <figure class="figure">
-<p><img src="color_augmentation.png" class="img-fluid figure-img"></p>
+<p><img src="color_augmentation.png" class="img-fluid figure-img" alt="Few images from a sample of dmcontrol task with Colour augmentation"></p>
 <figcaption>Colour Augmentation</figcaption>
 </figure>
 </div>
@@ -297,7 +302,7 @@ div.csl-indent {
 <p>Here, we pad the image with a 4-pixel border which mirrors the existing border and then crops the resulting image to the original image size at a random point. This surprisingly simple augmentation has proven effective for improving sample efficiency in model-free RL methods such as <span class="citation" data-cites="yaratsMasteringVisualContinuous2021">(<a href="#ref-yaratsMasteringVisualContinuous2021" role="doc-biblioref">Yarats et al. 2021</a>)</span>.</p>
 <div class="quarto-figure quarto-figure-center" style="text-align: center;">
 <figure class="figure">
-<p><img src="randshift_aug.png" class="img-fluid figure-img"></p>
+<p><img src="randshift_aug.png" class="img-fluid figure-img" alt="Few images from a sample of dmcontrol task with Randshift augmentation"></p>
 <figcaption>RandShift Augmentation</figcaption>
 </figure>
 </div>
@@ -316,7 +321,7 @@ div.csl-indent {
 <p><span class="citation" data-cites="Stone2021TheDC">Stone et al. (<a href="#ref-Stone2021TheDC" role="doc-biblioref">2021</a>)</span> introduces the Distracting Control benchmark. They extend DM Control by introducing visual distractions. These distractions create variations in background, colour, and camera pose. We are interested in measuring the robustness against the distractors introduced by our new training regime with augmentation. Hence, we only use distracting control environments for testing our trained agents. Due to the limited computational resources, we are able to only compare the vanilla dreamer 2 agent with the agents trained on augmented inputs. We do not test the model-free baselines on these approaches.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="distracting_control.png" class="img-fluid figure-img"></p>
+<p><img src="distracting_control.png" class="img-fluid figure-img" alt="An example image from distracting control suite where the default starry blue background replaced by another image"></p>
 <figcaption>Distracting Control: Example</figcaption>
 </figure>
 </div>
@@ -473,19 +478,19 @@ Zbontar, Jure, Li Jing, Ishan Misra, Yann LeCun, and Stéphane Deny. 2021. <span
 <li id="fn2"><p>DrQv2 paper doesn’t report DmControl100k baseline. We extract the 100k benchmark results by parsing their <a href="https://github.com/facebookresearch/drqv2/tree/main/curves">results</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p><span class="citation" data-cites="jie2021">Jie (<a href="#ref-jie2021" role="doc-biblioref">2021</a>)</span> has done some experiments on using Barlow Twins on Dreamer.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{prasanna, karim farid, diego fernandez2022,
+</section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{prasanna,_karim_farid,_diego_fernandez2022,
   author = {Prasanna, Karim Farid, Diego Fernandez, Sai},
   title = {Augmented {Dreams:} {Data} {Augmentation} \&amp;
     {Self-supervised} Learning with {Model-Based} {Reinforcement}
     {Learning}},
   date = {2022-10-23},
-  url = {saiprasanna.in/posts/2022-10-augmented-dreams},
+  url = {saiprasanna.in/posts/2022-10-augmented-dreams/},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-prasanna, karim farid, diego fernandez2022" class="csl-entry quarto-appendix-citeas" role="listitem">
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-prasanna,_karim_farid,_diego_fernandez2022" class="csl-entry quarto-appendix-citeas" role="listitem">
 Prasanna, Karim Farid, Diego Fernandez, Sai. 2022. <span>“Augmented
 Dreams: Data Augmentation &amp; Self-Supervised Learning with
-Model-Based Reinforcement Learning.”</span> October 23, 2022. <a href="https://saiprasanna.in/posts/2022-10-augmented-dreams">saiprasanna.in/posts/2022-10-augmented-dreams</a>.
+Model-Based Reinforcement Learning.”</span> October 23, 2022. <a href="https://saiprasanna.in/posts/2022-10-augmented-dreams/">saiprasanna.in/posts/2022-10-augmented-dreams/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -666,18 +671,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -709,7 +703,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("saiprasanna\.in");
@@ -717,7 +733,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
