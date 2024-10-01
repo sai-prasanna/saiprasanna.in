@@ -3,6 +3,7 @@ title: R. Sai Prasanna
 image: profile.jpg
 execute:
   echo: false
+  freeze: true
 jupyter: python3
 about:
   template: trestles
