@@ -1,14 +1,89 @@
 ---
-title: "Dao of Sai"
-subtitle: "🤖 = 42"
-listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  categories: false
-  sort-ui: false
-  filter-ui: false
-  feed: true
-page-layout: full
-title-block-banner: true
+title: R. Sai Prasanna 
+image: profile.jpg
+execute:
+  echo: false
+jupyter: python3
+about:
+  template: trestles
+  image-width: 15em
+  image-shape: round
+  links:
+    - icon: bi-envelope
+      text: Email
+      href: mailto://sai.r.prasanna@gmail.com
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/sai_prasanna
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/sai-prasanna-r-422aaba4
+    - icon: github
+      text: Github
+      href: https://github.com/sai-prasanna
+    - icon: bi-book
+      text: Google Scholar
+      href: https://scholar.google.com/citations?user=ZiB7SdEAAAAJ&hl=en
 ---
+
+I focus on research to build embodied agents that solve tasks in a robust manner, exhibit intrinsic motivation, and agency. I currently work on Reinforcement Learning at the University of Freiburg. Before that I have worked machine learning engineer and software engineer. 
+
+Here's my updated [resume](files/resume.pdf).You can also find my sporadically updated blog posts [here](blog.qmd).
+
+Open for collaboration, send me an email if you wish to collabrate with me! 
+
+
+## Selected Publications
+```{python}
+import yaml
+from IPython.display import display, HTML
+
+
+def readable_list(_s):
+    if len(_s) < 3:
+        return " and ".join(map(str, _s))
+    *a, b = _s
+    return f"{', '.join(map(str, a))}, and {b}"
+
+
+def button(title, url):
+    return f"""<a class="btn btn-outline-dark btn-sm", href="{url}" target="_blank" rel="noopener noreferrer">
+        {title}
+    </a>"""
+
+
+with open("papers.yaml") as paper_f:
+    yaml_data = yaml.safe_load(paper_f)
+pub_strs = []
+for idx, data in yaml_data.items():
+    pub_str = ""
+
+    title_str = data.pop("title")
+    pub_str += f"\n<div class='title'>{title_str}</div>"
+
+    authors = data.pop("authors")
+    authors = ["<strong>Sai Prasanna</strong>" if a == "me" else a for a in authors]
+    author_str = readable_list(authors)
+    pub_str += f"\n<div class='authors'>{author_str}</div>"
+
+    venue = data.pop("venue")
+    pub_str += f"\n<div class='venue'>{venue}</div>"
+    buttons = []
+    for btn in ["pdf", "code", "arxiv", "link", "poster", "talk"]:
+        link = data.pop(btn, None)
+        if link is not None:
+            buttons.append(button(btn.upper(), link))
+    pub_strs.append(
+        f"<li class='list-group-item' id='{idx}'>{pub_str}<br>{' '.join(buttons)}</li>"
+    )
+
+# | output: asis
+display(
+    HTML(
+        "<ul class='publication list-group list-group-flush'>"
+        + "\n".join(pub_strs)
+        + "</ul>"
+    )
+)
+```
+

@@ -1,0 +1,43 @@
+dreaming_many_worlds_24:
+  title: "Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot Generalization"
+  authors:
+      - Sai Prasanna
+      - Karim Farid*
+      - Raghu Rajan
+      - André Biedenkapp
+  venue: Reinforcement Learning Journal, vol. 3, 2024, pp. 1317–1350. Presented at RLC 2024 and accepted to EWRL 2024.
+  link: https://rlj.cs.umass.edu/2024/papers/Paper167.html
+  code: https://github.com/sai-prasanna/dreaming_of_many_world
+  arxiv: https://arxiv.org/abs/2403.10967
+perception_matters_24:
+    title: "Perception Matters: Enhancing Embodied AI with Uncertainty-Aware Semantic Segmentation"
+    authors:
+        - Sai Prasanna*
+        - Daniel Honerkamp*
+        - Kshitij Sirohi*
+        - Tim Welschehold
+        - Wolfram Burgard
+        - Abhinav Valada
+    venue: ISRR 2024 
+    link: http://semantic-search.cs.uni-freiburg.de/
+    code: https://github.com/robot-learning-freiburg/semantic-search
+    arxiv: https://arxiv.org/abs/2408.02297
+bert_plays_20:
+    title: "When BERT plays the lottery, all tickets are winning"
+    authors:
+        - Sai Prasanna
+        - Anna Rogers
+        - Anna Rumshisky
+    venue: In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 3208–3229, Online. Association for Computational Linguistics. 
+    link: https://aclanthology.org/2020.emnlp-main.259/
+    code: https://github.com/sai-prasanna/bert-experiments
+    arxiv: https://arxiv.org/abs/2005.00561
+zoho_semeval_19:
+  title: "Zoho at SemEval-2019 Task 9: Semi-supervised Domain Adaptation using Tri-training for Suggestion Mining"
+  authors:
+      - me
+      - Sri Ananda Seelan
+  venue:  In Proceedings of the 13th International Workshop on Semantic Evaluation, pages 1282–1286, Minneapolis, Minnesota, USA. Association for Computational Linguistics.
+  link: https://aclanthology.org/S19-2225/
+  code: https://github.com/sai-prasanna/suggestion-mining-semeval19
+  arxiv: https://arxiv.org/abs/1902.10623
