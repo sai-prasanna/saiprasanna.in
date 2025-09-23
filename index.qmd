@@ -14,24 +14,27 @@ about:
       text: Email
       href: mailto://sai.r.prasanna@gmail.com
     - icon: twitter
+      text: Bluesky
+      href: https://bsky.app/profile/saiprasanna.in
+    - icon: twitter
       text: Twitter
       href: https://twitter.com/sai_prasanna
-    - icon: linkedin
-      text: LinkedIn
-      href: https://www.linkedin.com/in/sai-prasanna-r-422aaba4
     - icon: github
       text: Github
       href: https://github.com/sai-prasanna
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/sai-prasanna-r-422aaba4
     - icon: bi-book
       text: Google Scholar
       href: https://scholar.google.com/citations?user=ZiB7SdEAAAAJ&hl=en
 ---
 
-I focus on research to build embodied agents that solve tasks in a robust manner, exhibit intrinsic motivation, and agency. I currently work on Reinforcement Learning at the University of Freiburg. Before that I have worked machine learning engineer and software engineer. 
+I research methods to make robots solve tasks robustly, exhibit intrinsic motivation, and agency. Currently I am focusing on Causal World Models, Intrinsic Motivation, and Reinforcement Learning for Robotics at the University of Tübingen and the Max-Planck Institute for Intelligent Systems. Before this I have worked as machine learning engineer and software engineer. 
 
-Here's my updated [resume](files/resume.pdf).You can also find my sporadically updated blog posts [here](blog.qmd).
+Here's my updated [resume](files/resume.pdf). You can also find my sporadically updated blog posts [here](blog.qmd).
 
-Open for collaboration, send me an email if you wish to collabrate with me! 
+Send me an email if you wish to collaborate with me or discuss anything interesting!
 
 
 ## Selected Publications

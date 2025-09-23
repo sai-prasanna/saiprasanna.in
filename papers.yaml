@@ -1,3 +1,12 @@
+mordor_hike_25:
+  title: "One Does Not Simply Estimate State: Comparing Model-based and Model-free Reinforcement Learning on the Partially Observable MordorHike Benchmark"
+  authors:
+      - Sai Prasanna
+      - André Biedenkapp
+      - Raghu Rajan
+  venue: Eighteenth European Workshop on Reinforcement Learning (EWRL 2025)
+  link: https://openreview.net/forum?id=lTyiOJwQqu
+  code: https://github.com/sai-prasanna/mordorhike
 dreaming_many_worlds_24:
   title: "Dreaming of Many Worlds: Learning Contextual World Models Aids Zero-Shot Generalization"
   authors:
