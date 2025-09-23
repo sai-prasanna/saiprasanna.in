@@ -9,12 +9,13 @@
 <link>saiprasanna.in/blog.html</link>
 <atom:link href="saiprasanna.in/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.5.57</generator>
+<generator>quarto-1.8.24</generator>
 <lastBuildDate>Sat, 23 Mar 2024 00:00:00 GMT</lastBuildDate>
 <item>
   <title>A Guide to the Cross Entropy Method (CEM)</title>
   <link>saiprasanna.in/posts/2024-03-cross-entropy-method/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -38,7 +39,7 @@
 <p>Where <img src="https://latex.codecogs.com/png.latex?x_1%20...%20x_k"> are i.i.d samples from f(.; u).</p>
 <p>Let us implement some code to see how this works. First, we will define a <img src="https://latex.codecogs.com/png.latex?f(.;u)"> as a standard normal distribution <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BN%7D(0,%201)"> and rare event as <img src="https://latex.codecogs.com/png.latex?X%20%3E%202">, so <img src="https://latex.codecogs.com/png.latex?S(X):=%20X"> is an identity function. Since it is a normal distribution, we can compute l in closed form. It is just the <img src="https://latex.codecogs.com/png.latex?1%20-%20%5Ctext%7BCDF%7D(2)">. We picked the normal distribution for the sake of illustration; in the real world, the distribution could be something more complex, without a closed form CDF, or as noted before, you might not even know the functional form of the pdf, only can sample from it and evaluate it at a point or if S(X) is something complicated, again the integral might be intractable.</p>
 <div id="cell-2" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
 background-color: null;
@@ -289,7 +290,7 @@ font-style: inherit;">'Error (log scale)'</span>)</span>
 <span id="cb1-65">plt.title(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Error between Closed Form and Monte Carlo Estimate (log-log plot)'</span>)</span>
-<span id="cb1-66">plt.show()</span></code></pre></div>
+<span id="cb1-66">plt.show()</span></code></pre></div></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -314,7 +315,7 @@ font-style: inherit;">'Error between Closed Form and Monte Carlo Estimate (log-l
 <p>And the monte-carlo estimate now can be done over samples from <img src="https://latex.codecogs.com/png.latex?g(x)"></p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Balign%7D%0Al%20&amp;=%5Cmathbb%7BE%7D_%7Bx%20%5Csim%20g(.)%7D%5Cleft%5B%20%5Cmathcal%7B1%7D_%7B%5C%7BS(x)%20%5Cge%20%5Cgamma%5C%7D%7D%20%5Cdfrac%7Bf(x;%20u)%7D%7Bg(x)%7D%20%5Cright%5D%20%5C%5C%0A%20%20&amp;%5Capprox%20%5Cdfrac%7B1%7D%7Bn%7D%20%5Csum_%7Bk=1%7D%5E%7Bn%7D%20%5Cmathcal%7B1%7D_%7B%5C%7BS(x_k)%20%5Cge%20%5Cgamma%5C%7D%7D%20%5Cdfrac%7Bf(x_k;%20u)%7D%7Bg(x_k)%7D%0A%5Cend%7Balign%7D%0A"> Where <img src="https://latex.codecogs.com/png.latex?x_1%20...%20x_k"> are i.i.d samples from g(x). Now the question becomes how do we select this <img src="https://latex.codecogs.com/png.latex?g(x)">? Let us first try a few examples of <img src="https://latex.codecogs.com/png.latex?g(x)"> and see how it compares to our previous Monte Carlo estimate.</p>
 <div id="cell-4" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Pick g1 to be uniform distribution near the rare event threshold and g2 to be a normal distribution near the rare event threshold</span></span>
 <span id="cb2-2"><span class="kw" style="color: #003B4F;
@@ -584,7 +585,7 @@ font-style: inherit;">'Error (log scale)'</span>)</span>
 background-color: null;
 font-style: inherit;">'Error between Closed Form and Different Estimates (log-log plot)'</span>)</span>
 <span id="cb2-60">plt.legend()</span>
-<span id="cb2-61">plt.show()</span></code></pre></div>
+<span id="cb2-61">plt.show()</span></code></pre></div></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -605,7 +606,7 @@ font-style: inherit;">'Error between Closed Form and Different Estimates (log-lo
 <p><span id="eq-g-star"><img src="https://latex.codecogs.com/png.latex?%0Ag%5E*(x)%20=%20%5Cmathcal%7B1%7D_%7B%5C%7BS(x)%20%5Cge%20%5Cgamma%5C%7D%7D%20%5Cdfrac%7Bf(x;%20u)%7D%7Bl%7D%0A%5Ctag%7B1%7D"></span></p>
 <p>Let us plot it to see why it is optimal.</p>
 <div id="cell-8" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">def</span> optimal_g(x):</span>
@@ -696,7 +697,7 @@ font-style: inherit;">'Density'</span>)</span>
 background-color: null;
 font-style: inherit;">'PDFs'</span>)</span>
 <span id="cb3-15">plt.legend()</span>
-<span id="cb3-16">plt.show()</span></code></pre></div>
+<span id="cb3-16">plt.show()</span></code></pre></div></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -747,7 +748,7 @@ Tip
 <p>where <img src="https://latex.codecogs.com/png.latex?W(x_i;%20u,%20v_t)%20=%20%5Cdfrac%7Bf(x_i;%20u)%7D%7Bf(x_i;%20v_t)%7D"> is the likelihood ratio. To derive this solution, compute the derivative w.r.t <img src="https://latex.codecogs.com/png.latex?v"> and set it to zero.</p>
 <p>Now, with this setup, let us jump into the code.</p>
 <div id="cell-10" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"></span>
 <span id="cb4-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -962,7 +963,7 @@ font-style: inherit;">'Error (log scale)'</span>)</span>
 background-color: null;
 font-style: inherit;">'Error (log-log plot)'</span>)</span>
 <span id="cb4-51">plt.legend()</span>
-<span id="cb4-52">plt.show()</span></code></pre></div>
+<span id="cb4-52">plt.show()</span></code></pre></div></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1020,7 +1021,7 @@ Note
 </div>
 <p>In practice, we pick f as a normal distribution for optimizing functions on a continuous domain. Moreover, in this case, we can pick both mean and standard deviation as the parameters of the distribution family. i.e., <img src="https://latex.codecogs.com/png.latex?v_t%20=%20%5B%5Cmu,%20%5Csigma%5D">. The maximization of step 3 is just the MLE estimate of elites, which is simply the mean and standard deviation for the elite samples for our normal distribution. Now, let us dive into the code to implement CEM and optimize the Rastrigin function, a highly nonlinear function with many local minima.</p>
 <div id="cell-13" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">np.random.seed(<span class="dv" style="color: #AD0000;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">np.random.seed(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">42</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -1305,7 +1306,7 @@ font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>)</span>
 <span id="cb5-60"></span>
-<span id="cb5-61">plot_optimization()</span></code></pre></div>
+<span id="cb5-61">plot_optimization()</span></code></pre></div></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1416,6 +1417,7 @@ V, Jyothir S, Siddhartha Jalagam, Yann LeCun, and Vlad Sobal. 2023. <span>“Gra
 
 
 
+
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Deep Reinforcement learning agents take a lot of interactions for training directly on high-dimensional inputs such as images. This could be time-consuming and/or infeasible if we were to train directly in the real world. Training in a simulator is faster and safer than real-world training. Simulators such as NVIDIA Isaac SIM can now render realistic scenes. <sup>1</sup> It would still be ideal to have sample efficient agents that don’t require millions of environment interactions for relatively simple tasks.</p>
@@ -1452,9 +1454,6 @@ V, Jyothir S, Siddhartha Jalagam, Yann LeCun, and Vlad Sobal. 2023. <span>“Gra
 <li>Data augmentation-only approach</li>
 <li>Data augmentation with Self-Supervised learning (SSL).</li>
 </ol>
-<div>
-
-</div>
 <div class="quarto-layout-panel" data-layout-ncol="2" data-layout-nrow="1">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
@@ -1607,9 +1606,6 @@ V, Jyothir S, Siddhartha Jalagam, Yann LeCun, and Vlad Sobal. 2023. <span>“Gra
 <h3 class="anchored" data-anchor-id="distracting-control-100k">Distracting Control 100k</h3>
 <p>We compare the mean returns of the best agent for our dreamer 2 approaches. In each environment, we test the agent on the corresponding distracting control environment. In all the tasks there is a considerable drop in mean returns. This is expected as we only test in new environments.</p>
 <p>In “Cheetah, Run” and “Cup, catch” tasks, Dreamer 2 with colour augmentation performs the best. But the “Finger, Spin” task again acts as a confounder, where the baseline performs better. It’s safe to say that more experiments with more environments are necessary.</p>
-<div>
-
-</div>
 <div class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -1705,6 +1701,7 @@ Model-Based Reinforcement Learning.”</span> October 23, 2022. <a href="https:/
 
 
 
+
 <p>In 2020, I was working in <a href="zoho.com">Zoho</a> focusing on natural language processing (NLP). It was around time when there was an explosion of self-supervised models such as BERT, RoBERTA etc in NLP. I had some research questions about these pre-trained models. I approached Dr.&nbsp;Anna Rogers, an amazing researcher working on interpretability in twitter. I asked her about some research directions in NLP I was considering. As our interests coincided, she graciously offered to mentor me.</p>
 <div class="quarto-figure quarto-figure-center" style="text-align: center;">
 <figure class="figure">
@@ -1754,6 +1751,7 @@ Prasanna, Sai, Anna Rogers, and Anna Rumshisky. 2020. <span>“<span>W</span>hen
 
 
 
+
 <p>We will explore how to efficiently batch large datasets with varied sequence length for training using <a href="https://github.com/microsoft/infinibatch/">infinibatch</a>. The focus will be on solving multiple challenges associated with this and making it work with <code>dataloader</code> abstraction in pytorch library. Though our focus is on pytorch, Infinibatch is a pure python library agnostic of the deep learning library.</p>
 <p>This post was inspired by this thread on twitter. &gt; twitter: https://twitter.com/marian_nmt/status/1292850875715604480</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1769,10 +1767,10 @@ Note
 <p>We will use <a href="https://blog.einstein.ai/the-wikitext-long-term-dependency-language-modeling-dataset/">wikitext-103</a> dataset as an example. It’s a dataset with sentences from wikipedia. It has 103,227,021 word level tokens in it’s training split. It is used only for illustration, the techniques discussed here are can work for far larger dataset sizes.</p>
 </div>
 </div>
-<div id="cell-2" class="cell" data-outputid="b2293107-5487-4715-8c63-0863531cb557" data-execution_count="1">
+<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:295}}" data-outputid="b2293107-5487-4715-8c63-0863531cb557" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">!</span>wget https:<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1805,7 +1803,7 @@ font-style: inherit;">-</span>raw<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span>v1.<span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">zip</span></span></code></pre></div>
+font-style: inherit;">zip</span></span></code></pre></div></div>
 </details>
 </div>
 <section id="challenges-in-efficiently-processing-large-datasets" class="level1">
@@ -1830,10 +1828,10 @@ font-style: inherit;">zip</span></span></code></pre></div>
 <h3 class="anchored" data-anchor-id="tokenization-and-length-distribution">Tokenization and length distribution</h3>
 <p>Let’s implement a typical dynamic padding workflow with pytorch dataloader and a subword level tokenizer. We use BERT-base-cased tokenizer from huggingface’s transformers library. This tokenizes words to subwords. The BERT model was pre-trained with maximum subword length of 512. We can theoretically use sequence lengths larger than that but for our purposes we will leave it as such at 512.</p>
 <p>We will use torch’s <a href="https://pytorch.org/docs/stable/data.html">dataset and dataloader</a> abstraction for this. It will as both an illustration of real world usage and is convinent as it helps avoid having to entire tokenized dataset in memory. We still have to load the sentences into memory once. This is not a problem for small datasets, but for very large corpuses it’s a big problem as mentioned before.</p>
-<div id="cell-8" class="cell" data-outputid="20390f6a-10b2-4073-bdad-213f1d35045a" data-execution_count="2">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:781}}" data-outputid="20390f6a-10b2-4073-bdad-213f1d35045a" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">!</span>pip install git<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1887,11 +1885,11 @@ font-style: inherit;">import</span> torch</span>
 <span id="cb2-12"></span>
 <span id="cb2-13"><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">%</span>matplotlib inline</span></code></pre></div>
+font-style: inherit;">%</span>matplotlib inline</span></code></pre></div></div>
 </details>
 </div>
-<div id="cell-9" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{}}" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">class</span> Wiki103(Dataset):</span>
@@ -1999,10 +1997,10 @@ font-style: inherit;">self</span>.max_length, truncation<span class="op" style="
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">True</span>)</span></code></pre></div>
+font-style: inherit;">True</span>)</span></code></pre></div></div>
 </div>
-<div id="cell-10" class="cell" data-outputid="99722997-5edb-49aa-9206-c68979125c34" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">tokenizer <span class="op" style="color: #5E5E5E;
+<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:69,&quot;referenced_widgets&quot;:[&quot;cd77a1ae224f4a14a8a72edb6c1003e7&quot;,&quot;c970f42678fe494f829848541ef975df&quot;]}}" data-outputid="99722997-5edb-49aa-9206-c68979125c34" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">tokenizer <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> AutoTokenizer.from_pretrained(<span class="st" style="color: #20794D;
 background-color: null;
@@ -2032,7 +2030,7 @@ font-style: inherit;">iter</span>(wiki_dataset)):</span>
 background-color: null;
 font-style: inherit;">len</span>(example[<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"input_ids"</span>]))</span></code></pre></div>
+font-style: inherit;">"input_ids"</span>]))</span></code></pre></div></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"cd77a1ae224f4a14a8a72edb6c1003e7","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -2054,10 +2052,10 @@ font-style: inherit;">"input_ids"</span>]))</span></code></pre></div>
 </div>
 </div>
 <p>By plotting the truncated <code>Subword sequence length vs Frequency</code> we see a distribution with a large variance.</p>
-<div id="cell-12" class="cell" data-outputid="db2d5efd-77b8-44ed-d9ca-515a77f27ae2" data-execution_count="5">
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:378}}" data-outputid="db2d5efd-77b8-44ed-d9ca-515a77f27ae2" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="cf" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">with</span> plt.style.context(<span class="st" style="color: #20794D;
@@ -2138,7 +2136,7 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">15</span>)</span>
-<span id="cb8-11">    plt.show()</span></code></pre></div>
+<span id="cb8-11">    plt.show()</span></code></pre></div></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -2153,8 +2151,8 @@ font-style: inherit;">15</span>)</span>
 <h3 class="anchored" data-anchor-id="dynamic-padding">Dynamic Padding</h3>
 <p>From the above graph we can intuit that if we draw random samples from the data to form a mini-batch, we would have few examples which are significantly longer than the rest. This would mean that we would add a lot of padding tokens. This holds even if we clean the very short length instances as noise.</p>
 <p>Let’s implement dynamic padding and measure how much. We can use torch’s <code>DataLoader</code> abstraction to do efficient batching with multi-processing. Since our tokenized outputs are of different lengths we have to implement a collate function to pad them dynamically together. We can pass the <code>tokenizer.pad</code> function implemented in huggingface’s tokenizer as the collate function.</p>
-<div id="cell-14" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{}}" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">def</span> collate_fn(examples: List[Dict[<span class="bu" style="color: null;
@@ -2186,11 +2184,11 @@ font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">32</span>, collate_fn<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span>collate_fn)</span></code></pre></div>
+font-style: inherit;">=</span>collate_fn)</span></code></pre></div></div>
 </div>
 <p>Let’s assume that we can use maximum a batch size of 32 for max sequence length of 512 for our model in our training hardware without out-of-memory errors. The tokens per batch would be <code>512 * 32 = 16384</code>. We can now compute how much of it is padding tokens and what is the distribution of the batch’s sequence length(which depends on the maximum element in the batch).</p>
-<div id="cell-16" class="cell" data-outputid="f25e7bea-9d40-4ad0-d8f0-b2e197018005" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">total_tokens <span class="op" style="color: #5E5E5E;
+<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:34}}" data-outputid="f25e7bea-9d40-4ad0-d8f0-b2e197018005" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">total_tokens <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -2227,13 +2225,13 @@ font-style: inherit;">+=</span> batched_input_ids.numel()</span>
 background-color: null;
 font-style: inherit;">+=</span> batched_input_ids[batched_input_ids <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">==</span> tokenizer.pad_token_id].numel()</span></code></pre></div>
+font-style: inherit;">==</span> tokenizer.pad_token_id].numel()</span></code></pre></div></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>100%|██████████| 36390/36390 [06:04&lt;00:00, 99.96it/s] </code></pre>
 </div>
 </div>
-<div id="cell-17" class="cell" data-outputid="0b1acde0-2567-4f4b-cfc9-d30d8d9fa183" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="bu" style="color: null;
+<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:104}}" data-outputid="0b1acde0-2567-4f4b-cfc9-d30d8d9fa183" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
 background-color: null;
@@ -2299,7 +2297,7 @@ font-style: inherit;">/</span>total_tokens<span class="sc" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
+font-style: inherit;">"</span>)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Total Batches    : 36390
 Padding Tokens   : 244072396
@@ -2310,10 +2308,10 @@ Padding Tokens % : 67.09493267712108</code></pre>
 </div>
 <p>Surprise, surprise, <strong>67% of our net tokens are padding tokens</strong>. This would imply that of all the computations that we do, only 33% of is done for useful work. This starkly highlights the problem with static batch lengths even when accounting for dynamic padding.</p>
 <p>Let’s also plot the distribution of batch lengths.</p>
-<div id="cell-19" class="cell" data-outputid="dd2980fb-b374-4454-9212-ff07ef9ef4b5" data-execution_count="9">
+<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:378}}" data-outputid="dd2980fb-b374-4454-9212-ff07ef9ef4b5" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="cf" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">with</span> plt.style.context(<span class="st" style="color: #20794D;
@@ -2394,7 +2392,7 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">15</span>)</span>
-<span id="cb14-11">    plt.show()</span></code></pre></div>
+<span id="cb14-11">    plt.show()</span></code></pre></div></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -2431,8 +2429,8 @@ font-style: inherit;">15</span>)</span>
 <section id="loading-and-shuffling-large-datasets-1" class="level2">
 <h2 class="anchored" data-anchor-id="loading-and-shuffling-large-datasets-1">1. Loading and shuffling large datasets</h2>
 <p>Following the infinibatch tutorial, we divide our dataset into multiple gzip chunks of 10000 sentences each.</p>
-<div id="cell-25" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="op" style="color: #5E5E5E;
+<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{}}" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">!</span>mkdir <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2471,12 +2469,12 @@ font-style: inherit;">103</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span>raw<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">/</span>wiki.train.raw  train.</span></code></pre></div>
+font-style: inherit;">/</span>wiki.train.raw  train.</span></code></pre></div></div>
 </div>
 <p>We can now create an iterator using infinibatch with a function that can deserialize a shard. Infinibatch takes care of loading multiple in a shuffled order. We can control the amount of deserialized individual examples from the shards be buffered using <code>buffer_size</code> parameter. The library returns a python iterable. We can call <code>next(iterable)</code> or iterate with a <code>for</code> to get the examples.</p>
 <p>Note: Passing <code>train=True</code> creates an infinite iterator that cycles after a full run on the dataset. The <code>chunked_dataset_iterator</code> method returns a composition of iterators, you can refer the source code <a href="https://github.com/microsoft/infinibatch/blob/master/infinibatch/iterators.py">here</a></p>
-<div id="cell-27" class="cell" data-outputid="98e9fbf6-b426-4da2-eef2-4c7feff5cc55" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><span class="im" style="color: #00769E;
+<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:54}}" data-outputid="98e9fbf6-b426-4da2-eef2-4c7feff5cc55" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> gzip, glob</span>
 <span id="cb16-2"><span class="im" style="color: #00769E;
@@ -2570,7 +2568,7 @@ font-style: inherit;">True</span>)</span>
 background-color: null;
 font-style: inherit;">print</span>(<span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">next</span>(sentence_it))</span></code></pre></div>
+font-style: inherit;">next</span>(sentence_it))</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>In 1993 , David Mirkin hired Scully to write for The Simpsons , as a replacement for the departing Conan O 'Brien , after reading some of his sample scripts . He began as a writer and producer for the show during its fifth season and wrote the episodes " Lisa 's Rival " , " Two Dozen and One Greyhounds " and " Lisa on Ice " which aired in season six . " Lisa 's Rival " was his first episode ; he wrote the script , but the original concept had been conceived by O 'Brien . Similarly , he wrote the script for " Two Dozen and One Greyhounds " , which was based on an idea by Al Jean and Mike Reiss . " Lisa on Ice " was inspired by Scully 's love of ice hockey and featured many experiences from his childhood , as was " Marge Be Not Proud " ( which he wrote for season seven ) which was based " one of the most traumatic moments " of his life , when he was caught shoplifting aged twelve . He jokingly told Variety that " It 's great to be paid for reliving the horrors of your life . " He also wrote " Team Homer " and " Lisa 's Date with Density " . Scully noted : " I wrote a lot of Lisa 's shows . I have five daughters , so I like Lisa a lot . I like Homer , too . Homer comes very naturally to me : I don 't know if that 's a good or a bad thing . A lot of my favorite episodes are the ones when Homer and Lisa are in conflict with each other ... They 're very human , I think that 's their appeal . "</code></pre>
 </div>
@@ -2579,8 +2577,8 @@ font-style: inherit;">next</span>(sentence_it))</span></code></pre></div>
 <h3 class="anchored" data-anchor-id="tensorize-our-dataset-with-a-map-iterator">Tensorize our dataset with a map iterator</h3>
 <p>We can now compose our tokenizer upon our sentence iterator. Infinibatch has two ways of doing this, 1. <code>MapIterator</code> 2. <code>ParallelMapIterator</code></p>
 <p>If you use pytorch and need multiprocessing to do costly transformations over your data on the fly, use the <code>ParallelMap</code> and set the <code>num_processes</code> with what you would have with <code>num_workers</code>. And set <code>num_workers=0</code> in your dataloader.</p>
-<div id="cell-29" class="cell" data-outputid="a3fc83c0-b76c-4304-d04f-e976d5160e53" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">tokenize_fn <span class="op" style="color: #5E5E5E;
+<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:54}}" data-outputid="a3fc83c0-b76c-4304-d04f-e976d5160e53" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">tokenize_fn <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> partial(tokenizer, max_length<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2614,7 +2612,7 @@ font-style: inherit;">=</span>tokenize_fn</span>
 <span id="cb18-8">)</span>
 <span id="cb18-9"><span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">next</span>(features_it)</span></code></pre></div>
+font-style: inherit;">next</span>(features_it)</span></code></pre></div></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>{'input_ids': [101, 1130, 1949, 117, 1681, 20522, 4314, 4327, 20452, 16125, 1106, 3593, 1111, 1109, 20726, 117, 1112, 170, 5627, 1111, 1103, 18646, 17727, 152, 112, 9620, 117, 1170, 3455, 1199, 1104, 1117, 6876, 15690, 119, 1124, 1310, 1112, 170, 2432, 1105, 2451, 1111, 1103, 1437, 1219, 1157, 3049, 1265, 1105, 1724, 1103, 3426, 107, 6516, 112, 188, 155, 15895, 107, 117, 107, 1960, 2091, 10947, 1105, 1448, 6285, 16930, 1116, 107, 1105, 107, 6516, 1113, 6172, 107, 1134, 4086, 1107, 1265, 1565, 119, 107, 6516, 112, 188, 155, 15895, 107, 1108, 1117, 1148, 2004, 132, 1119, 1724, 1103, 5444, 117, 1133, 1103, 1560, 3400, 1125, 1151, 10187, 1118, 152, 112, 9620, 119, 10321, 117, 1119, 1724, 1103, 5444, 1111, 107, 1960, 2091, 10947, 1105, 1448, 6285, 16930, 1116, 107, 117, 1134, 1108, 1359, 1113, 1126, 1911, 1118, 2586, 2893, 1105, 2639, 11336, 14788, 119, 107, 6516, 1113, 6172, 107, 1108, 3768, 1118, 20452, 16125, 112, 188, 1567, 1104, 2854, 4700, 1105, 2081, 1242, 5758, 1121, 1117, 5153, 117, 1112, 1108, 107, 9751, 2176, 4108, 1753, 5096, 4867, 107, 113, 1134, 1119, 1724, 1111, 1265, 1978, 114, 1134, 1108, 1359, 107, 1141, 1104, 1103, 1211, 23057, 4899, 107, 1104, 1117, 1297, 117, 1165, 1119, 1108, 2347, 4130, 18867, 4079, 4030, 119, 1124, 18114, 1193, 1500, 15526, 1115, 107, 1135, 112, 188, 1632, 1106, 1129, 3004, 1111, 1231, 2646, 3970, 1103, 5367, 1116, 1104, 1240, 1297, 119, 107, 1124, 1145, 1724, 107, 2649, 12353, 107, 1105, 107, 6516, 112, 188, 14265, 1114, 14760, 13730, 107, 119, 20452, 16125, 2382, 131, 107, 146, 1724, 170, 1974, 1104, 6516, 112, 188, 2196, 119, 146, 1138, 1421, 5421, 117, 1177, 146, 1176, 6516, 170, 1974, 119, 146, 1176, 12353, 117, 1315, 119, 12353, 2502, 1304, 8534, 1106, 1143, 131, 146, 1274, 112, 189, 1221, 1191, 1115, 112, 188, 170, 1363, 1137, 170, 2213, 1645, 119, 138, 1974, 1104, 1139, 5095, 3426, 1132, 1103, 3200, 1165, 12353, 1105, 6516, 1132, 1107, 4139, 1114, 1296, 1168, 119, 119, 119, 1220, 112, 1231, 1304, 1769, 117, 146, 1341, 1115, 112, 188, 1147, 5767, 119, 107, 102], 'token_type_ids': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}</code></pre>
 </div>
@@ -2664,8 +2662,8 @@ font-style: inherit;">next</span>(features_it)</span></code></pre></div>
 <p>First we sort this window with lengths in decreasing order. The sort order is stable. This preserves the shuffling of equal sized elements from previous iterator. So for our example it would be [a, b, e, c, d, f]</p>
 <p>Now we can Compute the dynamic batch sizes by applying the function <code>batch_size</code> iteratively till the window is exhausted. Assume our function is <code>lambda longest_instance: 60 // len(longest_instance)</code>. Then applying it once we get first longest item <code>a</code>, current batch size will be <code>60 //50 = 1</code>. The next longest item remaining can be used to calculate the size of the next batch and so on. So we will end up with [a], [b, e], [c, d, f]. Each of them will have 60 tokens.</p>
 <p>You can take a look at the code that does this computation <a href="https://github.com/microsoft/infinibatch/blob/master/infinibatch/iterators.py#L1080">here</a>.</p>
-<div id="cell-31" class="cell" data-outputid="5223316b-2086-4efe-97d3-0d83f87cf96e" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">tokens_per_batch <span class="op" style="color: #5E5E5E;
+<div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:89}}" data-outputid="5223316b-2086-4efe-97d3-0d83f87cf96e" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">tokens_per_batch <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -2765,7 +2763,7 @@ font-style: inherit;">"</span>)</span>
 background-color: null;
 font-style: inherit;">print</span>(dynamic_batch_wo_padding[:<span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">2</span>])</span></code></pre></div>
+font-style: inherit;">2</span>])</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Dynamic batch size: 124
 Dynamic batch size: 94
@@ -2773,8 +2771,8 @@ Dynamic batch size: 94
 </div>
 </div>
 <p>Now we can collate our examples and see how much this scheme has saved us. Since a training iterator is infinite, we will recreate our iterators with a non-infinite iterator.</p>
-<div id="cell-33" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">sentence_it_finite <span class="op" style="color: #5E5E5E;
+<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{}}" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">sentence_it_finite <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> datasets.chunked_dataset_iterator(</span>
 <span id="cb22-2">    chunk_refs <span class="op" style="color: #5E5E5E;
@@ -2892,10 +2890,10 @@ font-style: inherit;">=</span> iterators.MapIterator(</span>
 <span id="cb22-28">    transform<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>collate_fn</span>
-<span id="cb22-29">)</span></code></pre></div>
+<span id="cb22-29">)</span></code></pre></div></div>
 </div>
-<div id="cell-34" class="cell" data-outputid="2296d9db-6643-4d3d-f8ae-afd17ded5935" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">total_batches_dynamic <span class="op" style="color: #5E5E5E;
+<div id="cell-34" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:34}}" data-outputid="2296d9db-6643-4d3d-f8ae-afd17ded5935" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">total_batches_dynamic <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -2940,13 +2938,13 @@ font-style: inherit;">+=</span> batched_input_ids.numel()</span>
 background-color: null;
 font-style: inherit;">+=</span> batched_input_ids[batched_input_ids <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">==</span> tokenizer.pad_token_id].numel()</span></code></pre></div>
+font-style: inherit;">==</span> tokenizer.pad_token_id].numel()</span></code></pre></div></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>7650it [08:11, 15.57it/s]</code></pre>
 </div>
 </div>
-<div id="cell-35" class="cell" data-outputid="27ddbb47-2dc9-4aa9-8a35-163d9ad5fe8a" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><span class="bu" style="color: null;
+<div id="cell-35" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:104}}" data-outputid="27ddbb47-2dc9-4aa9-8a35-163d9ad5fe8a" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
 background-color: null;
@@ -3010,7 +3008,7 @@ font-style: inherit;">/</span>total_tokens_dynamic<span class="sc" style="color:
 background-color: null;
 font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
+font-style: inherit;">"</span>)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Total Batches    : 7650
 Padding Tokens   : 3838939
@@ -3022,10 +3020,10 @@ Padding Tokens % : 3.1074896620497463</code></pre>
 <p>We have <strong>reduced</strong> the % of <strong>padding tokens</strong> per epoch from <strong>67% to just around 3%</strong>.The total batches needed to process it in the same max tokens per batch limitation hence got reduced nearly five times from 36390 to 7642.</p>
 <p>The processing time is just one minute extra. I guess that might be due to IO, but you could try benchmarking that with more rigour.</p>
 <p>Now, plotting the length distribution for dynamic batches.</p>
-<div id="cell-37" class="cell" data-outputid="1e6ebe34-7066-4719-94a0-de85dc36ee99" data-execution_count="17">
+<div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:378}}" data-outputid="1e6ebe34-7066-4719-94a0-de85dc36ee99" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><span class="cf" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">with</span> plt.style.context(<span class="st" style="color: #20794D;
@@ -3106,7 +3104,7 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">15</span>)</span>
-<span id="cb27-11">    plt.show()</span></code></pre></div>
+<span id="cb27-11">    plt.show()</span></code></pre></div></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -3123,8 +3121,8 @@ font-style: inherit;">15</span>)</span>
 <h2 class="anchored" data-anchor-id="static-batch-sizes-with-sorted-window">Static Batch Sizes with Sorted Window</h2>
 <p>In practise using variable batch sizes could be a problem depending on your task. As tokens in an instance are already correlated, having few instances (though longer) in one batch might give a more noisy gradient update than many shorter instances in a batch. This is my <strong>speculation</strong> as to why I wasn’t able to make purely dynamic batch sizes work well with a token classification fine-tuning on BERT.</p>
 <p>But all is not lost here, we can still use bucketing to have uniform length batches with fewer padding tokens. Let’s checkout the padding tokens % when we fix the batch size as 32 but sort a window of 10 batches (320 instances) and then form batches.</p>
-<div id="cell-40" class="cell" data-outputid="05fb3403-6f54-4df1-b64a-17bbbb6728a6" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1">sentence_it_finite <span class="op" style="color: #5E5E5E;
+<div id="cell-40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:139}}" data-outputid="05fb3403-6f54-4df1-b64a-17bbbb6728a6" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1">sentence_it_finite <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> datasets.chunked_dataset_iterator(</span>
 <span id="cb28-2">    chunk_refs <span class="op" style="color: #5E5E5E;
@@ -3341,7 +3339,7 @@ font-style: inherit;">/</span>total_tokens_bucket_sorted<span class="sc" style="
 background-color: null;
 font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
+font-style: inherit;">"</span>)</span></code></pre></div></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>36390it [08:26, 71.81it/s]</code></pre>
 </div>
@@ -3358,10 +3356,10 @@ Padding Tokens % : 20.993451964120347</code></pre>
 </div>
 </div>
 <p>So we see that the % of total padding tokens has decreased from 67% to 20%. And we can see from the below the distribution of sequence length of batches is close to the distribution of individual sequence lengths. This is different from the case where we made static batches without sorting.</p>
-<div id="cell-42" class="cell" data-outputid="a75613f8-5e54-4d43-bbea-4a0424339d21" data-execution_count="19">
+<div id="cell-42" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:378}}" data-outputid="a75613f8-5e54-4d43-bbea-4a0424339d21" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><span class="cf" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">with</span> plt.style.context(<span class="st" style="color: #20794D;
@@ -3442,7 +3440,7 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">15</span>)</span>
-<span id="cb32-11">    plt.show()</span></code></pre></div>
+<span id="cb32-11">    plt.show()</span></code></pre></div></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -3456,10 +3454,10 @@ font-style: inherit;">15</span>)</span>
 <section id="checkpointing-1" class="level2">
 <h2 class="anchored" data-anchor-id="checkpointing-1">3. Checkpointing</h2>
 <p>One cool feature of <code>infinibatch</code> is that you can checkpoint a particular state in which the composed iterators is at and restore (rewind?) it back to that state. This is very cool considering it works recursively on the composed iterators and even on infinite iterator. Let’s recreate our iterators and check this out.</p>
-<div id="cell-44" class="cell" data-execution_count="20">
+<div id="cell-44" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{}}" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1">sentence_it <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1">sentence_it <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> datasets.chunked_dataset_iterator(</span>
 <span id="cb33-2">    chunk_refs <span class="op" style="color: #5E5E5E;
@@ -3577,11 +3575,11 @@ font-style: inherit;">=</span> iterators.MapIterator(</span>
 <span id="cb33-28">    transform<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>collate_fn</span>
-<span id="cb33-29">)</span></code></pre></div>
+<span id="cb33-29">)</span></code></pre></div></div>
 </details>
 </div>
-<div id="cell-45" class="cell" data-outputid="157ac2b8-95c2-4021-af89-b9be82530835" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1">initial_state <span class="op" style="color: #5E5E5E;
+<div id="cell-45" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:106}}" data-outputid="157ac2b8-95c2-4021-af89-b9be82530835" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1">initial_state <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> tensors_it.getstate() </span>
 <span id="cb34-2"><span class="bu" style="color: null;
@@ -3722,7 +3720,7 @@ font-style: inherit;">{</span>all_equal<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"</span>)</span></code></pre></div>
+font-style: inherit;">"</span>)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Initial State of composed iterators {'source_state': None, 'random_state': None, 'num_served': 0}
 Current State after sampling 5 batches: {'source_state': {'source_state': None, 'flattened_items_yielded': 0}, 'random_state': (3, (2147483648, 766982754, 497961170, 3952298588, 2331775348, 1811986599, 3100132149, 3188119873, 3937547222, 215718963, 3315684082, 2978012849, 2428261856, 1298227695, 1704729580, 54668373, 3285201915, 3285178464, 1552935063, 988471319, 3135387943, 1691402966, 2757551880, 416056905, 907387413, 1072924981, 33903495, 2168419592, 2429050353, 831159753, 430343641, 3315943586, 1761671042, 864453023, 334804929, 1627478028, 2596811275, 3468733638, 3994375553, 1457139722, 3139722021, 1334790738, 2656639915, 3535811098, 1464315470, 2397423927, 885719490, 1140895889, 3284299483, 2854516462, 2734973817, 147484763, 792049954, 114360641, 3345458839, 1159898878, 1410498733, 2242989638, 453922141, 1344019764, 413870456, 3089405849, 1494382840, 470157779, 4266372830, 2831181573, 1361928602, 1589253513, 1381373062, 753045124, 987032420, 781978839, 2953638767, 3258570111, 3006718191, 1675218601, 1854232715, 3655829819, 1731242722, 2192104666, 1736665161, 740150002, 1195833394, 1610203160, 159492766, 4041488705, 3128952632, 2867295744, 3272632449, 886824304, 1791482600, 221114776, 3867175393, 4020804062, 1077871826, 1298953503, 996366221, 4149754679, 2483052703, 2615558283, 274318093, 1716359450, 4099129961, 1026774175, 288240973, 1459347562, 2365566296, 3690105224, 3065780221, 2050634722, 2652606621, 3185241207, 3026457375, 3456165734, 1880121515, 3398461093, 1795638629, 2379692076, 608668379, 1261955525, 84456522, 1913485156, 106878280, 757183891, 2913957588, 160418091, 2025664758, 141497907, 1657818026, 3053760160, 672193054, 4157546743, 223046484, 1623470498, 1201972930, 675008814, 684162366, 1738776330, 3025656654, 159760723, 1908867305, 3933381342, 2545706671, 467196949, 1427819885, 842150314, 4032903454, 2140851898, 3269883445, 975813755, 4177392955, 1556690684, 2535611513, 462962732, 67591358, 1729610528, 2025206740, 3153739740, 3255032049, 4186226368, 1070144624, 3107867195, 1621006038, 63742485, 835629717, 3189842019, 3950227584, 3184714559, 841836938, 1685394870, 657939920, 766156242, 1412314179, 1048281639, 4037161120, 2044490307, 1923947830, 3900790422, 907554295, 276417304, 860658646, 3574201134, 3508771399, 2110232300, 1636296241, 1405006077, 1093408401, 3243057343, 1519791182, 1994660136, 3829840937, 2644974199, 957955566, 3487641161, 1646922510, 1907939989, 3836029453, 3429168778, 201307778, 72550089, 2464394982, 1695794191, 3344785682, 996786130, 3589457196, 1241754792, 1291082245, 4224603667, 1194379475, 2693491244, 881186965, 2705535111, 445306946, 440274268, 1980827733, 2482488861, 3205215943, 2119332222, 2928713046, 1418736938, 652581136, 2474070665, 2208621536, 4171251876, 2303664214, 443762656, 2981912989, 2199228311, 2652261633, 3166738494, 3443009210, 3498764432, 424010848, 4065487566, 2262993542, 1756076712, 1477098233, 2742171915, 306185806, 3610666541, 923091830, 1034267993, 2336668648, 1880719718, 676878038, 3788797208, 3763351494, 3985428106, 1101865631, 1130501258, 3672967388, 3432003530, 4124438011, 1660392285, 4025484827, 2108074566, 3815409682, 42955331, 3248965569, 1643835718, 1246665668, 1071162194, 3814069229, 115491158, 985096811, 3311029186, 2990827378, 3101633320, 1648574497, 1470117052, 174145027, 2019894819, 2035501481, 459104123, 3507464599, 2093352659, 3369174406, 618767835, 4009895756, 935587447, 3956987426, 33753995, 307782427, 2473424805, 1440371818, 2382619594, 2138695812, 3164510238, 1318650933, 2910086616, 3886677510, 566832801, 3718063320, 1559818704, 183047272, 1142362855, 26306548, 645536402, 3875596208, 2272778168, 3512733409, 1897046338, 38248886, 2570759766, 1806313150, 860304898, 2433450338, 4124013408, 1216634590, 1275388896, 1169566669, 652504502, 761221427, 1448403764, 3129135949, 2513214949, 1269533687, 2413509541, 1226750363, 2450740925, 4094137910, 945759293, 3636927736, 3178020081, 2509964157, 3878869300, 1848504895, 2018369720, 1579755740, 1023627943, 924838836, 2653160914, 1812804174, 1521323076, 4012390528, 1338763317, 2608655937, 16022784, 1672945066, 2177189646, 2944458483, 2213810972, 1369873847, 1224017670, 130901785, 3595066712, 2259115284, 3316038259, 455873927, 2917250465, 3599550610, 1502173758, 684943436, 3079863840, 3144992244, 942855823, 1771140188, 2118780653, 3411494225, 2711180217, 4239611184, 1371891067, 3398566397, 3105518599, 1310665701, 3345178451, 2959821156, 242241789, 2148966880, 3192740583, 404401893, 3605380577, 1446464038, 3920522056, 2577523013, 1079274576, 286634372, 1752710796, 2351075979, 981312309, 3410516352, 3468455736, 1938779182, 1592494371, 1533303080, 88045436, 438252489, 1220512168, 3487004938, 3724852871, 1073434882, 3728218947, 2977555283, 4105408406, 3553772656, 1462006821, 3917158017, 119003006, 3470530198, 3439192457, 2829375771, 3555715155, 32324691, 588735808, 1459221702, 803072782, 2699519868, 1530797005, 79738580, 671990400, 4289511388, 3207115447, 2584684068, 832698998, 760958416, 1217440464, 2517898131, 2418819938, 3629956222, 3445024962, 206619378, 365007395, 522114139, 1707954431, 540423623, 1786750801, 369253262, 4239016754, 147889201, 1637777773, 236798285, 2806120188, 586972608, 2201782716, 1323327827, 819485723, 406078680, 3407345698, 1537169369, 1821691865, 527271655, 3751827102, 1465426495, 3321682429, 2179672664, 401355478, 1068871880, 24609462, 1403522408, 2311580015, 1532058170, 3877815340, 1768430711, 1619755157, 2832904331, 475102697, 354987331, 3295386430, 2816873951, 1039415736, 363972779, 1499307670, 2895506264, 3746345349, 2678027234, 3251899088, 955392878, 2329157295, 1343358773, 309573887, 2410178377, 2843173466, 361132917, 1755816798, 1319204283, 609284796, 1998842567, 1892325921, 223190385, 1483015769, 2876023365, 3876009312, 3199738344, 491524099, 160383137, 1219178873, 3870310498, 1114580266, 4279604166, 855339774, 1983818547, 2297848784, 4118592947, 4084409863, 2225095054, 4215601993, 946447434, 4205503762, 146088676, 778046685, 1876936928, 3157333726, 2173097090, 3215738813, 4135448234, 1219619643, 1936128689, 2897130162, 3336043946, 3779039524, 4200886837, 1359380925, 3402593091, 3140713935, 50855190, 3122065768, 1501584468, 2512255124, 687125154, 2666013386, 837819715, 3057258172, 3653455791, 2868624990, 322131992, 42534870, 4036564806, 798099710, 3533853670, 190914037, 3726947981, 2601169403, 602059656, 1365668439, 1918780004, 394790500, 277566007, 3891847777, 3365421094, 3139612253, 1380519090, 1183088424, 4203794803, 3049949521, 4214159484, 3446206962, 1875544460, 3207220027, 3288287026, 913535288, 178159620, 1410694581, 4190575040, 880731713, 1427805121, 404869072, 3413191414, 2865934056, 2899472677, 4239222733, 688404529, 3923323887, 933651074, 1199453686, 642723732, 2850614853, 3104368451, 3054041024, 3129913503, 2805843726, 1829781129, 3479062313, 650272704, 4224852052, 4085038685, 2616580676, 1793860711, 585126334, 2995262791, 520446536, 3855655015, 1571815563, 2240778227, 2051010344, 1694977983, 788402852, 1988089041, 2035558649, 1800063056, 1234412692, 2490862867, 417320514, 2415019489, 3374117797, 136034611, 898704236, 1247106941, 3923519397, 3563607190, 2454738671, 3522360389, 2672645476, 146828884, 3985140042, 4233949333, 1184742586, 860278824, 2815489967, 983483427, 3190081845, 3288865305, 3575181235, 1292151129, 4007823805, 4049420597, 3499391972, 1611182906, 1721268432, 2944249577, 2487212557, 789127738, 4027610014, 1057334138, 2902720905, 624), None), 'num_served': 5}
@@ -3775,8 +3773,8 @@ Warning
 <p>When using finite iterators with <code>ddp</code> for validation set, if you split the data using <code>instance_rank</code> option, the validation can get stuck.This can happen either when your dataset is not divisible by number of <code>ddp</code> processes or doing dynamic batching caused an uneven number of batches produced for each instance. So it’s better to do the validation in one GPU setting <code>instance_rank=0</code>. This is a quick hack, if you find a better option please let me know in the comments.</p>
 </div>
 </div>
-<div id="cell-48" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb36" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><span class="im" style="color: #00769E;
+<div id="cell-48" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{}}" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> torch.utils.data <span class="im" style="color: #00769E;
 background-color: null;
@@ -4209,7 +4207,7 @@ background-color: null;
 font-style: inherit;">#print(next(iter(train_loader)))</span></span>
 <span id="cb36-109"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">#print(next(iter(val_loader)))</span></span></code></pre></div>
+font-style: inherit;">#print(next(iter(val_loader)))</span></span></code></pre></div></div>
 </div>
 
 
@@ -4223,6 +4221,7 @@ font-style: inherit;">#print(next(iter(val_loader)))</span></span></code></pre><
   <title>Roam Research - Software for building a Second Brain</title>
   <link>saiprasanna.in/posts/roam-research-software-for-building-a-second-brain/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4391,6 +4390,7 @@ font-style: inherit;">#print(next(iter(val_loader)))</span></span></code></pre><
 
 
 
+
 <p>Research Paper - <a href="https://arxiv.org/abs/1511.02799">https://arxiv.org/abs/1511.02799</a></p>
 <p>Authors - Jacob Andreas, Marcus Rohrbach, Trevor Darrell, Dan Klein ## Key Idea Parse questions of visual QA into a description of compositions of functions. These functions are neural networks called Neural Modules. Execute the neural networks and reweigh the resulting label using question representation. <img src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Fartificial_sai%2FImqekKqTqJ?alt=media&amp;token=f46ba375-0d38-4c81-b40f-f691c4099a74.png" class="img-fluid" alt="Architecture diagram"> ## Task - Visual Question Answering Given a question like “What color is the coffee mug?” and an image we want to predict the answer. <img src="https://visualqa.org/static/img/vqa_examples.jpg" class="img-fluid" alt="4 visual qa examples. One example: Two images having a man and women. One with man wearing glasses and another image with woman wearing glasses.Question, “Who is wearing glasses?” and respective answer below the image"> ## Prior approaches</p>
 <p><strong>End to End neural networks</strong></p>
@@ -4419,6 +4419,7 @@ font-style: inherit;">#print(next(iter(val_loader)))</span></span></code></pre><
   <title>ACL 2019 Conference Summary</title>
   <link>saiprasanna.in/posts/ACL-2019-Conference-Summary/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4548,6 +4549,7 @@ font-style: inherit;">#print(next(iter(val_loader)))</span></span></code></pre><
 
 
 
+
 <p>I am guilty of spamming people in the degree one of my network with too many links in topics that fancy the Legion of varied interests that haunt me. Following the suggestion of Ananda Seelan, I am consolidating my link blasts into a considated blog post format, thus begins the “Semantic Legion”. This exercise might help organize the “Legion” in my head and maybe lead to more focused blog posts.</p>
 <blockquote class="blockquote">
 <p>“My name is Legion, for we are many.”</p>
@@ -4669,6 +4671,7 @@ font-style: inherit;">#print(next(iter(val_loader)))</span></span></code></pre><
 
 
 
+
 <p>SemEval Workshop regularly has been conducting tasks in NLP to evaluate the progress in the field.</p>
 <p>I and my colleague Ananda Seelan participated in this year SemEval’s Suggestion mining task (Task 9). Here is our <a href="https://arxiv.org/abs/1902.10623">submission</a> to be published in NAACL 2019 proceedings, and the code is on <a href="https://github.com/sai-prasanna/suggestion-mining-semeval19">github</a>.</p>
 <p>This blog is a summary of the key techniques and ideas which influenced this work.</p>
@@ -4741,6 +4744,7 @@ font-style: inherit;">#print(next(iter(val_loader)))</span></span></code></pre><
   <title>God’s own Programming Language</title>
   <link>saiprasanna.in/posts/gods-own-programming-language/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4824,6 +4828,7 @@ with its own four-letter name.</code></pre>
 
 
 
+
 <p><a href="https://arxiv.org/pdf/1803.00144.pdf">Paper</a> by Trieu H. Trinh, Andrew M. Dai, Minh-Thang Luong, Quoc V. Le</p>
 <p><strong>TLDR;</strong> RNNs can learn very long sequences when auxiliary loss for predicting input sequence (forward and backward) from different timesteps is added.</p>
 <section id="problem-being-addressed" class="level3">
@@ -4857,6 +4862,7 @@ with its own four-letter name.</code></pre>
   <title>Neural Open Information Extraction (ACL 2018)</title>
   <link>saiprasanna.in/posts/neural-open-information-extraction/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -4905,6 +4911,7 @@ This paper applies neural networks to get better accuracy and alleviate errors.<
 
 
 
+
 <p>We are going to explore dependency injection with emphasis on swift iOS development. But the concept applies to most object oriented languages. We will also see some practical considerations on applying DI in iOS environment. This article is result of my deep dive into implementing DI, and learning about various practical, theoretical aspects of it.</p>
 <section id="what-is-dependency-injection" class="level1">
 <h1>What is Dependency Injection?</h1>
@@ -4928,7 +4935,7 @@ This paper applies neural networks to get better accuracy and alleviate errors.<
 <h2 class="anchored" data-anchor-id="scenario---koala-koder">Scenario - Koala Koder!</h2>
 <p>Say you have an app with a user login. A user model struct/class encapsulates the logged in user data.</p>
 <p>Suppose you are a Koala Koder( a programmer who is as lazy as a koala bear). You perhaps made a solution which is quick and dirty. Store the user model inside NSUserDefaults, and fetch it via properties. And as we all know how apple loves its singleton classes, we follow them making UserModel a singleton.</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">class</span> UserModel <span class="op" style="color: #5E5E5E;
@@ -5046,7 +5053,7 @@ background-color: null;
 font-style: inherit;">}</span></span>
 <span id="cb1-17"><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">}</span></span></code></pre></div>
+font-style: inherit;">}</span></span></code></pre></div></div>
 <p>We write our app with this usermodel in mind, and <code>UserModel.sharedInstance</code> is everywhere in our app.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -5088,7 +5095,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <section id="singletons-are-hard-to-test" class="level3">
 <h3 class="anchored" data-anchor-id="singletons-are-hard-to-test">1. Singletons are hard to test</h3>
 <p>Now if you want to unit test a viewcontroller that uses this singleton.</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb2-1"></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb2-1"></span>
 <span id="cb2-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5129,7 +5136,7 @@ background-color: null;
 font-style: inherit;">}</span></span>
 <span id="cb2-8"><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">}</span></span></code></pre></div>
+font-style: inherit;">}</span></span></code></pre></div></div>
 <p>In unit testing you create a UserProfile object, call viewDidLoad or other methods manually. Now you have to verify whether <code>UserModel.sharedInstance.greet()</code> was called.</p>
 <p>Since UserModel.sharedInstance is immutable, either we can’t replace it with our mock class extending UserModel, which overrides greetUser, and sets a flag which can be checked. So our testing coverage comes down.</p>
 </section>
@@ -5137,7 +5144,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <h3 class="anchored" data-anchor-id="instantiation-inside-our-code-constraints-creates-strong-coupling-creating-harmful-constraints">2. Instantiation inside our code constraints creates strong coupling, creating harmful constraints</h3>
 <p>In our scenario, by using a singleton, we tied our codebase to a single UserModel but now our app needs multiple user models. So in general, using singletons will make it hard to adapt to new use cases. <em>What you thought as a singleton suddenly is not so single anymore</em>.</p>
 <p>But consider that we didn’t use singleton, but instantiated UserModel, by calling <code>UserModel()</code> wherever we needed it.</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb3-1"></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb3-1"></span>
 <span id="cb3-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5183,7 +5190,7 @@ background-color: null;
 font-style: inherit;">}</span></span>
 <span id="cb3-10"><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">}</span></span></code></pre></div>
+font-style: inherit;">}</span></span></code></pre></div></div>
 <p>We can’t support our new usecase of multiple users, without userprofile class knowing about multi-usermodel, or some other global allowing UserModel() to return the correct usermodel, these solutions are ugly hacks, which add complexity by either giving too much knowledge to classes or using globals and forgoing object oriented encapsulation.</p>
 </section>
 <section id="concrete-type-usage-creates-strong-coupling" class="level3">
@@ -5203,7 +5210,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <p>So we will be injecting a serializer into UserModel via constructor.</p>
 <p><strong>Move dependency to constructor, and if possible make it a interface/protocol type instead of concrete class/struct</strong></p>
 <p>So we remove singleton access to userdefaults. And rather pass a serializer protocol which has methods we require for serialization to constructor.</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb4-1"></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb4-1"></span>
 <span id="cb4-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5259,14 +5266,14 @@ background-color: null;
 font-style: inherit;">String</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span>
-<span id="cb4-5">}</span>
+<span id="cb4-5"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span>
 <span id="cb4-6"></span>
 <span id="cb4-7"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">class</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">UserModel</span> <span class="op" style="color: #5E5E5E;
+font-style: inherit;">class</span> UserModel <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">{</span></span>
 <span id="cb4-8">    <span class="kw" style="color: #003B4F;
@@ -5370,9 +5377,9 @@ font-style: inherit;">}</span></span>
 <span id="cb4-22"></span>
 <span id="cb4-23"><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">}</span></span></code></pre></div>
+font-style: inherit;">}</span></span></code></pre></div></div>
 <p>Since we are Koala Koder, we just make the Serializing protocol methods to same ones in NSUserdefaults, so we can make NSUserDefaults conform easily by</p>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb5-1"><span class="kw" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">extension</span> NSUserDefaults<span class="op" style="color: #5E5E5E;
@@ -5381,10 +5388,10 @@ font-style: inherit;">:</span> <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">Serializing</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">{}</span></span></code></pre></div>
+font-style: inherit;">{}</span></span></code></pre></div></div>
 <p>.</p>
 <p>Now to use user defaults as our serializer, we do the following.</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb6-1">UserModel<span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb6-1">UserModel<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>serializer<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -5392,9 +5399,9 @@ font-style: inherit;">:</span> NSUserDefaults<span class="op" style="color: #5E5
 background-color: null;
 font-style: inherit;">.</span>standard<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">)</span></span></code></pre></div>
+font-style: inherit;">)</span></span></code></pre></div></div>
 <p>For our fancy multiple user use case we can also do this. (Note: did this in a hurry, it may have edge cases, just providing it as a illustration)</p>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb7-1"></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb7-1"></span>
 <span id="cb7-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5622,7 +5629,7 @@ font-style: inherit;">(</span>serializer<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span> multiUserSerializer<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">)</span></span></code></pre></div>
+font-style: inherit;">)</span></span></code></pre></div></div>
 <p>So now userModel fetches data, and sets data to the current userID without even knowing about it. We could also use something other than <code>NSUserDefaults.standard</code> to serialize the data in top level.</p>
 <p>The point is by removing replacing the concrete dependency <code>NSUserDefaults.standard</code> out of <code>UserModel</code> and swapping it to <code>Serializing</code> protocol we can now satisfy the new usecase of multi user modelling easily. This is the core idea behind of <strong>loose coupling</strong>.</p>
 <p>Also we can now unit test User Model by just passing a Mock implementation of <code>Serializing</code></p>
@@ -5631,7 +5638,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 <p>Sometimes you don’t have the time, or are sure that concrete type used will not have to be changed. You can still DI the concrete type without bothering with protocol creation, just for the sake of it.</p>
 <section id="for-example" class="level4">
 <h4 class="anchored" data-anchor-id="for-example">For example:</h4>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb8-1"></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb8-1"></span>
 <span id="cb8-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5701,11 +5708,11 @@ background-color: null;
 font-style: inherit;">}</span></span>
 <span id="cb8-14"><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">}</span></span></code></pre></div>
+font-style: inherit;">}</span></span></code></pre></div></div>
 <p>We move UserModel creation out of the controller, without creating any protocol for UserModel properties.</p>
 <p>We still gain advantages of unit testability using ordinary mock objects, and also we are free to use our multi user serialized UserModel , hence making UserProfile support multi user model without changing any logic in user profile.</p>
 <p>(But if you have to do something to notify changes in data, that is seperate topic)</p>
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb9-1"><span class="kw" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb9-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">let</span> <span class="va" style="color: #111111;
@@ -5748,13 +5755,13 @@ font-style: inherit;">(</span>userModel<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span> multiUserModel<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">)</span></span></code></pre></div>
+font-style: inherit;">)</span></span></code></pre></div></div>
 </section>
 </section>
 <section id="my-constructor-is-a-monster-now" class="level3">
 <h3 class="anchored" data-anchor-id="my-constructor-is-a-monster-now">My constructor is a monster now&nbsp;:(</h3>
 <p>A common problem which you will come across is, your UIViewController (if you don’t use storyboards) or any class where you do DI becomes a to big.</p>
-<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb10-1"><span class="kw" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb10-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">class</span> UserProfile<span class="op" style="color: #5E5E5E;
@@ -5792,7 +5799,7 @@ font-style: inherit;">:</span> ZService<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">,</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">....)</span> </span></code></pre></div>
+font-style: inherit;">....)</span> </span></code></pre></div></div>
 <p>This is a good thing, it points out clearly that your class is violating <strong>Single Responsibility rule</strong> . Single responsibility rule states that a class should have singe responsibility.</p>
 <p>We can solve this by moving some of the current dependencies to a new class, and pass the new class as dependency to UserProfile.</p>
 <p>Guess what if we do this we properly we would be re-inventing design patterns l MVVM(Nodel View ViewModel) or MVP. Whew! DI just solved Huge ViewController problem!!.</p>
@@ -5808,7 +5815,7 @@ font-style: inherit;">....)</span> </span></code></pre></div>
 <p>If you don’t control the creation of a object, your best bet is property injection. But prefer constructor injection if that’s not the case.</p>
 </blockquote>
 <p>Sometimes you don’t create objects of classes, some messy framework does it. For example, if you use Storyboards, you can’t do stuff like <code>let userProfileViewController = UserProfile(multiUserModel)</code>. You would have to refactor to something like</p>
-<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb11-1"></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb11-1"></span>
 <span id="cb11-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -5936,13 +5943,13 @@ font-style: inherit;">!</span> UserProfile</span>
 background-color: null;
 font-style: inherit;">.</span>userModel <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span> multiUserModel</span></code></pre></div>
+font-style: inherit;">=</span> multiUserModel</span></code></pre></div></div>
 <p>By using implicitly unwrapped Optional property, and setting it from outside, we achive the same effects of constructor injection. But is not perfect, as <code>userModel</code> property can be mutated from outside. Butthis is as good as it can get.</p>
 </section>
 <section id="method-injection" class="level2">
 <h2 class="anchored" data-anchor-id="method-injection">Method Injection</h2>
 <p>Method injection is just replacing instantiating inside method by one of its parameters.</p>
-<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">// Before injection</span></span>
 <span id="cb12-2"></span>
@@ -6036,13 +6043,13 @@ font-weight: bold;
 font-style: inherit;">return</span> y</span>
 <span id="cb12-14"><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">}</span></span></code></pre></div>
+font-style: inherit;">}</span></span></code></pre></div></div>
 </section>
 <section id="runtime-injection---factory-pattern" class="level2">
 <h2 class="anchored" data-anchor-id="runtime-injection---factory-pattern">Runtime Injection - Factory pattern</h2>
 <p>Sometimes you want to create a object of a particular class in runtime. But you want to use only protocol type(or a super type) instead of actual implementation (or subclass). Let’s say you need a networking service, which you set based on a user action, but as you are going to need it in runtime, you may think that you can’t inject it.</p>
 <p>But what you can do is inject a factory Networking object or closure, that constructs it in runtime. This factory can fill the dependency of the concrete Networking class, so your class can be unaware of this.</p>
-<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb13-1"></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb13-1"></span>
 <span id="cb13-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -6421,7 +6428,7 @@ font-style: inherit;">}</span></span>
 <span id="cb13-67"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb13-68"></span></code></pre></div>
+<span id="cb13-68"></span></code></pre></div></div>
 </section>
 </section>
 <section id="dependency-injection---containers-frameworks" class="level1">
@@ -6430,7 +6437,7 @@ font-style: inherit;">}</span></span>
 <p>When we examine what we are doing with DI, we are building a graph with our concrete types as nodes, and their dependencies linking them. If we do this completely, all dependencies will originate from a root object.</p>
 <p>Without a framework, we will be doing a lot of copy paste coding. If our app uses networking protocol type in multiple areas, we have to type out the same concrete implementation everywhere, and fill out every dependency of networking class everywhere.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb14-1"> <span class="kw" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb14-1"> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">class</span> A <span class="op" style="color: #5E5E5E;
@@ -6522,7 +6529,7 @@ font-style: inherit;">(),</span> z<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span> Z<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">()))</span></span></code></pre></div>
+font-style: inherit;">()))</span></span></code></pre></div></div>
 <p>To make this process easier we can build something to store list of dependency type, and their concrete implementation. We will have a table of mappings.</p>
 <table class="caption-top table">
 <thead>
@@ -6588,7 +6595,7 @@ font-style: inherit;">()))</span></span></code></pre></div>
 <section id="poor-mans-di-in-swift" class="level2">
 <h2 class="anchored" data-anchor-id="poor-mans-di-in-swift">Poor man’s DI in Swift</h2>
 <p>Though I recommend the framework approach, supposing you don’t want to use framework initially and still want the to do DI, Fear not. You can use Swift’s default parameters to do constructor/method injection, and just use variable properties for property injection. You can maintain a Seperate DI singleton and fill dependencies using that.</p>
-<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb15-1"></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb15-1"></span>
 <span id="cb15-2"></span>
 <span id="cb15-3"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -6750,7 +6757,7 @@ font-style: inherit;">}</span></span>
 <span id="cb15-27"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb15-28"></span></code></pre></div>
+<span id="cb15-28"></span></code></pre></div></div>
 <p>But if you use the above method, beware of circular dependencies.</p>
 </section>
 </section>
@@ -6771,6 +6778,7 @@ font-style: inherit;">}</span></span>
   <title>Manjaro Linux - My current daily driver arch based distro</title>
   <link>saiprasanna.in/posts/Manjaro-Linux/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -6814,6 +6822,7 @@ font-style: inherit;">}</span></span>
 
 
 
+
 <p>It was a boring tuesday/wednesday afternoon, co-worker <a href="https://twitter.com/giridharvc7">Giridhar</a> pinged me. He was the organizer for <a href="https://swiftindia.github.io/swiftindia/">Swift India</a> meetups. He invited me to give a talk. As I am in trying to doing things that I haven’t done before, I accepted readily.</p>
 <p>About 60-66 people turned out for the <a href="https://www.meetup.com/SwiftChennai/events/236837342/">meetup</a>. It was fun and great learning experience to share what you know with others. It also exposed where I have to concentrate to develop my public speaking skills.</p>
 <p>Here are the slides for the talk. I will try to put up the playground file later.</p>
@@ -6832,6 +6841,7 @@ font-style: inherit;">}</span></span>
   <title>Open for Collaboration, Closed for Disturbance</title>
   <link>saiprasanna.in/posts/open-for-collaboration-closed-for-disturbance-rethinking-open-office-layout/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -6891,6 +6901,7 @@ font-style: inherit;">}</span></span>
 
 
 
+
 <p>The amount of content available for consumption in our digital age is staggering. Movies, TV, video games, videos, blogs, emails, chat messages all compete for our limited time.</p>
 <p>I think mindful consumption is of great importance. We can start being aware of what our consumption inlets are. Just the awareness of this can create great impact on how we choose to spend our time.</p>
 <p>I am not arguing against consuming media, but for having healthy awareness on wether it has negative effects on one’s creative spirit. It is important in my opinion to keep the act of creation balanced with consumption.</p>
@@ -6908,6 +6919,7 @@ font-style: inherit;">}</span></span>
   <title>Function Currying, Composition in Redux Middleware</title>
   <link>saiprasanna.in/posts/function-currying-and-composition/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -6981,6 +6993,7 @@ return promise
 
 
 
+
 <p><a href="http://injectionforxcode.com/">Injection for XCode</a>.</p>
 <p><img src="https://camo.githubusercontent.com/95389a5ccf548360add8cf7270c84030cc874971/687474703a2f2f672e7265636f726469742e636f2f69366b5166544d4570672e676966" width="640"></p>
 <p>One of the most boring/unproductive part of any development cycle is waiting for your project to compile. And if you have done iOS development, you know how much time is wasted for XCode to recompile the project. And even if compile time is less, you have to follow a bunch of taps, long presses etc to get to the desired app state before even testing your changes. This plugin will reduces reduce these steps considerably. As you change your code , you can inject the new class definition using this XCode plugin. It recompiles just changed file, and injects it into the live running app. The great thing is it works for real device as well.</p>
@@ -7018,6 +7031,7 @@ return promise
   <title>MIT OCW 6.006 Algorithms Course</title>
   <link>saiprasanna.in/posts/MIT-OCW-Algorithms/</link>
   <description><![CDATA[ 
+
 
 
 
